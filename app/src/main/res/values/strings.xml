@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Marco</string>
+    <string name="create_trip_button">Criar Viagem</string>
+    <string name="current_trip_button">Viagem Atual</string>
+    <string name="list_trips_button">Listar Viagens</string>
+    <string name="nearby_button">Aqui por Perto</string>
+
+    <string name="current_trip">Recife, PE - 12/2016</string>
+    <string name="trip2">Gramado, RS - 06/2016</string>
+    <string name="trip3">Chapa Diamantina, BA - 12/2015</string>
 </resources>
