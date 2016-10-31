@@ -8,4 +8,5 @@
     <string name="current_trip">Recife, PE - 12/2016</string>
     <string name="trip2">Gramado, RS - 06/2016</string>
     <string name="trip3">Chapa Diamantina, BA - 12/2015</string>
+    <string name="title_activity_gostos">GostosActivity</string>
 </resources>

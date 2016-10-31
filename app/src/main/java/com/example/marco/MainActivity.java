@@ -18,4 +18,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ListTripsActivity.class);
         startActivity(intent);
     }
+    public void gostos(View view) {
+        Intent intent = new Intent(this, GostosActivity.class);
+        startActivity(intent);
+    }
+
 }
