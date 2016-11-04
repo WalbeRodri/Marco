@@ -13,23 +13,32 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/create_trip_button" />
+        android:text="@string/create_trip_button"
+        android:onClick="createTrip"
+        android:layout_marginBottom="10dp" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/current_trip_button" />
+        android:text="@string/current_trip_button"
+        android:layout_marginBottom="10dp" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/list_trips_button"
-        android:onClick="listTrips" />
+        android:onClick="listTrips"
+        android:layout_marginBottom="10dp" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:onClick="gostos"
         android:text="Gostos" />
+=======
+        android:text="@string/nearby_button"
+        android:layout_marginBottom="10dp" />
+>>>>>>> c07218220d3fc957b84f850f975ae6d14820354b
 
 </LinearLayout>

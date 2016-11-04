@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<<<<<<< HEAD
+=======
+
+    <color name="white">#FFFFFF</color>
+    <color name="lightGray">#AFBCBC</color>
+    <color name="mediumGray">#707575</color>
+    <color name="darkGray">#434443</color>
+    <color name="black">#262827</color>
+    <color name="cyan">#92EAD1</color>
+    <color name="orange">#FFB14D</color>
+
+>>>>>>> c07218220d3fc957b84f850f975ae6d14820354b
     <color name="colorClara">#AFBCBC</color>
     <color name="colorPrimary">#707575</color>
     <color name="colorPrimaryDark">#434443</color>
     <color name="colorAccent">#FFB14D</color>
     <color name="colorVerde">#92EAD1</color>
+<<<<<<< HEAD
 </resources>
+=======
+</resources>
+>>>>>>> c07218220d3fc957b84f850f975ae6d14820354b

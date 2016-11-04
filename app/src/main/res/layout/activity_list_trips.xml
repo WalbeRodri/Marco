@@ -15,21 +15,26 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/current_trip" />
+        android:text="@string/current_trip"
+        android:layout_marginBottom="10dp" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/trip2" />
+        android:text="@string/trip2"
+        android:layout_marginBottom="10dp" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/trip3" />
+        android:text="@string/trip3"
+        android:layout_marginBottom="10dp" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/create_trip_button" />
+        android:text="@string/create_trip_button"
+        android:onClick="createTrip"
+        android:layout_marginBottom="10dp" />
 
 </LinearLayout>

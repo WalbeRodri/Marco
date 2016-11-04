@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingTop="52dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:clipToPadding="false">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/content_create_trips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="com.example.marco.CreateTripActivity"
+        tools:showIn="@layout/activity_create_trip">
+
+        <TextView
+            android:text="Nome da Viagem:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tripNameText" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:id="@+id/tripNameField"
+            android:hint="Ex: Natal - 2016" />
+
+        <TextView
+            android:text="Chegada:"
+            android:id="@+id/tripStartDateText"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:id="@+id/tripStartDateField"
+            android:hint="Ex: 20/12/2016" />
+
+        <TextView
+            android:text="Partida:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tripFinishDateText"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:id="@+id/tripFinishDateField"
+            android:hint="Ex: 28/12/2016" />
+
+
+        <TextView
+            android:text="Que horário deseja iniciar o roteiro?"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tripStartTimeText"
+            android:layout_marginTop="20dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:ems="10"
+            android:id="@+id/tripStartTimeField"
+            android:hint="Ex: 08:30" />
+
+        <TextView
+            android:text="Quantas horas você gostaria que durasse o roteiro?"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tripDailyDurationText"
+            android:layout_marginTop="20dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:ems="10"
+            android:id="@+id/tripDailyDurationField"
+            android:hint="Ex: 5" />
+
+        <TextView
+            android:text="Qual o seu orçamento diário em R$? (Não inclua passagem nem hospedagem)"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dailyBudgetText"
+            android:layout_marginTop="20dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:id="@+id/dailyBudgetField"
+            android:hint="Ex: 200" />
+
+        <TextView
+            android:text="Qual o seu endereço de hospedagem? (Opcional)"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/hostAdressText"
+            android:layout_marginTop="20dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:id="@+id/hostAdressField"
+            android:hint="Ex: Av. Boa Viagem, n 32" />
+
+        <Button
+            android:text="Criar Viagem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/createTripButton"
+            android:layout_marginTop="20dp"
+            style="@style/AppTheme.PrimaryButtonStyle" />
+
+    </LinearLayout>
+
+</ScrollView>
+
