@@ -33,12 +33,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
-        android:onClick="gostos"
-        android:text="Gostos" />
-=======
-        android:text="@string/nearby_button"
+        android:onClick="createPerfil"
+        android:text="Perfil"
         android:layout_marginBottom="10dp" />
->>>>>>> c07218220d3fc957b84f850f975ae6d14820354b
-
 </LinearLayout>

@@ -21,15 +21,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".ListTripsActivity" />
-
-        <activity 
-            android:name=".GostosActivity"
-            android:label="@string/title_activity_gostos"></activity>    
+        <activity android:name=".GostosActivity" />
         <activity
             android:name=".CreateTripActivity"
             android:label="@string/title_activity_create_trip"
-
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".PerfilActivity"></activity>
     </application>
 
 </manifest>
