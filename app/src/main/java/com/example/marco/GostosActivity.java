@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ToggleButton;
 
 public class GostosActivity extends AppCompatActivity {
-
+    private ToggleButton teatroButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +25,8 @@ public class GostosActivity extends AppCompatActivity {
         final Drawable praca = (Drawable) getResources().getDrawable(R.mipmap.praca);
         final Drawable pracaSelected = (Drawable) getResources().getDrawable(R.mipmap.pracaselect);
 
-        final ToggleButton teatroButton = (ToggleButton) findViewById(R.id.tbTeatro);
+
+        teatroButton = (ToggleButton) findViewById(R.id.tbTeatro);
         teatroButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (teatroButton.getBackground().equals(teatro)) {
@@ -39,9 +40,10 @@ public class GostosActivity extends AppCompatActivity {
         pracaButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (pracaButton.getBackground().equals(praca)) {
-                    pracaButton.setBackgroundDrawable(pracaSelected);
-                } else {
                     pracaButton.setBackgroundDrawable(praca);
+                } else {
+                    pracaButton.setBackgroundDrawable(pracaSelected);
+
                 }
             }
         });

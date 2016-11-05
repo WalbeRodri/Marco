@@ -13,7 +13,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"   >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,15 +24,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".ListTripsActivity" />
-
-        <activity 
-            android:name=".GostosActivity"
-            android:label="@string/title_activity_gostos"></activity>    
+        <activity android:name=".GostosActivity" />
         <activity
             android:name=".CreateTripActivity"
             android:label="@string/title_activity_create_trip"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".PerfilActivity" />
 
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
