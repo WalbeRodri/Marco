@@ -74,18 +74,15 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_reset) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_feedback) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_sobre) {
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_gostos) {
+            Intent intent = new Intent(this, PerfilActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -97,17 +94,9 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    public void gostos(View view) {
-        Intent intent = new Intent(this, GostosActivity.class);
-        startActivity(intent);
-    }
 
     public void createTrip(View view) {
         Intent intent = new Intent(this, CreateTripActivity.class);
-        startActivity(intent);
-    }
-    public void createPerfil(View view){
-        Intent intent = new Intent(this, PerfilActivity.class);
         startActivity(intent);
     }
 }

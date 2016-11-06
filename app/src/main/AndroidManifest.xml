@@ -24,7 +24,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".ListTripsActivity" />
-        <activity android:name=".GostosActivity" />
         <activity
             android:name=".CreateTripActivity"
             android:label="@string/title_activity_create_trip"
