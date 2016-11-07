@@ -17,4 +17,9 @@ public class ListTripsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CreateTripActivity.class);
         startActivity(intent);
     }
+
+    public void openTrip(View view) {
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
+    }
 }
