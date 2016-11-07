@@ -84,7 +84,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Posição inicial arbitrária, está jogando pro Marco Zero; isso deve ficar dinâmico
         map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(-8.0631534, -34.8711168)));
         // Valor arbitrário de zoom; isso precisa ficar dinâmico de acordo com a distância entre os pontos
-        map.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
+        map.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
 
 
         // Roteiro 1
