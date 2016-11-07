@@ -15,18 +15,20 @@ import org.json.JSONObject;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -36,8 +38,9 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 /*
-    Baseado no tutorial abaixo
+    Baseado nos tutoriais abaixo
     http://wptrafficanalyzer.in/blog/drawing-driving-route-directions-between-two-locations-using-google-directions-in-google-map-android-api-v2/
+    http://wptrafficanalyzer.in/blog/route-between-two-locations-with-waypoints-in-google-map-android-api-v2/
 */
 
 
@@ -69,8 +72,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
+     * This is where we can add markers or lines, add listeners or move the camera.
      * If Google Play services is not installed on the device, the user will be prompted to install
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
@@ -79,112 +81,114 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
 
-        // Posições de exemplo
-        LatLng paco_alfandega = new LatLng(-8.0648251, -34.873804);
-        LatLng marco_zero = new LatLng(-8.0631534, -34.8711168);
-        LatLng torre_malakoff = new LatLng(-8.060726, -34.870684);
-
-        map.moveCamera(CameraUpdateFactory.newLatLng(marco_zero));
+        // Posição inicial arbitrária, está jogando pro Marco Zero; isso deve ficar dinâmico
+        map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(-8.0631534, -34.8711168)));
         // Valor arbitrário de zoom; isso precisa ficar dinâmico de acordo com a distância entre os pontos
         map.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
 
-        /**
+
+        // Roteiro 1
+        /*
+        LatLng cais_sertao = new LatLng(-8.0598311, -34.8699349);
+        LatLng rock_ribs = new LatLng(-8.0639807, -34.8715432);
+        LatLng seu_boteco = new LatLng(-8.0637666, -34.8713085);
+        LatLng paco_frevo = new LatLng(-8.0613593, -34.8715237);
+        LatLng torre_malakoff = new LatLng(-8.060726, -34.870684);
+        LatLng parque_esculturas = new LatLng(-8.063934, -34.869167);
+
         map.addMarker(new MarkerOptions()
-                .position(paco_alfandega)
-                .title("Paço Alfandega"));
+                .position(cais_sertao)
+                .title("Cais do Sertão"));
         map.addMarker(new MarkerOptions()
-                .position(marco_zero)
-                .title("Marco Zero")
-                .snippet("Preço: Gratuito\nHorário: 24h"));
+                .position(seu_boteco)
+                .title("Almoço - Seu Boteco"));
+        map.addMarker(new MarkerOptions()
+                .position(paco_frevo)
+                .title("Paço do Frevo"));
         map.addMarker(new MarkerOptions()
                 .position(torre_malakoff)
                 .title("Torre Malakoff"));
+        map.addMarker(new MarkerOptions()
+                .position(parque_esculturas)
+                .title("Parque de Esculturas Francisco Brennand"));
+        map.addMarker(new MarkerOptions()
+                .position(rock_ribs)
+                .title("Jantar - Rock & Ribs"));
 
-        // Adiciona linha direta entre os pontos (não é a rota)
-        map.addPolyline(
-                (new PolylineOptions())
-                        .add(paco_alfandega, marco_zero, torre_malakoff)
-                        .width(3)
-                        .color(R.color.orange)  // não está pegando a cor certa, não sei pq
-        );
-        **/
+        markerPoints.add(cais_sertao);
+        markerPoints.add(rock_ribs);
+        markerPoints.add(seu_boteco);
+        markerPoints.add(paco_frevo);
+        markerPoints.add(torre_malakoff);
+        markerPoints.add(parque_esculturas);
+        */
 
+        // Roteiro 2
+        LatLng instituto_brennand = new LatLng(-8.0650775, -34.9628285);
+        LatLng castellus = new LatLng(-8.0640736, -34.9624825);
+        LatLng oficina_ceramica = new LatLng(-8.0527211, -34.9738586);
+        LatLng paco_alfandega = new LatLng(-8.0648251, -34.873804);
+
+        map.addMarker(new MarkerOptions()
+                .position(instituto_brennand));
+        map.addMarker(new MarkerOptions()
+                .position(castellus));
+        map.addMarker(new MarkerOptions()
+                .position(oficina_ceramica));
+        map.addMarker(new MarkerOptions()
+                .position(paco_alfandega));
+
+        markerPoints.add(instituto_brennand);
+        markerPoints.add(castellus);
+        markerPoints.add(oficina_ceramica);
         markerPoints.add(paco_alfandega);
-        markerPoints.add(marco_zero);
-        //markerPoints.add(torre_malakoff);
 
-        // Enable MyLocation Button in the Map
-        // map.setMyLocationEnabled(true);
+        // Getting URL to the Google Directions API
+        String url = getDirectionsUrl();
 
-        // Setting onclick event listener for the map
-        map.setOnMapClickListener(new OnMapClickListener() {
+        DownloadTask downloadTask = new DownloadTask();
 
-            @Override
-            public void onMapClick(LatLng point) {
-
-                // Already two locations
-                if(markerPoints.size()>1){
-                    markerPoints.clear();
-                    map.clear();
-                }
-
-                // Adding new item to the ArrayList
-                markerPoints.add(point);
-
-                // Creating MarkerOptions
-                MarkerOptions options = new MarkerOptions();
-
-                // Setting the position of the marker
-                options.position(point);
-
-                /**
-                 * For the start location, the color of marker is GREEN and
-                 * for the end location, the color of marker is RED.
-                 */
-                if(markerPoints.size()==1){
-                    options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-                }else if(markerPoints.size()==2){
-                    options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-                }
-
-                // Add new marker to the Google Map Android API V2
-                map.addMarker(options);
-
-                // Checks, whether start and end locations are captured
-                if(markerPoints.size() >= 2){
-                    LatLng origin = markerPoints.get(0);
-                    LatLng dest = markerPoints.get(1);
-
-                    // Getting URL to the Google Directions API
-                    String url = getDirectionsUrl(origin, dest);
-
-                    DownloadTask downloadTask = new DownloadTask();
-
-                    // Start downloading json data from Google Directions API
-                    downloadTask.execute(url);
-                }
-            }
-        });
+        // Start downloading json data from Google Directions API
+        downloadTask.execute(url);
     }
 
-    private String getDirectionsUrl(LatLng origin,LatLng dest){
+    private String getDirectionsUrl(){
+
         // Origin of route
+        LatLng origin = markerPoints.get(0);
         String str_origin = "origin="+origin.latitude+","+origin.longitude;
 
         // Destination of route
-        String str_dest = "destination="+dest.latitude+","+dest.longitude;
+        int last_item = markerPoints.size()-1;
+        LatLng destination = markerPoints.get(last_item);
+        String str_dest = "destination="+destination.latitude+","+destination.longitude;
 
         // Sensor enabled
         String sensor = "sensor=false";
 
+        // Modo de transporte
+        String mode = "mode=driving";
+        // String mode = "mode=walking";
+
+        // Waypoints
+        String waypoints = "";
+        for(int i=1; i<last_item; i++){
+            LatLng point  = (LatLng) markerPoints.get(i);
+            if(i==1)
+                waypoints = "waypoints=";
+            waypoints += point.latitude + "," + point.longitude + "|";
+        }
+
         // Building the parameters to the web service
-        String parameters = str_origin+"&"+str_dest+"&"+sensor;
+        String parameters = str_origin+"&"+str_dest+"&"+sensor+"&"+mode+"&"+waypoints;
 
         // Output format
         String output = "json";
 
         // Building the url to the web service
         String url = "https://maps.googleapis.com/maps/api/directions/"+output+"?"+parameters;
+
+        Toast.makeText( getApplicationContext(), url, Toast.LENGTH_LONG ).show();
 
         return url;
     }
@@ -285,9 +289,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Executes in UI thread, after the parsing process
         @Override
         protected void onPostExecute(List<List<HashMap<String, String>>> result) {
+
             ArrayList<LatLng> points = null;
             PolylineOptions lineOptions = null;
-            MarkerOptions markerOptions = new MarkerOptions();
 
             // Traversing through all the routes
             for(int i=0;i<result.size();i++){
@@ -318,14 +322,4 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             map.addPolyline(lineOptions);
         }
     }
-
-    /**
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-    **/
-
 }
