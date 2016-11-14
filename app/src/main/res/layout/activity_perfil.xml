@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_perfil"
     android:layout_width="match_parent"
@@ -10,78 +11,107 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.marco.PerfilActivity">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="179dp"
-            android:focusableInTouchMode="false"
-            android:clickable="true">
-
-            <ToggleButton
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/tbBar"
-
-                android:background="@drawable/check"
-                android:textOff=" "
-                android:textOn=" "
-                android:layout_weight="1"
-                android:layout_margin="1pt" />
-
-            <ToggleButton
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/tbTeatro"
-                android:background="@mipmap/teatro"
-                android:textOff=" "
-                android:textOn=" "
-                android:layout_weight="1"
-                android:layout_margin="1pt" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="179dp">
-
-            <ToggleButton
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/tbPraca"
-                android:background="@mipmap/praca"
-                android:textOff=" "
-                android:textOn=" "
-                android:layout_weight="1"
-                android:layout_margin="1pt" />
-
-            <ToggleButton
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/tbPraia"
-                android:textOff=" "
-                android:textOn=" "
-                android:background="@mipmap/praia"
-                android:layout_weight="1"
-                android:layout_margin="1pt" />
-        </LinearLayout>
-
-        <Button
-            android:text="Confirma"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button"
-            android:layout_margin="10pt"
-            android:background="@color/orange"
-            />
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
 
-    </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="179dp">
+                <ToggleButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tbComida"
+
+                    android:background="@drawable/check_comida"
+                    android:textOff=" "
+                    android:textOn=" "
+                    android:layout_weight="1"
+                    android:layout_margin="1pt" />
+
+                <ToggleButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tbMuseu"
+                    android:background="@drawable/check_museu"
+                    android:textOff=" "
+                    android:textOn=" "
+                    android:layout_weight="1"
+                    android:layout_margin="1pt" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="179dp"
+                android:focusableInTouchMode="false"
+                android:clickable="true">
+
+                <ToggleButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tbBar"
+
+                    android:background="@drawable/check"
+                    android:textOff=" "
+                    android:textOn=" "
+                    android:layout_weight="1"
+                    android:layout_margin="1pt" />
+
+                <ToggleButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tbTeatro"
+                    android:background="@drawable/check_teatro"
+                    android:textOff=" "
+                    android:textOn=" "
+                    android:layout_weight="1"
+                    android:layout_margin="1pt" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="179dp">
+
+                <ToggleButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tbPraca"
+                    android:background="@drawable/check_praca"
+                    android:textOff=" "
+                    android:textOn=" "
+                    android:layout_weight="1"
+                    android:layout_margin="1pt" />
+
+                <ToggleButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tbPraia"
+                    android:textOff=" "
+                    android:textOn=" "
+                    android:background="@drawable/check_praia"
+                    android:layout_weight="1"
+                    android:layout_margin="1pt" />
+
+            </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Confirma"
+            android:background="@color/colorAccent" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
 </RelativeLayout>

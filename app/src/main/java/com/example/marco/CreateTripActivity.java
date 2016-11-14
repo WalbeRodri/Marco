@@ -18,7 +18,7 @@ public class CreateTripActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
     public void confirmTrip(View view) {
-        Intent intent = new Intent(this, ConfirmaViagemFragmentActivity.class);
+        Intent intent = new Intent(this, TravelCardsActivity.class);
         startActivity(intent);
     }
 }

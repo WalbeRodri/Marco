@@ -12,6 +12,6 @@
     <color name="colorClara">#AFBCBC</color>
     <color name="colorPrimary">#707575</color>
     <color name="colorPrimaryDark">#434443</color>
-    <color name="colorAccent">#FFB14D</color>
-    <color name="colorVerde">#92EAD1</color>
+    <color name="colorAccent">#ffb14d</color>
+    <color name="colorVerde">#92ead1</color>
 </resources>
