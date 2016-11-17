@@ -1,16 +1,11 @@
 package com.example.marco;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.method.Touch;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewDebug;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,14 +50,15 @@ public class TravelCardsActivity extends AppCompatActivity {
 
 
 
-    private List<ContactInfo> createList(int size) {
+    private List<LocalInfo> createList(int size) {
 
-        List<ContactInfo> result = new ArrayList<ContactInfo>();
+        List<LocalInfo> result = new ArrayList<LocalInfo>();
         for (int i = 1; i <= size; i++) {
-            ContactInfo ci = new ContactInfo();
-            ci.name = ContactInfo.NAME_PREFIX + i;
-            ci.surname = ContactInfo.SURNAME_PREFIX + i;
-            ci.email = ContactInfo.EMAIL_PREFIX + i + "@test.com";
+            LocalInfo ci = new LocalInfo();
+            ci.nome = LocalInfo.LOCAL + i;
+            ci.desc = LocalInfo.DESC + i;
+            ci.hora = LocalInfo.HORARIO + i;
+            ci.preco  = LocalInfo.ENTRADA +i;
 
             result.add(ci);
 

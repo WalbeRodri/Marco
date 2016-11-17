@@ -15,9 +15,9 @@ import java.util.List;
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactViewHolder> {
 
-    private List<ContactInfo> contactList;
+    private List<LocalInfo> contactList;
 
-    public ContactAdapter(List<ContactInfo> contactList) {
+    public ContactAdapter(List<LocalInfo> contactList) {
         this.contactList = contactList;
     }
 
@@ -29,12 +29,13 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
 
     @Override
     public void onBindViewHolder(ContactViewHolder contactViewHolder, int i) {
-        ContactInfo ci = contactList.get(i);
-        contactViewHolder.vImagem.setImageResource(R.mipmap.praca2);
-        contactViewHolder.vName.setText(ci.name);
-        contactViewHolder.vSurname.setText(ci.surname);
-        contactViewHolder.vEmail.setText(ci.email);
-        contactViewHolder.vTitle.setText(ci.name + " " + ci.surname);
+        LocalInfo ci = contactList.get(i);
+        contactViewHolder.vImagem.setImageResource(R.mipmap.museu);
+        contactViewHolder.vNome.setText(ci.nome);
+        contactViewHolder.vDesc.setText(ci.desc);
+        contactViewHolder.vHora.setText(ci.hora);
+        contactViewHolder.vEntradas.setText(ci.preco);
+//        contactViewHolder.vNome.setText(ci.nome + " " + ci.desc);
     }
 
     @Override
@@ -48,18 +49,19 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
 
     public static class ContactViewHolder extends RecyclerView.ViewHolder {
         protected  ImageView vImagem;
-        protected TextView vName;
-        protected TextView vSurname;
-        protected TextView vEmail;
-        protected TextView vTitle;
+        protected TextView vNome;
+        protected TextView vDesc;
+        protected TextView vHora;
+        protected TextView vEntradas;
 
         public ContactViewHolder(View v) {
             super(v);
             vImagem = (ImageView) v.findViewById(R.id.imagem);
-            vName =  (TextView) v.findViewById(R.id.txtName);
-            vSurname = (TextView)  v.findViewById(R.id.txtSurname);
-            vEmail = (TextView)  v.findViewById(R.id.txtEmail);
-            vTitle = (TextView) v.findViewById(R.id.title);
+            vNome =  (TextView) v.findViewById(R.id.txtNome);
+            vDesc = (TextView)  v.findViewById(R.id.txtDesc);
+            vHora = (TextView)  v.findViewById(R.id.txtHora);
+            vEntradas = (TextView) v.findViewById(R.id.txtPreco);
+
         }
     }
 }
