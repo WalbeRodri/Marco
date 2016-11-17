@@ -1,32 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="wrap_content"
     android:layout_margin="5dp"
     card_view:cardCornerRadius="4dp">
 
     <RelativeLayout
-        android:onClick="resize"
         android:layout_width="match_parent"
         android:background="@color/colorAccent"
-        android:layout_height="match_parent">
+        android:layout_height="200dp"
+        app:elevation="3dp">
+
         <ImageView
             android:id="@+id/imagem"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:foregroundGravity="left"
             />
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:background="@color/colorAccent"
             android:gravity="center_vertical"
-            android:text="contact det"
+            android:text="textao"
             android:textColor="@android:color/white"
-            android:textSize="14dp" />
+            android:textSize="24dp" />
 
         <TextView
             android:id="@+id/txtName"
@@ -60,5 +62,47 @@
             android:layout_marginTop="10dp"
             android:text="Email"
             android:textSize="10dp" />
+
+        <LinearLayout
+            android:layout_alignBottom="@+id/imagem"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <Button
+                android:text="Editar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/button2"
+                android:layout_toRightOf="@+id/txtName"
+                android:layout_toEndOf="@+id/txtName"
+                android:id="@+id/button4"
+                android:layout_weight="1" />
+
+            <Button
+                android:text="Excluir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/button2"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="19dp"
+                android:layout_marginEnd="19dp"
+                android:id="@+id/button3"
+                android:layout_weight="1" />
+
+            <Button
+                android:text="atualizar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
     </RelativeLayout>
+
 </android.support.v7.widget.CardView>

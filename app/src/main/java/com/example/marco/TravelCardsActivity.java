@@ -52,14 +52,7 @@ public class TravelCardsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void resize(View view) {
-        final CardView cardView = (CardView) findViewById(R.id.cardList);
-        cardView.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                    cardView.setMinimumHeight(cardView.getHeight()*2);
-            }
-        });
-    }
+
 
 
     private List<ContactInfo> createList(int size) {
