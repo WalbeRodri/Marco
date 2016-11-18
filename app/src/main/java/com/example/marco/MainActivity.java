@@ -1,6 +1,7 @@
 package com.example.marco;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -77,6 +78,9 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_reset) {
             // Handle the camera action
         } else if (id == R.id.nav_feedback) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("market://details?id=com.example.marco")); //redireciona para a página do app na play store
+            startActivity(intent);
 
         } else if (id == R.id.nav_sobre) {
 
@@ -99,4 +103,5 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(this, CreateTripActivity.class);
         startActivity(intent);
     }
+
 }

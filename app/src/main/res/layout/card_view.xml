@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+
+    card_view:cardCornerRadius="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/colorAccent"
+        app:elevation="3dp">
+
+        <ImageView
+            android:id="@+id/imagem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:foregroundGravity="left" />
+
+        <TextView
+            android:id="@+id/txtNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/imagem"
+            android:layout_alignRight="@+id/imagem"
+            android:layout_alignBaseline="@+id/imagem"
+            android:text="Título"
+            android:textColor="@android:color/white"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/txtDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imagem"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:text="Desc"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/txtHora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtDesc"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:text="Hora"
+            android:textSize="12dp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="32dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <Button
+
+                android:id="@+id/btnEdit"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_margin="8dp"
+                android:background="@mipmap/edit" />
+
+            <Button
+                android:id="@+id/btnExcluir"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+
+                android:layout_margin="8dp"
+                android:background="@mipmap/lixo" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+
+                android:layout_margin="8dp"
+                android:background="@mipmap/renew" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtPreco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtHora"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:text="Entradas"
+            android:textSize="10dp" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

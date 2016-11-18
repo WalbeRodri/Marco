@@ -16,9 +16,10 @@ public class CreateTripActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_trip);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
     }
     public void confirmTrip(View view) {
-        Intent intent = new Intent(this, ConfirmaViagemFragmentActivity.class);
+        Intent intent = new Intent(this, TravelCardsActivity.class);
         startActivity(intent);
     }
 }

@@ -21,6 +21,154 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_create_trip" />
+
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="60dp"
+        >
+
+        <LinearLayout
+            android:paddingTop="10dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <TextView
+                android:id="@+id/tripNameText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nome da Viagem:" />
+
+            <EditText
+                android:id="@+id/tripNameField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ex: Natal - 2016"
+                android:inputType="text"
+                android:selectAllOnFocus="false"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"/>
+
+            <TextView
+                android:id="@+id/tripStartDateText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
+                android:text="Chegada:" />
+
+            <EditText
+                android:id="@+id/tripStartDateField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ex: 20/12/2016"
+                android:inputType="date"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"/>
+
+            <TextView
+                android:id="@+id/tripFinishDateText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
+                android:text="Partida:" />
+
+            <EditText
+                android:id="@+id/tripFinishDateField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ex: 28/12/2016"
+                android:inputType="date" />
+
+
+            <TextView
+                android:id="@+id/tripStartTimeText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Que horário deseja iniciar o roteiro?" />
+
+            <EditText
+                android:id="@+id/tripStartTimeField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Ex: 08:30"
+                android:inputType="time"
+                android:focusableInTouchMode="true"/>
+
+            <TextView
+                android:id="@+id/tripDailyDurationText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Quantas horas você gostaria que durasse o roteiro?" />
+
+            <EditText
+                android:id="@+id/tripDailyDurationField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Ex: 5"
+                android:focusableInTouchMode="true"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/dailyBudgetText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Qual o seu orçamento diário em R$? (Não inclua passagem nem hospedagem)" />
+
+            <EditText
+                android:id="@+id/dailyBudgetField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ex: 200"
+                android:focusableInTouchMode="true"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/hostAdressText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Qual o seu endereço de hospedagem? (Opcional)" />
+
+            <EditText
+                android:id="@+id/hostAdressField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ex: Av. Boa Viagem, n 32"
+                android:inputType="text"
+                android:focusableInTouchMode="true"/>
+
+            <Button
+                android:id="@+id/createTripButton"
+                style="@style/AppTheme.PrimaryButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:onClick="confirmTrip"
+                android:text="Criar Viagem" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>
