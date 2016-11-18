@@ -18,10 +18,8 @@
         android:id="@+id/btnAtual"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@mipmap/viagem_atual"
-        android:visibility="invisible"
+        android:background="@mipmap/btn_transparente"
         android:onClick="createTrip"
-
         android:clickable="true"
         android:layout_marginTop="43dp"
         android:layout_alignParentTop="true"
@@ -29,31 +27,31 @@
         android:layout_alignParentEnd="true" />
 
     <Button
-        android:visibility="invisible"
-        android:id="@+id/btnNova"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@mipmap/criar_nova"
-        android:layout_marginRight="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_below="@+id/btnHistorico"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="10dp"
-        android:clickable="true"/>
-
-    <Button
-        android:visibility="invisible"
         android:clickable="true"
         android:id="@+id/btnHistorico"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="listTrips"
-        android:background="@mipmap/historico"
+        android:background="@mipmap/btn_transparente"
         android:layout_marginLeft="18dp"
         android:layout_marginStart="18dp"
         android:layout_marginTop="13dp"
         android:layout_below="@+id/btnAtual"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+
+        android:id="@+id/btnNova"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/btn_transparente"
+        android:layout_marginRight="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="21dp"
+        android:clickable="true"
+        android:onClick="createTrip"
+        android:layout_below="@+id/btnHistorico"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

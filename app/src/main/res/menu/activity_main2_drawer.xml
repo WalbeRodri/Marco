@@ -8,8 +8,7 @@
 
         <item
             android:id="@+id/nav_feedback"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Feedback" />
+             android:title="Feedback" />
         <item
             android:id="@+id/nav_reset"
             android:title="Resetar Perfil" />
