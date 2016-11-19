@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "113760093625",
+    "firebase_url": "https://first-64349.firebaseio.com",
+    "project_id": "first-64349",
+    "storage_bucket": "first-64349.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:113760093625:android:0787d3918a1db7a5",
+        "android_client_info": {
+          "package_name": "com.example.marco"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "113760093625-j5mf0p39mhs0nlortqmp75n461plj4b3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABSlp1NIdiYnNp0yrLuTsD4Iv1_0buDWQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
