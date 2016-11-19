@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TimePicker;
 
 public class CreateTripActivity extends AppCompatActivity {
 
@@ -16,6 +17,14 @@ public class CreateTripActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_trip);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        TimePicker timePicker = (TimePicker) findViewById(R.id.timePicker);
+        timePicker.setIs24HourView(true);
+
+        // O método está obsoleto, mas a nova é nova demais pro nosso minSDK
+        // timePicker.setHour(8);
+        // timePicker.setCurrentHour(8);
+
 
     }
     public void confirmTrip(View view) {

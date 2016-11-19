@@ -45,14 +45,15 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_alignParentStart="true"
+            android:weightSum="1">
+
 
             <TextView
                 android:id="@+id/tripNameText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nome da Viagem:" />
-
             <EditText
                 android:id="@+id/tripNameField"
                 android:layout_width="match_parent"
@@ -63,22 +64,6 @@
                 android:descendantFocusability="beforeDescendants"
                 android:focusableInTouchMode="true"/>
 
-            <TextView
-                android:id="@+id/tripStartDateText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center_vertical"
-                android:text="Chegada:" />
-
-            <EditText
-                android:id="@+id/tripStartDateField"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Ex: 20/12/2016"
-                android:inputType="date"
-                android:descendantFocusability="beforeDescendants"
-                android:focusableInTouchMode="true"/>
 
             <TextView
                 android:id="@+id/tripFinishDateText"
@@ -86,15 +71,32 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="center_vertical"
-                android:text="Partida:" />
+                android:text="Data de Partida:" />
 
-            <EditText
-                android:id="@+id/tripFinishDateField"
+            <DatePicker
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:id="@+id/tripStartDateField"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner" />
+
+            <TextView
+                android:id="@+id/tripStartDateText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ex: 28/12/2016"
-                android:inputType="date" />
-
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
+                android:text="Data de Chegada:" />
+            <DatePicker
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:id="@+id/tripFinishDateField"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner" />
 
             <TextView
                 android:id="@+id/tripStartTimeText"
@@ -102,15 +104,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Que horário deseja iniciar o roteiro?" />
-
-            <EditText
-                android:id="@+id/tripStartTimeField"
+            <TimePicker
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ex: 08:30"
-                android:inputType="time"
-                android:focusableInTouchMode="true"/>
+                android:id="@+id/timePicker"
+                android:timePickerMode="spinner" />
+
 
             <TextView
                 android:id="@+id/tripDailyDurationText"
