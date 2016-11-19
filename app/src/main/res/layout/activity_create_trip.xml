@@ -23,29 +23,28 @@
 
 
     <LinearLayout
-        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+        android:padding="10dp" />
 
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingEnd="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:paddingEnd="10dp"
-        android:paddingTop="60dp"
-        >
+        android:paddingTop="60dp">
 
         <LinearLayout
-            android:paddingTop="10dp"
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical"
+            android:paddingTop="10dp">
 
             <TextView
                 android:id="@+id/tripNameText"
@@ -57,11 +56,11 @@
                 android:id="@+id/tripNameField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:descendantFocusability="beforeDescendants"
+                android:focusableInTouchMode="true"
                 android:hint="Ex: Natal - 2016"
                 android:inputType="text"
-                android:selectAllOnFocus="false"
-                android:descendantFocusability="beforeDescendants"
-                android:focusableInTouchMode="true"/>
+                android:selectAllOnFocus="false" />
 
             <TextView
                 android:id="@+id/tripStartDateText"
@@ -75,10 +74,10 @@
                 android:id="@+id/tripStartDateField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ex: 20/12/2016"
-                android:inputType="date"
                 android:descendantFocusability="beforeDescendants"
-                android:focusableInTouchMode="true"/>
+                android:focusableInTouchMode="true"
+                android:hint="Ex: 20/12/2016"
+                android:inputType="date" />
 
             <TextView
                 android:id="@+id/tripFinishDateText"
@@ -92,6 +91,7 @@
                 android:id="@+id/tripFinishDateField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:focusableInTouchMode="true"
                 android:hint="Ex: 28/12/2016"
                 android:inputType="date" />
 
@@ -108,9 +108,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:focusableInTouchMode="true"
                 android:hint="Ex: 08:30"
-                android:inputType="time"
-                android:focusableInTouchMode="true"/>
+                android:inputType="time" />
 
             <TextView
                 android:id="@+id/tripDailyDurationText"
@@ -124,8 +124,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Ex: 5"
                 android:focusableInTouchMode="true"
+                android:hint="Ex: 5"
                 android:inputType="number" />
 
             <TextView
@@ -139,8 +139,8 @@
                 android:id="@+id/dailyBudgetField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ex: 200"
                 android:focusableInTouchMode="true"
+                android:hint="Ex: 200"
                 android:inputType="number" />
 
             <TextView
@@ -154,9 +154,9 @@
                 android:id="@+id/hostAdressField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:focusableInTouchMode="true"
                 android:hint="Ex: Av. Boa Viagem, n 32"
-                android:inputType="text"
-                android:focusableInTouchMode="true"/>
+                android:inputType="text" />
 
             <Button
                 android:id="@+id/createTripButton"
