@@ -22,7 +22,6 @@ public class CreateTripActivity extends AppCompatActivity {
         timePicker.setIs24HourView(true);
 
         int currentapiVersion = android.os.Build.VERSION.SDK_INT;
-
         // O método setCurrentHour está obsoleto, mas o setHour é novo demais pro nosso minSDK
         // Precisa testar em outros aparelhos!!!
         if (currentapiVersion >= 23){
@@ -30,11 +29,6 @@ public class CreateTripActivity extends AppCompatActivity {
         } else{
             timePicker.setCurrentHour(8);
         }
-
-
-
-        //
-
 
     }
     public void confirmTrip(View view) {
