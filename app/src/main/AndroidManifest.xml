@@ -76,6 +76,7 @@
 
         <activity android:name=".ConfirmaViagemFragmentActivity" />
         <activity android:name=".TravelCardsActivity"/>
+        <activity android:name=".TelaSobre"/>
     </application>
 
 </manifest>
