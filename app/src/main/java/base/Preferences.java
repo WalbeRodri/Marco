@@ -2,13 +2,15 @@ package base;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Preference {
+public class Preferences {
 
     private List<String> preferences;
 
-    public Preference(){}
+    public Preferences(){
+        this.preferences = new ArrayList<>();
+    }
 
-    public Preference(List<String> preferences) {
+    public Preferences(List<String> preferences) {
         this.preferences = new ArrayList<>();
         this.preferences = preferences;
     }
@@ -19,5 +21,9 @@ public class Preference {
 
     public void setPreferences(List<String> preferences) {
         this.preferences = preferences;
+    }
+
+    public void addPreferences(String Gosto) {
+        this.preferences.add(Gosto);
     }
 }
