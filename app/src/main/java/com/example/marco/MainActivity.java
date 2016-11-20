@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -96,6 +97,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_sign_out) {
             FirebaseAuth.getInstance().signOut();
+            Toast.makeText(MainActivity.this, "Logout Succeed", Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.nav_gostos) {
             Intent intent = new Intent(this, PerfilActivity.class);
