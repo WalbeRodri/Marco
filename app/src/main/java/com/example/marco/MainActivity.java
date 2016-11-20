@@ -15,6 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -26,7 +28,6 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         return false;
@@ -88,6 +90,13 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_sobre) {
 
+        } else if (id == R.id.nav_sign_in) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+
+        } else if (id == R.id.nav_sign_out) {
+            FirebaseAuth.getInstance().signOut();
+
         } else if (id == R.id.nav_gostos) {
             Intent intent = new Intent(this, PerfilActivity.class);
             startActivity(intent);
@@ -97,6 +106,7 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
     public void listTrips(View view) {
         Intent intent = new Intent(this, ListTripsActivity.class);
         startActivity(intent);
