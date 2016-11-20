@@ -13,11 +13,11 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactViewHolder> {
+public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapter.ContactViewHolder> {
 
     private List<LocalInfo> contactList;
 
-    public ContactAdapter(List<LocalInfo> contactList) {
+    public CreateViagemAdapter(List<LocalInfo> contactList) {
         this.contactList = contactList;
     }
 
@@ -48,7 +48,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
     }
 
     public static class ContactViewHolder extends RecyclerView.ViewHolder {
-        protected  ImageView vImagem;
+        protected ImageView vImagem;
         protected TextView vNome;
         protected TextView vDesc;
         protected TextView vHora;
