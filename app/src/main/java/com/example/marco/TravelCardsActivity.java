@@ -23,7 +23,7 @@ public class TravelCardsActivity extends AppCompatActivity {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
 
-        ContactAdapter ca = new ContactAdapter(createList(30));
+        CreateViagemAdapter ca = new CreateViagemAdapter(createList(30));
         recList.setAdapter(ca);
     }
 
