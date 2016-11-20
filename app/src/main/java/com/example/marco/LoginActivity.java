@@ -73,67 +73,76 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (emailEditText.getText().length()==0||passwordEditText.getText().length()==0) {
+                    Toast.makeText(LoginActivity.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Reterives user inputs
+                    email = emailEditText.getText().toString();
+                    password = passwordEditText.getText().toString();
 
-                // Reterives user inputs
-                email = emailEditText.getText().toString();
-                password = passwordEditText.getText().toString();
-
-                // trims the input
-                email = email.trim();
-                password = password.trim();
+                    // trims the input
+                    email = email.trim();
+                    password = password.trim();
 
 
-                // When a user signs in to your app, pass the user's email address and password to signInWithEmailAndPassword
-                mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                Log.d("TAG", "signInWithEmail:onComplete:" + task.isSuccessful());
+                    // When a user signs in to your app, pass the user's email address and password to signInWithEmailAndPassword
+                    mAuth.signInWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    Log.d("TAG", "signInWithEmail:onComplete:" + task.isSuccessful());
 
-                                // If sign in fails, display a message to the user. If sign in succeeds
-                                // the auth state listener will be notified and logic to handle the
-                                // signed in user can be handled in the listener.
-                                if (!task.isSuccessful()) {
-                                    Log.w("TAG", "signInWithEmail", task.getException());
-                                    Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
+                                    // If sign in fails, display a message to the user. If sign in succeeds
+                                    // the auth state listener will be notified and logic to handle the
+                                    // signed in user can be handled in the listener.
+                                    if (!task.isSuccessful()) {
+                                        Log.w("TAG", "signInWithEmail", task.getException());
+                                        Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                                Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(LoginActivity.this, "Login Realizado com Sucesso", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }
-                        });
+                            });
+                }
             }
         });
         cadastroButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (emailEditText.getText().length()==0 || passwordEditText.getText().length()==0) {
+                    Toast.makeText(LoginActivity.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Reterives user inputs
+                    email = emailEditText.getText().toString();
+                    password = passwordEditText.getText().toString();
 
-                // Reterives user inputs
-                email = emailEditText.getText().toString();
-                password = passwordEditText.getText().toString();
-
-                // trims the input
-                email = email.trim();
-                password = password.trim();
+                    // trims the input
+                    email = email.trim();
+                    password = password.trim();
 
 
-                // When a user signs in to your app, pass the user's email address and password to signInWithEmailAndPassword
-                mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
+                    // When a user signs in to your app, pass the user's email address and password to signInWithEmailAndPassword
+                    mAuth.createUserWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
 
-                                // If sign in fails, display a message to the user. If sign in succeeds
-                                // the auth state listener will be notified and logic to handle the
-                                // signed in user can be handled in the listener.
-                                if (!task.isSuccessful()) {
-                                    Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
+                                    // If sign in fails, display a message to the user. If sign in succeeds
+                                    // the auth state listener will be notified and logic to handle the
+                                    // signed in user can be handled in the listener.
+                                    if (!task.isSuccessful()) {
+                                        Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                                Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(LoginActivity.this, "Login Succeed", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    // ...
                                 }
-
-                                // ...
-                            }
-                        });
-            }
+                            });
+                }    }
         });
 
 
