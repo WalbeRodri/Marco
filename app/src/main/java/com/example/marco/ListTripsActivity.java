@@ -54,8 +54,8 @@ public class ListTripsActivity extends AppCompatActivity {
         for (int i = 1; i <= size; i++) {
             TripInfo ci = new TripInfo();
             ci.nome = TripInfo.NOME + i;
-            ci.data_viagem = TripInfo.DATA_VIAGEM + i;
-            ci.cidade = TripInfo.CIDADE + i;
+            ci.data_viagem = TripInfo.DATA_VIAGEM;
+            ci.cidade = TripInfo.CIDADE;
             result.add(ci);
         }
         return result;

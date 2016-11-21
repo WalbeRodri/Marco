@@ -40,21 +40,21 @@
             >
 
             <TextView
+                android:id="@+id/txtCidade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Cidade"
+                android:textColor="@color/black"
+                android:textSize="10dp" />
+
+            <TextView
                 android:id="@+id/txtData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:gravity="center_vertical"
                 android:text="Data"
-                android:textColor="@color/black"
-                android:textSize="10dp" />
-
-            <TextView
-                android:id="@+id/txtCidade"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Duração"
                 android:textColor="@color/black"
                 android:textSize="10dp" />
         </LinearLayout>

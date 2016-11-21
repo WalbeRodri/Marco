@@ -9,7 +9,7 @@ public class TripInfo {
     protected String data_viagem;
     protected String cidade;
 
-    protected static final String NOME = "Praia Grande - SP";
-    protected static final String DATA_VIAGEM = "Jul/2016";
-    protected static final String CIDADE = "1 dia";
+    protected static final String NOME = "Fim de Semana em Gravatá";
+    protected static final String DATA_VIAGEM = "Out/2016";
+    protected static final String CIDADE = "Gravatá - PE";
 }
