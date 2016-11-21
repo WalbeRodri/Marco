@@ -25,6 +25,12 @@ public class Perfil {
         this.data_born = data_born;
         this.preferences = preferences;
     }
+    public Perfil(String username, String gmail, String gender, Date data_born) {
+        this.username = username;
+        this.gmail = gmail;
+        this.gender = gender;
+        this.data_born = data_born;
+    }
 
     public String getUsername() {
         return username;

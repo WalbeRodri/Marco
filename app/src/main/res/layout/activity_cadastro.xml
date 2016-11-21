@@ -44,7 +44,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusableInTouchMode="true"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:hint="Email"/>
 
             <DatePicker
                 android:id="@+id/dataNascimento"
@@ -75,11 +76,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <Button
+                android:id="@+id/confirmaCadastroButton"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:background="@color/colorAccent"
-                android:text="Confirmar"
-                android:onClick="confirmaCadastro"/>
+                android:text="Confirmar"/>
 
         </LinearLayout>
     </ScrollView>
