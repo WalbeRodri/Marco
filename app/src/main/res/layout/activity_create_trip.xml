@@ -80,7 +80,8 @@
                 android:descendantFocusability="beforeDescendants"
                 android:focusableInTouchMode="true"
                 android:calendarViewShown="false"
-                android:datePickerMode="spinner" />
+                android:datePickerMode="spinner"
+                android:theme="@style/AppTheme.DatePicker"/>
 
             <TextView
                 android:id="@+id/tripStartDateText"
@@ -96,7 +97,8 @@
                 android:descendantFocusability="beforeDescendants"
                 android:focusableInTouchMode="true"
                 android:calendarViewShown="false"
-                android:datePickerMode="spinner" />
+                android:datePickerMode="spinner"
+                android:theme="@style/AppTheme.DatePicker" />
 
             <TextView
                 android:id="@+id/tripStartTimeText"
@@ -106,9 +108,10 @@
                 android:text="Que horário deseja iniciar o roteiro?" />
             <TimePicker
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:id="@+id/timePicker"
-                android:timePickerMode="spinner" />
+                android:timePickerMode="spinner"
+                android:theme="@style/AppTheme.DatePicker"/>
 
 
             <TextView

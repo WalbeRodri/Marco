@@ -10,11 +10,13 @@
 
         <item name="android:windowBackground">@color/darkGray</item>
         <item name="android:textColor">@color/white</item>
+        <item name="android:datePickerStyle">@style/AppTheme.DatePicker</item>
 
         <item name="editTextStyle">@style/AppTheme.EditTextStyle</item>
         <item name="buttonStyle">@style/AppTheme.SecundaryButtonStyle</item>
 
     </style>
+
 
     <style name="AppTheme.EditTextStyle">
         <item name="android:textColor">@color/white</item>
@@ -41,6 +43,10 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.DatePicker">
+        <item name="android:textColorPrimary">@color/lightGray</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
