@@ -10,14 +10,24 @@ import android.widget.CompoundButton;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.google.firebase.database.Query;
+
 import java.util.List;
 import java.util.*;
 
+import adapters.PerfilAdapter;
+import base.Perfil;
 import base.Preferences;
+import database.dataBaseMarco;
 
 public class PerfilActivity extends AppCompatActivity {
 
     Preferences preferencias = new Preferences();
+
+    private dataBaseMarco dbMarco;
+
+    private Query mQuery; //caminho de Local
+    private PerfilAdapter perfilAdapter; //adapter de perfil , não usado
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +40,10 @@ public class PerfilActivity extends AppCompatActivity {
         ToggleButton tbPraia = (ToggleButton) findViewById(R.id.tbPraia);
         ToggleButton tbTeatro = (ToggleButton) findViewById(R.id.tbTeatro);
         ToggleButton tbComida = (ToggleButton) findViewById(R.id.tbComida);
+
+        dbMarco = new dataBaseMarco(); //inicializando banco de dados
+        setUpFirebase();
+        setUpAdapter();
 
         tbBar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -105,9 +119,23 @@ public class PerfilActivity extends AppCompatActivity {
     }
 
     public void ConfirmaGosto(View view) {
-        for(int i=0; i < preferencias.getPreferences().size(); i++) {
-            String ola = preferencias.getPreferences().get(i);
-            Toast.makeText(PerfilActivity.this, ola, Toast.LENGTH_SHORT).show();
-        }
+        Perfil perfil  = perfilAdapter.getItems().get(0);
+        perfil.setPreferences(preferencias);
+        String chave = perfilAdapter.getKeys().get(0);
+        dbMarco.editPerfil(perfil,chave);
+    }
+
+    private void setUpFirebase() {
+        mQuery = dbMarco.recoverPerfil(); //ACESANDO NÓS DE CONSULTA
+    }
+
+    public void setUpAdapter() {
+        perfilAdapter = new PerfilAdapter(mQuery, Perfil.class);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        perfilAdapter.destroy();
     }
 }
