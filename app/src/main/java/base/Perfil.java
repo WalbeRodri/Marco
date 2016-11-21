@@ -13,12 +13,12 @@ public class Perfil {
     String gmail;
     String gender;
     Date data_born;
-    Preference preferences;
+    Preferences preferences;
 //    private String id;
 
     public Perfil(){}
 
-    public Perfil(String username, String gmail, String gender, Date data_born, Preference preferences) {
+    public Perfil(String username, String gmail, String gender, Date data_born, Preferences preferences) {
         this.username = username;
         this.gmail = gmail;
         this.gender = gender;
@@ -58,11 +58,11 @@ public class Perfil {
         this.data_born = data_born;
     }
 
-    public Preference getPreferences() {
+    public Preferences getPreferences() {
         return preferences;
     }
 
-    public void setPreferences(Preference preferences) {
+    public void setPreferences(Preferences preferences) {
         this.preferences = preferences;
     }
 

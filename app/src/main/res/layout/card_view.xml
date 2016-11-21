@@ -12,48 +12,86 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
+        android:background="@color/cardview_light_background"
         app:elevation="3dp">
+
+        <LinearLayout
+            android:id="@+id/head"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorVerde">
+
+            <TextView
+                android:id="@+id/txtNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Título"
+                android:textColor="@color/white"
+                android:textSize="30dp" />
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/imagem"
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            />
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@id/head"
+            android:layout_margin="5dp" />
+
 
         <TextView
             android:id="@+id/txtDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/imagem"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_below="@+id/head"
+            android:layout_margin="5dp"
+            android:layout_toEndOf="@+id/imagem"
+            android:layout_toRightOf="@+id/imagem"
             android:text="Desc"
-            android:textSize="15dp" />
+            android:textColor="@color/black"
+            android:textSize="12dp" />
 
-        <TextView
-            android:id="@+id/txtHora"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/specs"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/txtDesc"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:gravity="center_vertical"
-            android:text="Hora"
-            android:textSize="15dp" />
+            android:layout_below="@id/imagem"
+            android:layout_marginBottom="2dp"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/txtHora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_margin="5dp"
+                android:gravity="center_vertical"
+                android:text="Hora"
+                android:textColor="@color/black"
+                android:textSize="10dp" />
+
+            <TextView
+                android:id="@+id/txtPreco"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Entradas"
+                android:textColor="@color/black"
+                android:textSize="10dp" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="32dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:background="@color/white"
-            android:orientation="horizontal"
-            android:gravity="end">
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/specs"
+            android:background="@drawable/backgroun_with_shadow"
+            android:gravity="end"
+            android:orientation="horizontal">
 
 
             <Button
@@ -61,21 +99,23 @@
                 android:id="@+id/btnEdit"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginTop="4dp"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
                 android:background="@mipmap/edit" />
+
+
 
             <Button
                 android:id="@+id/btnExcluir"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
 
-                android:layout_marginTop="4dp"
                 android:layout_marginLeft="4dp"
-                android:layout_marginStart="4dp"
                 android:layout_marginRight="4dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
                 android:background="@mipmap/lixo" />
 
             <Button
@@ -83,34 +123,12 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_margin="4dp"
-                android:layout_marginTop="4dp"
                 android:layout_marginLeft="4dp"
                 android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
                 android:background="@mipmap/renew" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/txtPreco"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/txtHora"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="10dp"
-            android:text="Entradas"
-            android:textSize="15dp" />
-
-        <TextView
-            android:id="@+id/txtNome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Título"
-            android:textColor="@android:color/white"
-            android:textSize="30dp"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/imagem"
-             />
 
     </RelativeLayout>
 
