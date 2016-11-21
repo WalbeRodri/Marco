@@ -10,6 +10,9 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import base.Local;
+import rotisserie.Decision;
+
 public class TravelCardsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +26,7 @@ public class TravelCardsActivity extends AppCompatActivity {
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
 
-        CreateViagemAdapter ca = new CreateViagemAdapter(createList(30));
+        CreateViagemAdapter ca = new CreateViagemAdapter(createList());
         recList.setAdapter(ca);
     }
 
@@ -50,20 +53,8 @@ public class TravelCardsActivity extends AppCompatActivity {
 
 
 
-    private List<LocalInfo> createList(int size) {
-
-        List<LocalInfo> result = new ArrayList<LocalInfo>();
-        for (int i = 1; i <= size; i++) {
-            LocalInfo ci = new LocalInfo();
-            ci.nome = LocalInfo.LOCAL + i;
-            ci.desc = LocalInfo.DESC + i;
-            ci.hora = LocalInfo.HORARIO + i;
-            ci.preco  = LocalInfo.ENTRADA +i;
-
-            result.add(ci);
-
-        }
-
-        return result;
+    private ArrayList<Local> createList() {
+        Decision decisao = new Decision();
+        return decisao.choice();
     }
 }

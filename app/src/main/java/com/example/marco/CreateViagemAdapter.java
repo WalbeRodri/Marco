@@ -11,13 +11,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import base.Local;
 
 public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapter.ContactViewHolder> {
 
-    private List<LocalInfo> contactList;
+    private ArrayList<Local> contactList;
 
-    public CreateViagemAdapter(List<LocalInfo> contactList) {
+    public CreateViagemAdapter(ArrayList<Local> contactList) {
         this.contactList = contactList;
     }
 
@@ -29,12 +32,14 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
 
     @Override
     public void onBindViewHolder(ContactViewHolder contactViewHolder, int i) {
-        LocalInfo ci = contactList.get(i);
+
+        Local ci = contactList.get(i);
         contactViewHolder.vImagem.setImageResource(R.mipmap.museu);
-        contactViewHolder.vNome.setText(ci.nome);
-        contactViewHolder.vDesc.setText(ci.desc);
-        contactViewHolder.vHora.setText(ci.hora);
-        contactViewHolder.vEntradas.setText(ci.preco);
+        contactViewHolder.vNome.setText(ci.getName());
+        contactViewHolder.vDesc.setText(ci.getDescription());
+        contactViewHolder.vHora.setText(ci.getSchedule());
+        String preco = ci.getPrice()+"";
+        contactViewHolder.vEntradas.setText(preco);
 //        contactViewHolder.vNome.setText(ci.nome + " " + ci.desc);
     }
 
