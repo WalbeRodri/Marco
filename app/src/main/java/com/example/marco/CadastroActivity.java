@@ -115,6 +115,6 @@ public class CadastroActivity extends AppCompatActivity {
         }
     }
 
-    public void cheat(){}
+    public int  cheat(){ return  0;}
 }
 
