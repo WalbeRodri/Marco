@@ -140,25 +140,29 @@ public class PerfilActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Perfil perfil1 = perfilAdapter.getItems().get(0);
                 Preferences pref = perfil1.getPreferences();
-                Toast.makeText(PerfilActivity.this, "Foi", Toast.LENGTH_SHORT).show();
-                if (pref.getPreferences().contains("Teatro")) {
-                    tbTeatro.setChecked(true);
+                if(pref != null) {
+                    Toast.makeText(PerfilActivity.this, "Foi", Toast.LENGTH_SHORT).show();
+                    if (pref.getPreferences().contains("Teatro")) {
+                        tbTeatro.setChecked(true);
+                    }
+                    if (pref.getPreferences().contains("Praia")) {
+                        tbPraia.setChecked(true);
+                    }
+                    if (pref.getPreferences().contains("Praca")) {
+                        tbPraca.setChecked(true);
+                    }
+                    if (pref.getPreferences().contains("Bar")) {
+                        tbBar.setChecked(true);
+                    }
+                    if (pref.getPreferences().contains("Comida")) {
+                        tbComida.setChecked(true);
+                    }
+                    if (pref.getPreferences().contains("Museu")) {
+                        tbMuseu.setChecked(true);
+                    }
                 }
-                if (pref.getPreferences().contains("Praia")) {
-                    tbPraia.setChecked(true);
-                }
-                if (pref.getPreferences().contains("Praca")) {
-                    tbPraca.setChecked(true);
-                }
-                if (pref.getPreferences().contains("Bar")) {
-                    tbBar.setChecked(true);
-                }
-                if (pref.getPreferences().contains("Comida")) {
-                    tbComida.setChecked(true);
-                }
-                if (pref.getPreferences().contains("Museu")) {
-                    tbMuseu.setChecked(true);
-                }
+
+
             }
 
             @Override
