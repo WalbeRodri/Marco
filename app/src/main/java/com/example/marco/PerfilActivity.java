@@ -161,8 +161,6 @@ public class PerfilActivity extends AppCompatActivity {
                         tbMuseu.setChecked(true);
                     }
                 }
-
-
             }
 
             @Override

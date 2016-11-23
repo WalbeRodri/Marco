@@ -10,9 +10,9 @@ public class Preferences {
         this.preferences = new ArrayList<>();
     }
 
-    public Preferences(List<String> preferences) {
+    public Preferences(List<String> preferences2) {
         this.preferences = new ArrayList<>();
-        this.preferences = preferences;
+        this.preferences = preferences2;
     }
 
     public List<String> getPreferences() {

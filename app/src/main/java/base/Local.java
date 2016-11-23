@@ -9,25 +9,26 @@ import org.parceler.Parcel;
 @Parcel
 public class Local  {
 
-     String name;
-     String description;
-     double price;
-     String schedule;
-     String timeSpend;
-     double latitude;
-     double logintude;
-
+    String name;
+    String description;
+    double price;
+    String schedule;
+    String timeSpend;
+    double latitude;
+    double longitude;
+    String type;
 
     public Local(){}
 
-    public Local(String name, String description, double price, String schedule, String timeSpend, double latitude, double logintude) {
+    public Local(String name, String description, double price, String schedule, String timeSpend, double latitude, double longitude, String type) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.schedule = schedule;
         this.timeSpend = timeSpend;
         this.latitude = latitude;
-        this.logintude = logintude;
+        this.longitude = longitude;
+        this.type = type;
     }
 
 
@@ -37,6 +38,14 @@ public class Local  {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getDescription() {
@@ -79,14 +88,11 @@ public class Local  {
         this.latitude = latitude;
     }
 
-    public double getLogintude() {
-        return logintude;
+    public double getlongitude() {
+        return longitude;
     }
 
-    public void setLogintude(double logintude) {
-        this.logintude = logintude;
+    public void setlongitude(double longitude) {
+        this.longitude = longitude;
     }
-
-
-
 }
