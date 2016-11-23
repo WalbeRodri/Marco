@@ -114,8 +114,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void listTrips(View view) {
-        Intent intent = new Intent(this, ListTripsActivity.class);
+        //Intent intent = new Intent(this, ListTripsActivity.class);
+        //startActivity(intent);
+        Intent intent = new Intent(this, DecisaoLocal.class);
         startActivity(intent);
+
     }
 
 

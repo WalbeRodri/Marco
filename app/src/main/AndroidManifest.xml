@@ -73,7 +73,8 @@
 
         <activity android:name=".ConfirmaViagemFragmentActivity" />
         <activity android:name=".TravelCardsActivity" />
-        <activity android:name=".CadastroActivity"></activity>
+        <activity android:name=".CadastroActivity" />
+        <activity android:name=".DecisaoLocal"></activity>
     </application>
 
 </manifest>
