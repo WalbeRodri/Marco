@@ -109,7 +109,7 @@
             <TimePicker
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:id="@+id/timePicker"
+                android:id="@+id/timeBeginPicker"
                 android:timePickerMode="spinner"
                 android:theme="@style/AppTheme.DatePicker"/>
 
@@ -121,14 +121,14 @@
                 android:layout_marginTop="20dp"
                 android:text="Quantas horas você gostaria que durasse o roteiro?" />
 
-            <EditText
-                android:id="@+id/tripDailyDurationField"
+            <TimePicker
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Ex: 5"
-                android:focusableInTouchMode="true"
-                android:inputType="number" />
+                android:layout_height="100dp"
+                android:id="@+id/timeEndPicker"
+                android:timePickerMode="spinner"
+                android:theme="@style/AppTheme.DatePicker"/>
+
+
 
             <TextView
                 android:id="@+id/dailyBudgetText"
@@ -166,6 +166,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:onClick="confirmTrip"
                 android:text="Criar Viagem" />
 

@@ -4,21 +4,27 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_gostos"
+            android:icon="@drawable/gostos"
             android:title="Gerencie seus gostos" />
         <item
             android:id="@+id/nav_feedback"
+            android:icon="@drawable/feedback"
              android:title="Feedback" />
         <item
             android:id="@+id/nav_reset"
+            android:icon="@drawable/refresh"
             android:title="Resetar Perfil" />
         <item
             android:id="@+id/nav_sobre"
+            android:icon="@drawable/info"
             android:title="Sobre" />
         <item
             android:id="@+id/nav_sign_in"
+            android:icon="@drawable/logout"
             android:title="Login" />
         <item
             android:id="@+id/nav_sign_out"
+            android:icon="@drawable/logout"
             android:title="Sair" />
 
 

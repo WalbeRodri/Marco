@@ -10,14 +10,14 @@ import base.*;
  * Created by Matheus on 06/11/2016.
  */
 
-public class dataBaseMarco {
+public class DataBaseMarco {
     private FirebaseDatabase database;
     private DatabaseReference tripRef;  //nó de viagem
     private DatabaseReference perfilRef; // nó de perfil
     private DatabaseReference localRef;
 
     //  private DatabaseReference agendaRef;
-    public dataBaseMarco() {
+    public DataBaseMarco() {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String uidUser = auth.getCurrentUser().getUid();
         database = FirebaseDatabase.getInstance();

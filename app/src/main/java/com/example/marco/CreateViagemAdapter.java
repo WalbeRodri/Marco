@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -46,6 +48,8 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
         contactViewHolder.vDesc.setText(ci.getDescription());
       //  contactViewHolder.vHora.setText(ci.getSchedule()+"");
         String preco = ci.getPrice()+"";
+
+
         contactViewHolder.vEntradas.setText(preco);
 
 

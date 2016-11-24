@@ -1,6 +1,5 @@
 package com.example.marco;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,20 +15,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.api.model.StringList;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import base.Perfil;
-import database.dataBaseMarco;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import database.DataBaseMarco;
 
 public class CadastroActivity extends AppCompatActivity {
     protected Perfil perfil;
-    private dataBaseMarco dbMarco;
+    private DataBaseMarco dbMarco;
     private static final String TAG = "CadastroActivity";
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -46,7 +40,7 @@ public class CadastroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
-        //dbMarco = new dataBaseMarco();
+        //dbMarco = new DataBaseMarco();
         nome = (EditText) findViewById(R.id.nomeCadastro);
         genero = (EditText) findViewById(R.id.genero);
         email = (EditText) findViewById(R.id.emailCadastro);
@@ -62,7 +56,7 @@ public class CadastroActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    dbMarco = new dataBaseMarco();
+                    dbMarco = new DataBaseMarco();
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     Date date = new Date(data.getYear(), data.getMonth(), data.getDayOfMonth());
                     perfil = new Perfil(nome.getText().toString(), email.getText().toString(), genero.getText().toString(), date);

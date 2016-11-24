@@ -22,14 +22,14 @@ import adapters.LocalAdapter;
 import adapters.PerfilAdapter;
 import base.Local;
 import base.Perfil;
-import database.dataBaseMarco;
+import database.DataBaseMarco;
 import rotisserie.Decision;
 
 public class TravelCardsActivity extends AppCompatActivity {
     private final static String SAVED_ADAPTER_ITEMS_LOCAL = "SAVED_ADAPTER_ITEMS_LOCAIS";
     private final static String SAVED_ADAPTER_KEYS_LOCAL = "SAVED_ADAPTER_KEYS_LOCAIS";
 
-    private dataBaseMarco dbMarco;
+    private DataBaseMarco dbMarco;
     private Query mQuery; //caminho de Local
     private LocalAdapter localAdapter; //adapter
 
@@ -47,9 +47,8 @@ public class TravelCardsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_my);
 
-        dbMarco = new dataBaseMarco(); //inicializando banco de dados
+        dbMarco = new DataBaseMarco(); //inicializando banco de dados
         handleInstanceState(savedInstanceState);
         setUpFirebase();
         setUpAdapter();
