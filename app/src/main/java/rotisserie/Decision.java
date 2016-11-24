@@ -7,10 +7,10 @@ package rotisserie;
 
 public class Decision {
     private List<String> teste;
-    private Local[] array;
+    //private Local[] array;
     private List<Local> arrayLocais;
 
-    public Decision() {
+   /* public Decision() {
         teste = new ArrayList<String>();
         teste.add("Bar");
         teste.add("Museu");
@@ -23,7 +23,8 @@ public class Decision {
         arrayLocais.add(new Local("Centro Artesanato de Pernambuco", "Museu", 5, "07:00", "1", -8.062282856771736, -34.871192094739904,"Bar"));
         arrayLocais.add(new Local("Downtown Pier", "Bar", 0, "21:00", "1", -8.06473755, -34.87182319,"Bar"));
     }
-
+*/
+    //receber tempo inicial e a duração
     public Decision(List<Local> arrayLocaisr, List<String> preferencias) {
         this.teste = preferencias;
         this.arrayLocais = arrayLocaisr;
@@ -37,9 +38,9 @@ public class Decision {
         int aux = 0;
         double auxMoney = 0;
         for(int i=0; i<arrayLocais.length;i++){
-            if(((Integer.parseInt(arrayLocais[i].getTimeSpend())) + aux <= tempoPorDia) && (arrayLocais[i].getPrice() + auxMoney) <= budget ){
+            if(((arrayLocais[i].getTimeSpend() + aux <= tempoPorDia) && (arrayLocais[i].getPrice() + auxMoney) <= budget )){
                 packed.add(arrayLocais[i]);
-                aux += Integer.parseInt(arrayLocais[i].getTimeSpend());
+                aux +=arrayLocais[i].getTimeSpend();
                 auxMoney += arrayLocais[i].getPrice();
             }
         }
@@ -47,7 +48,7 @@ public class Decision {
     }
 
     public ArrayList<Local> choice(){
-        return packing(escolha(teste, arrayLocais), 1, 2, 10);
+        return packing(escolha(teste, arrayLocais), 1, 10, 1000);
     }
 
     private ArrayList<Local> escolha(List<String> preferencias, List<Local> locals){

@@ -13,14 +13,15 @@ public class Local  {
     String description;
     double price;
     String schedule;
-    String timeSpend;
+    double timeSpend;
     double latitude;
     double longitude;
     String type;
-
+    String image;
+     String horario;
     public Local(){}
 
-    public Local(String name, String description, double price, String schedule, String timeSpend, double latitude, double longitude, String type) {
+    public Local(String name, String description, double price, String schedule, double timeSpend, double latitude, double longitude, String type,String image) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -29,6 +30,7 @@ public class Local  {
         this.latitude = latitude;
         this.longitude = longitude;
         this.type = type;
+        this.image = image;
     }
 
 
@@ -72,11 +74,11 @@ public class Local  {
         this.schedule = schedule;
     }
 
-    public String getTimeSpend() {
+    public double getTimeSpend() {
         return timeSpend;
     }
 
-    public void setTimeSpend(String timeSpend) {
+    public void setTimeSpend(double timeSpend) {
         this.timeSpend = timeSpend;
     }
 
@@ -88,11 +90,29 @@ public class Local  {
         this.latitude = latitude;
     }
 
-    public double getlongitude() {
+
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setlongitude(double longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getHorario() {
+        return horario;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
+    }
+
 }
