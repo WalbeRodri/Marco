@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import base.Local;
 
@@ -37,9 +36,10 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
         contactViewHolder.vImagem.setImageResource(R.mipmap.museu);
         contactViewHolder.vNome.setText(ci.getName());
         contactViewHolder.vDesc.setText(ci.getDescription());
-        contactViewHolder.vHora.setText(ci.getSchedule());
-        String preco = ci.getPrice()+"";
-        contactViewHolder.vEntradas.setText(preco);
+        contactViewHolder.vSchedule.setText(ci.getSchedule());
+        contactViewHolder.vTimeSpend.setText(ci.getTimeSpend());
+        contactViewHolder.vCategorias.setText(ci.getDescription());
+
 //        contactViewHolder.vNome.setText(ci.nome + " " + ci.desc);
     }
 
@@ -56,16 +56,18 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
         protected ImageView vImagem;
         protected TextView vNome;
         protected TextView vDesc;
-        protected TextView vHora;
-        protected TextView vEntradas;
+        protected TextView vSchedule;
+        protected TextView vCategorias;
+        protected TextView vTimeSpend;
 
         public ContactViewHolder(View v) {
             super(v);
             vImagem = (ImageView) v.findViewById(R.id.imagem);
             vNome =  (TextView) v.findViewById(R.id.txtNome);
             vDesc = (TextView)  v.findViewById(R.id.txtDesc);
-            vHora = (TextView)  v.findViewById(R.id.txtHora);
-            vEntradas = (TextView) v.findViewById(R.id.txtPreco);
+            vSchedule = (TextView)  v.findViewById(R.id.txtSchedule);
+            vCategorias = (TextView) v.findViewById(R.id.txtCategoria);
+            vTimeSpend = (TextView) v.findViewById(R.id.txtTimeSpend);
 
         }
     }
