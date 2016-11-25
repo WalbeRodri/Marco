@@ -19,13 +19,10 @@
             android:icon="@drawable/info"
             android:title="Sobre" />
         <item
-            android:id="@+id/nav_sign_in"
+            android:id="@+id/nav_sign_in_out"
             android:icon="@drawable/logout"
-            android:title="Login" />
-        <item
-            android:id="@+id/nav_sign_out"
-            android:icon="@drawable/logout"
-            android:title="Sair" />
+            android:title="Login/Logout" />
+
 
 
     </group>

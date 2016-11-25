@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -24,14 +25,16 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        mAuth = FirebaseAuth.getInstance();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -87,25 +90,31 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_reset) {
-            // Handle the camera action
+            //handle Reset
         } else if (id == R.id.nav_feedback) {
+
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse("market://details?id=com.example.marco")); //redireciona para a página do app na play store
             startActivity(intent);
 
         } else if (id == R.id.nav_sobre) {
 
-        } else if (id == R.id.nav_sign_in) {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-
-        } else if (id == R.id.nav_sign_out) {
-            FirebaseAuth.getInstance().signOut();
-            Toast.makeText(MainActivity.this, "Logout Succeed", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_sign_in_out) {
+            if (mAuth.getCurrentUser() == null) {
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+            } else {
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(MainActivity.this, "Logout Succeed", Toast.LENGTH_SHORT).show();
+            }
 
         } else if (id == R.id.nav_gostos) {
-            Intent intent = new Intent(this, PerfilActivity.class);
-            startActivity(intent);
+            if (mAuth.getCurrentUser() != null) {
+                Intent intent = new Intent(this, PerfilActivity.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(MainActivity.this, "Realize Login para setar suas preferências", Toast.LENGTH_SHORT).show();
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -114,13 +123,21 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void listTrips(View view) {
-        //Intent intent = new Intent(this, ListTripsActivity.class);
-        //startActivity(intent);
-        Intent intent = new Intent(this, DecisaoLocal.class);
-        startActivity(intent);
+
+        if (mAuth.getCurrentUser() != null) {
+            Intent intent = new Intent(this, ListTripsActivity.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(MainActivity.this, "Realize Login para ver suas Viagens antigas", Toast.LENGTH_SHORT).show();
+        }
+//        Intent intent = new Intent(this, DecisaoLocal.class);
+//        startActivity(intent);
 
     }
 
+    public void currentTrip() {
+
+    }
 
     public void createTrip(View view) {
         Intent intent = new Intent(this, CreateTripActivity.class);
