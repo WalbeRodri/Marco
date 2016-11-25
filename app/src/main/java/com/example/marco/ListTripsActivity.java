@@ -1,14 +1,15 @@
 package com.example.marco;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.marco.map.MapsActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,16 +20,10 @@ import com.google.firebase.database.ValueEventListener;
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import adapters.LocalAdapter;
-import adapters.PerfilAdapter;
 import adapters.TripAdapter;
-import base.Local;
-import base.Perfil;
 import base.Trip;
 import database.DataBaseMarco;
-import rotisserie.Decision;
 
 public class ListTripsActivity extends AppCompatActivity {
     private final static String SAVED_ADAPTER_ITEMS_TRIP = "SAVED_ADAPTER_ITEMS_TRIP";

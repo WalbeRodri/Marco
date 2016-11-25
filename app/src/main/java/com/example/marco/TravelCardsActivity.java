@@ -1,13 +1,16 @@
 package com.example.marco;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
+import com.example.marco.map.MapsActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -168,4 +171,10 @@ public class TravelCardsActivity extends AppCompatActivity {
         localAdapter.destroy(); //destroindo os adapter criados
         perfilAdapter.destroy();
     }
+
+    public void openMap(View view)
+    {
+        startActivity(new Intent(this, MapsActivity.class));
+    }
+
 }
