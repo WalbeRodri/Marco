@@ -4,12 +4,20 @@ package com.example.marco;
  * Created by Walber Rodrigues on 10/11/2016.
  */
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -30,15 +38,36 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
     }
 
     @Override
-    public void onBindViewHolder(ContactViewHolder contactViewHolder, int i) {
+    public void onBindViewHolder(final ContactViewHolder contactViewHolder, int i) {
 
         Local ci = contactList.get(i);
-        contactViewHolder.vImagem.setImageResource(R.mipmap.museu);
+
         contactViewHolder.vNome.setText(ci.getName());
         contactViewHolder.vDesc.setText(ci.getDescription());
+
         contactViewHolder.vSchedule.setText(ci.getSchedule());
-        contactViewHolder.vTimeSpend.setText(ci.getTimeSpend());
-        contactViewHolder.vCategorias.setText(ci.getDescription());
+        contactViewHolder.vTimeSpend.setText("Duração: " + String.valueOf(ci.getTimeSpend()) + "h");
+        contactViewHolder.vCategorias.setText(ci.getType());
+
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReferenceFromUrl(ci.getImage());
+
+        final long tamanhoMax = 500 * 1024;
+        storageRef.getBytes(tamanhoMax).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                // Data for "images/island.jpg" is returns, use this as needed
+                Bitmap bm = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                contactViewHolder.vImagem.setImageBitmap(bm);
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+            }
+        });
 
 //        contactViewHolder.vNome.setText(ci.nome + " " + ci.desc);
     }
