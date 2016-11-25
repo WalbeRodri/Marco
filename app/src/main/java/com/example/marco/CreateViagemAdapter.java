@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -44,7 +46,6 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
 
         contactViewHolder.vNome.setText(ci.getName());
         contactViewHolder.vDesc.setText(ci.getDescription());
-
         contactViewHolder.vSchedule.setText(ci.getSchedule() + " -");
         contactViewHolder.vTimeSpend.setText("Tempo Estimado: " + String.valueOf(ci.getTimeSpend()) + "h");
         contactViewHolder.vCategorias.setText(ci.getType());

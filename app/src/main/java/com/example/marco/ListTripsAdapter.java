@@ -6,32 +6,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by paim on 21/11/16.
- */
+import base.Trip;
+
 
 public class ListTripsAdapter extends RecyclerView.Adapter<com.example.marco.ListTripsAdapter.ContactViewHolder> {
 
-    private List<TripInfo> contactList;
-
-    public ListTripsAdapter(List<TripInfo> contactList) {
-        this.contactList = contactList;
+    private List<Trip> tripList;
+    public ListTripsAdapter(ArrayList<Trip> contactList) {
+        this.tripList = contactList;
     }
 
 
     @Override
     public int getItemCount() {
-        return contactList.size();
+        return tripList.size();
     }
 
     @Override
     public void onBindViewHolder(com.example.marco.ListTripsAdapter.ContactViewHolder contactViewHolder, int i) {
-        TripInfo ci = contactList.get(i);
-        contactViewHolder.vNome.setText(ci.nome);
-        contactViewHolder.vDataViagem.setText(ci.data_viagem);
-        contactViewHolder.vCidade.setText(ci.cidade);
+        Trip ci = tripList.get(i);
+        contactViewHolder.vNome.setText(ci.getName());
+        contactViewHolder.vDataViagem.setText(ci.getTimeStar());
+        contactViewHolder.vCidade.setText(ci.getAdress());
     }
 
     @Override
