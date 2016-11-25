@@ -62,7 +62,8 @@
                 android:inputType="text"
                 android:selectAllOnFocus="false"
                 android:descendantFocusability="beforeDescendants"
-                android:focusableInTouchMode="true"/>
+                android:focusableInTouchMode="true"
+                android:text="nome" />
 
 
             <TextView
@@ -143,7 +144,8 @@
                 android:layout_height="wrap_content"
                 android:hint="Ex: 200"
                 android:focusableInTouchMode="true"
-                android:inputType="number" />
+                android:inputType="number"
+                android:text="200" />
 
             <TextView
                 android:id="@+id/hostAdressText"
@@ -158,7 +160,8 @@
                 android:layout_height="wrap_content"
                 android:hint="Ex: Av. Boa Viagem, n 32"
                 android:inputType="text"
-                android:focusableInTouchMode="true"/>
+                android:focusableInTouchMode="true"
+                android:text="adress" />
 
             <Button
                 android:id="@+id/createTripButton"
