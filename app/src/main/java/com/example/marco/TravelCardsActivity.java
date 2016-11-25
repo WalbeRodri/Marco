@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.parceler.Parcels;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import adapters.LocalAdapter;
@@ -46,6 +47,7 @@ public class TravelCardsActivity extends AppCompatActivity {
     private ArrayList<String> mAdapterLocalKeys; //chaves de locais
 
     private Decision decisao = null;
+    public CreateViagemAdapter ca;
 
 
     @Override
@@ -77,7 +79,7 @@ public class TravelCardsActivity extends AppCompatActivity {
                     Toast.makeText(TravelCardsActivity.this, "Você não tem nenhum gosto escolhido :'(", Toast.LENGTH_SHORT).show();
                 } else {
                     decisao = new Decision(mAdapterLocal, perfil1.getPreferences().getPreferences());
-                    CreateViagemAdapter ca = new CreateViagemAdapter(decisao.choice());
+                    ca = new CreateViagemAdapter(decisao.choice());
                     recList.setAdapter(ca);
                 }
                 //PRINTS DE TESTE, FAVOR NAO TIRAR
@@ -174,7 +176,9 @@ public class TravelCardsActivity extends AppCompatActivity {
 
     public void openMap(View view)
     {
-        startActivity(new Intent(this, MapsActivity.class));
+        Intent intent = new Intent(this, MapsActivity.class);
+        intent.putExtra("LOCAIS", (Serializable) this.ca.getContactList());
+        startActivity(intent);
     }
 
 }

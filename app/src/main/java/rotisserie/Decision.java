@@ -1,9 +1,9 @@
 package rotisserie;
 
-        import java.util.ArrayList;
-        import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 
-        import base.Local;
+import base.Local;
 
 public class Decision {
     private List<String> teste;
@@ -25,7 +25,9 @@ public class Decision {
     }
 */
     //receber tempo inicial e a duração
-    public Decision(List<Local> arrayLocaisr, List<String> preferencias) {
+    public Decision(List<Local> arrayLocaisr, List<String> preferencias)
+
+    {
         this.teste = preferencias;
         this.arrayLocais = arrayLocaisr;
     }

@@ -59,6 +59,7 @@ dependencies {
     compile 'org.parceler:parceler-api:1.0.2'
     testCompile 'junit:junit:4.12'
     apt 'org.parceler:parceler:1.0.2'
+    compile 'org.parceler:parceler-api:1.0.2'
 }
 
 apply plugin: 'com.google.gms.google-services'

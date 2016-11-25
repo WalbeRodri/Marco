@@ -1,6 +1,7 @@
 package com.example.marco.map;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -29,6 +30,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import base.Local;
+
+
 /*
     Baseado nos tutoriais abaixo
     http://wptrafficanalyzer.in/blog/drawing-driving-route-directions-between-two-locations-using-google-directions-in-google-map-android-api-v2/
@@ -39,7 +43,7 @@ import java.util.List;
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
     GoogleMap map;
     ArrayList<LatLng> markerPoints;
-    ArrayList<Locals> locals;
+    ArrayList<Local> locals;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +53,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // Initializing
         markerPoints = new ArrayList<LatLng>();
-        Decision d = new Decision();
-        locals = d.choice();
+
+        Intent intent = getIntent();
+        locals = (ArrayList<Local>) intent.getParcelableExtra("LOCAIS");
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -101,7 +106,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 */
 
         for (int i = 0; i < locals.size(); i++) {
-            LatLng aux = new LatLng(locals.get(i).latitude, locals.get(i).longitude);
+            LatLng aux = new LatLng(locals.get(i).getLatitude(), locals.get(i).getLongitude());
             map.addMarker(new MarkerOptions().position(aux));
             markerPoints.add(aux);
         }

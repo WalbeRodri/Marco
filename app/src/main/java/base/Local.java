@@ -6,8 +6,10 @@ package base;
 
 import org.parceler.Parcel;
 
+import java.io.Serializable;
+
 @Parcel
-public class Local  {
+public class Local implements Serializable{
 
     String name;
     String description;
