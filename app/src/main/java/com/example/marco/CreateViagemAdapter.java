@@ -46,17 +46,13 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
 
         contactViewHolder.vNome.setText(ci.getName());
         contactViewHolder.vDesc.setText(ci.getDescription());
-      //  contactViewHolder.vHora.setText(ci.getSchedule()+"");
-        String preco = ci.getPrice()+"";
-
-
-        contactViewHolder.vEntradas.setText(preco);
+        contactViewHolder.vSchedule.setText(ci.getSchedule() + " -");
+        contactViewHolder.vTimeSpend.setText("Tempo Estimado: " + String.valueOf(ci.getTimeSpend()) + "h");
+        contactViewHolder.vCategorias.setText(ci.getType());
 
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReferenceFromUrl(ci.getImage());
-
-
 
         final long tamanhoMax = 500 * 1024;
         storageRef.getBytes(tamanhoMax).addOnSuccessListener(new OnSuccessListener<byte[]>() {
@@ -90,16 +86,18 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
         protected ImageView vImagem;
         protected TextView vNome;
         protected TextView vDesc;
-        protected TextView vHora;
-        protected TextView vEntradas;
+        protected TextView vSchedule;
+        protected TextView vCategorias;
+        protected TextView vTimeSpend;
 
         public ContactViewHolder(View v) {
             super(v);
             vImagem = (ImageView) v.findViewById(R.id.imagem);
             vNome =  (TextView) v.findViewById(R.id.txtNome);
             vDesc = (TextView)  v.findViewById(R.id.txtDesc);
-            vHora = (TextView)  v.findViewById(R.id.txtHora);
-            vEntradas = (TextView) v.findViewById(R.id.txtPreco);
+            vSchedule = (TextView)  v.findViewById(R.id.txtSchedule);
+            vCategorias = (TextView) v.findViewById(R.id.txtCategoria);
+            vTimeSpend = (TextView) v.findViewById(R.id.txtTimeSpend);
 
         }
     }
