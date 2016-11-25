@@ -9,25 +9,93 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import adapters.LocalAdapter;
+import adapters.PerfilAdapter;
+import adapters.TripAdapter;
+import base.Local;
+import base.Perfil;
+import base.Trip;
+import database.DataBaseMarco;
+import rotisserie.Decision;
+
 public class ListTripsActivity extends AppCompatActivity {
+    private final static String SAVED_ADAPTER_ITEMS_TRIP = "SAVED_ADAPTER_ITEMS_TRIP";
+    private final static String SAVED_ADAPTER_KEYS_TRIP = "SAVED_ADAPTER_KEYS_TRIP";
+
+    final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+    private Query mQuery;
+    private DataBaseMarco dbMarco;
+    private TripAdapter tripsAdapter;
+    private ArrayList<Trip> mAdapterTrip; //armazena lista de locais
+    private ArrayList<String> mAdapterTripKeys; //chaves de locais
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_trips);
 
-        RecyclerView recList = (RecyclerView) findViewById(R.id.tripsList);
+        dbMarco = new DataBaseMarco(); //inicializando banco de dados
+        handleInstanceState(savedInstanceState);
+        setUpFirebase();
+        setUpAdapter();
+
+        final RecyclerView recList = (RecyclerView) findViewById(R.id.tripsList);
         recList.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
 
-        ListTripsAdapter ca = new ListTripsAdapter(createList(3));
-        recList.setAdapter(ca);
+
+
+
+        //tripsAdapter = new ListTripsAdapter(createList(3));
+
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+//                decisao = new Decision(mAdapterLocal, perfil1.getPreferences().getPreferences());
+                ListTripsAdapter ca = new ListTripsAdapter(mAdapterTrip);
+                recList.setAdapter(ca);
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //Toast.makeText(DecisaoLocal.this, "Falha conexão!", Toast.LENGTH_SHORT).show();
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+
+
     }
+
+
+    public void createTrip(View view) {
+        Intent intent = new Intent(this, CreateTripActivity.class);
+        startActivity(intent);
+    }
+
+    public void openTrip(View view) {
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -48,26 +116,47 @@ public class ListTripsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private List<TripInfo> createList(int size) {
 
-        List<TripInfo> result = new ArrayList<TripInfo>();
-        for (int i = 1; i <= size; i++) {
-            TripInfo ci = new TripInfo();
-            ci.nome = TripInfo.NOME + i;
-            ci.data_viagem = TripInfo.DATA_VIAGEM;
-            ci.cidade = TripInfo.CIDADE;
-            result.add(ci);
+    /*
+        private ArrayList<Local> createList() {
+            Decision decisao = new Decision();
+            return decisao.choice();
         }
-        return result;
+            */
+    private void setUpFirebase() {
+        mQuery = dbMarco.recoverLocal(); //ACESANDO NÓS DE CONSULTA
     }
 
-    public void createTrip(View view) {
-        Intent intent = new Intent(this, CreateTripActivity.class);
-        startActivity(intent);
+    public void setUpAdapter() {
+        tripsAdapter = new TripAdapter(mQuery, Trip.class, mAdapterTrip, mAdapterTripKeys);
     }
 
-    public void openTrip(View view) {
-        Intent intent = new Intent(this, MapsActivity.class);
-        startActivity(intent);
+    // Restoring the item list and the keys of the items: they will be passed to the adapter
+    private void handleInstanceState(Bundle savedInstanceState) {
+        if (savedInstanceState != null &&
+                savedInstanceState.containsKey(SAVED_ADAPTER_ITEMS_TRIP) &&
+                savedInstanceState.containsKey(SAVED_ADAPTER_KEYS_TRIP)) {
+            mAdapterTrip = Parcels.unwrap(savedInstanceState.getParcelable(SAVED_ADAPTER_ITEMS_TRIP));
+            mAdapterTripKeys = savedInstanceState.getStringArrayList(SAVED_ADAPTER_KEYS_TRIP);
+        } else {
+            mAdapterTrip = new ArrayList<Trip>(); //INICIALIZANDO VARIAVEIS
+            mAdapterTripKeys = new ArrayList<String>();
+        }
+    }
+
+
+    // Saving the list of items and keys of the items on rotation
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(SAVED_ADAPTER_ITEMS_TRIP, Parcels.wrap(tripsAdapter.getItems())); //SETANDO LOCAL QUE IRÁ ARMAZENAR
+        outState.putStringArrayList(SAVED_ADAPTER_KEYS_TRIP, tripsAdapter.getKeys());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        tripsAdapter.destroy(); //destroindo os adapter criados
+
     }
 }

@@ -83,7 +83,7 @@ import projetao.firebase.adapters.LocalAdapter;
 import projetao.firebase.adapters.PerfilAdapter;
 import projetao.firebase.base.Local;
 import projetao.firebase.base.Perfil;
-import projetao.firebase.database.dataBaseMarco;
+import projetao.firebase.database.DataBaseMarco;
 
 public class MainRealBack2 extends AppCompatActivity {
     private static final String TAG = "MainRealBack2";
@@ -93,7 +93,7 @@ public class MainRealBack2 extends AppCompatActivity {
 
     private FirebaseDatabase database;
     private DatabaseReference tripRef;
-    private dataBaseMarco dbMarco ;
+    private DataBaseMarco dbMarco ;
 
 
     private LocalAdapter localAdapter; //adapter
@@ -108,7 +108,7 @@ public class MainRealBack2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_back2);
-         dbMarco = new dataBaseMarco(); //inicializando banco de dados
+         dbMarco = new DataBaseMarco(); //inicializando banco de dados
          handleInstanceState(savedInstanceState);
          setUpFirebase();
          setUpList();

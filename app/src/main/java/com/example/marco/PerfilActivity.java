@@ -1,10 +1,7 @@
 package com.example.marco;
 
-import android.graphics.drawable.Drawable;
-import android.preference.Preference;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
@@ -18,18 +15,17 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
-import java.util.*;
 
 import adapters.PerfilAdapter;
 import base.Perfil;
 import base.Preferences;
-import database.dataBaseMarco;
+import database.DataBaseMarco;
 
 public class PerfilActivity extends AppCompatActivity {
 
     Preferences preferencias = new Preferences();
 
-    private dataBaseMarco dbMarco;
+    private DataBaseMarco dbMarco;
 
     private Query mQuery; //caminho de Local
     private PerfilAdapter perfilAdapter; //adapter de perfil , não usado
@@ -55,7 +51,7 @@ public class PerfilActivity extends AppCompatActivity {
         tbTeatro = (ToggleButton) findViewById(R.id.tbTeatro);
         tbComida = (ToggleButton) findViewById(R.id.tbComida);
 
-        dbMarco = new dataBaseMarco(); //inicializando banco de dados
+        dbMarco = new DataBaseMarco(); //inicializando banco de dados
         setUpFirebase();
         setUpAdapter();
 
@@ -177,6 +173,7 @@ public class PerfilActivity extends AppCompatActivity {
         perfil.setPreferences(preferencias);
         String chave = perfilAdapter.getKeys().get(0);
         dbMarco.editPerfil(perfil,chave);
+        this.finish();
     }
 
     private void setUpFirebase() {

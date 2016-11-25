@@ -17,14 +17,14 @@ public class Trip {
     private String adress;
     private  Agenda agenda;
     private String timeStar;
-
+    private String timeEnd;
 
 
     public Trip(){}
 
 
     public Trip( String name,Double budget, String destiny,
-                Date start_date, Date end_date, String adress, Agenda agenda, String timeStar) {
+                Date start_date, Date end_date, String adress, Agenda agenda, String timeStar, String timeEnd) {
         this.budget = budget;
         this.name = name;
         this.destiny = destiny;
@@ -33,7 +33,7 @@ public class Trip {
         this.adress = adress;
         this.agenda = agenda;
         this.timeStar = timeStar;
-
+        this.timeEnd = timeEnd;
     }
 
 

@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,14 +23,14 @@ import adapters.LocalAdapter;
 import adapters.PerfilAdapter;
 import base.Local;
 import base.Perfil;
-import database.dataBaseMarco;
+import database.DataBaseMarco;
 import rotisserie.Decision;
 
 public class TravelCardsActivity extends AppCompatActivity {
     private final static String SAVED_ADAPTER_ITEMS_LOCAL = "SAVED_ADAPTER_ITEMS_LOCAIS";
     private final static String SAVED_ADAPTER_KEYS_LOCAL = "SAVED_ADAPTER_KEYS_LOCAIS";
 
-    private dataBaseMarco dbMarco;
+    private DataBaseMarco dbMarco;
     private Query mQuery; //caminho de Local
     private LocalAdapter localAdapter; //adapter
 
@@ -47,9 +48,8 @@ public class TravelCardsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_my);
 
-        dbMarco = new dataBaseMarco(); //inicializando banco de dados
+        dbMarco = new DataBaseMarco(); //inicializando banco de dados
         handleInstanceState(savedInstanceState);
         setUpFirebase();
         setUpAdapter();
@@ -64,17 +64,19 @@ public class TravelCardsActivity extends AppCompatActivity {
         recList.setLayoutManager(llm);
 
 
-
         ArrayList<Local> arrayLocal = new ArrayList<Local>();
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 Perfil perfil1 = perfilAdapter.getItems().get(0);
-                decisao = new Decision(mAdapterLocal, perfil1.getPreferences().getPreferences());
-                CreateViagemAdapter  ca = new CreateViagemAdapter( decisao.choice());
-                recList.setAdapter(ca);
-
+                if(perfil1.getPreferences()==null){
+                    Toast.makeText(TravelCardsActivity.this, "Você não tem nenhum gosto escolhido :'(", Toast.LENGTH_SHORT).show();
+                } else {
+                    decisao = new Decision(mAdapterLocal, perfil1.getPreferences().getPreferences());
+                    CreateViagemAdapter ca = new CreateViagemAdapter(decisao.choice());
+                    recList.setAdapter(ca);
+                }
                 //PRINTS DE TESTE, FAVOR NAO TIRAR
                 /*for(int i = 0; i < perfil1.getPreferences().getPreferences().size(); i++){
                     Toast.makeText(DecisaoLocal.this, perfil1.getPreferences().getPreferences().get(i), Toast.LENGTH_SHORT).show();
@@ -97,11 +99,6 @@ public class TravelCardsActivity extends AppCompatActivity {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
-
-
-
-
-
 
 
     }
@@ -127,13 +124,12 @@ public class TravelCardsActivity extends AppCompatActivity {
     }
 
 
-
-/*
-    private ArrayList<Local> createList() {
-        Decision decisao = new Decision();
-        return decisao.choice();
-    }
-        */
+    /*
+        private ArrayList<Local> createList() {
+            Decision decisao = new Decision();
+            return decisao.choice();
+        }
+            */
     private void setUpFirebase() {
         mQuery = dbMarco.recoverLocal(); //ACESANDO NÓS DE CONSULTA
         mQuery2 = dbMarco.recoverPerfil();
@@ -156,7 +152,6 @@ public class TravelCardsActivity extends AppCompatActivity {
             mAdapterLocalKeys = new ArrayList<String>();
         }
     }
-
 
 
     // Saving the list of items and keys of the items on rotation
