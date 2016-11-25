@@ -45,8 +45,8 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
         contactViewHolder.vNome.setText(ci.getName());
         contactViewHolder.vDesc.setText(ci.getDescription());
 
-        contactViewHolder.vSchedule.setText(ci.getSchedule());
-        contactViewHolder.vTimeSpend.setText("Duração: " + String.valueOf(ci.getTimeSpend()) + "h");
+        contactViewHolder.vSchedule.setText(ci.getSchedule() + " - ");
+        contactViewHolder.vTimeSpend.setText("Tempo Estimado: " + String.valueOf(ci.getTimeSpend()) + "h");
         contactViewHolder.vCategorias.setText(ci.getType());
 
 

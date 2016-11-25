@@ -58,53 +58,54 @@
 
         <ImageView
             android:id="@+id/imagem"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/head"
             android:layout_margin="5dp" />
 
-
-        <TextView
-            android:id="@+id/txtDesc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/head"
-            android:layout_margin="5dp"
-            android:layout_toEndOf="@+id/imagem"
-            android:layout_toRightOf="@+id/imagem"
-            android:text="Desc"
-            android:textColor="@color/black"
-            android:textSize="14dp" />
-
         <LinearLayout
             android:id="@+id/specs"
-            android:layout_width="120dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/imagem"
-            android:layout_marginBottom="2dp"
-            android:orientation="vertical"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
             >
-
-            <TextView
-                android:id="@+id/txtCategoria"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:text="Categoria"
-                android:textColor="@color/black"
-                android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/txtTimeSpend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:text=""
+                android:layout_margin="5dp"
+                android:text="Tempo Estimado"
                 android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/txtCategoria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Categoria"
+                android:textColor="@color/black"
+                android:textStyle="bold"
                 android:textSize="14dp" />
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/txtDesc"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/specs"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+            android:text="Desc"
+            android:textColor="@color/black"
+            android:textSize="14dp" />
 
     </RelativeLayout>
 
