@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +29,7 @@ import base.Perfil;
 import database.DataBaseMarco;
 import rotisserie.Decision;
 
+
 public class TravelCardsActivity extends AppCompatActivity {
     private final static String SAVED_ADAPTER_ITEMS_LOCAL = "SAVED_ADAPTER_ITEMS_LOCAIS";
     private final static String SAVED_ADAPTER_KEYS_LOCAL = "SAVED_ADAPTER_KEYS_LOCAIS";
@@ -47,8 +47,7 @@ public class TravelCardsActivity extends AppCompatActivity {
     private ArrayList<String> mAdapterLocalKeys; //chaves de locais
 
     private Decision decisao = null;
-    public CreateViagemAdapter ca;
-
+    private ArrayList<Local> locals;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +78,8 @@ public class TravelCardsActivity extends AppCompatActivity {
                     Toast.makeText(TravelCardsActivity.this, "Você não tem nenhum gosto escolhido :'(", Toast.LENGTH_SHORT).show();
                 } else {
                     decisao = new Decision(mAdapterLocal, perfil1.getPreferences().getPreferences());
-                    ca = new CreateViagemAdapter(decisao.choice());
+                    locals = decisao.choice();
+                    CreateViagemAdapter ca = new CreateViagemAdapter(locals);
                     recList.setAdapter(ca);
                 }
                 //PRINTS DE TESTE, FAVOR NAO TIRAR
@@ -176,10 +176,9 @@ public class TravelCardsActivity extends AppCompatActivity {
 
     public void openMap(View view)
     {
-        Log.i("ocq", ca.getContactList().get(0).getName().toString());
         Intent intent = new Intent(this, MapsActivity.class);
         Bundle b = new Bundle();
-        b.putParcelableArrayList("locais", mAdapterLocal);
+        b.putParcelableArrayList("FILES_TO_SEND", locals);
         intent.putExtras(b);
         startActivity(intent);
     }

@@ -1,25 +1,25 @@
 package base;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Matheus on 30/10/2016.
  */
 
-import android.os.Parcelable;
+@org.parceler.Parcel
+public class Local implements Parcelable {
 
-import android.os.Parcel;
-
-public class Local  implements Parcelable {
-
-    String name;
-    String description;
-    double price;
-    String schedule;
-    double timeSpend;
-    double latitude;
-    double longitude;
-    String type;
-    String image;
-    String horario;
+    private String name;
+    private String description;
+    private double price;
+    private String schedule;
+    private double timeSpend;
+    private double latitude;
+    private double longitude;
+    private String type;
+    private String image;
+    private String horario;
 
     public Local(){}
 
@@ -33,19 +33,6 @@ public class Local  implements Parcelable {
         this.longitude = longitude;
         this.type = type;
         this.image = image;
-    }
-
-    public Local(Parcel in) {
-        name = in.readString();
-        description = in.readString();
-        this.price = in.readDouble();
-        this.schedule = in.readString();
-        this.timeSpend = in.readDouble();
-        this.latitude = in.readDouble();
-        this.longitude = in.readDouble();
-        this.type = in.readString();
-        this.image = in.readString();
-        this.horario = in.readString();
     }
 
     public String getName() {
@@ -129,14 +116,27 @@ public class Local  implements Parcelable {
         this.horario = horario;
     }
 
+    private Local(Parcel in) {
+        name = in.readString();
+        description = in.readString();
+        price = in.readDouble();
+        schedule = in.readString();
+        timeSpend = in.readDouble();
+        latitude = in.readDouble();
+        longitude = in.readDouble();
+        type = in.readString();
+        image = in.readString();
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
     }
 
     @Override
-    public void writeToParcel(android.os.Parcel dest, int flags) {
-        dest.writeString(name);
+    public void writeToParcel(Parcel dest, int flags) {
+        dest. writeString(name);
         dest.writeString(description);
         dest.writeDouble(price);
         dest.writeString(schedule);
@@ -145,14 +145,12 @@ public class Local  implements Parcelable {
         dest.writeDouble(longitude);
         dest.writeString(type);
         dest.writeString(image);
-        dest.writeString(horario);
     }
 
     public static final Parcelable.Creator<Local> CREATOR = new Parcelable.Creator<Local>()
     {
-        @Override
-        public Local createFromParcel(android.os.Parcel source) {
-            return null;
+        public Local createFromParcel(Parcel in) {
+            return new Local(in);
         }
 
         public Local[] newArray(int size)

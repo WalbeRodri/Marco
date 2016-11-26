@@ -1,7 +1,6 @@
 package com.example.marco.map;
 
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -53,16 +52,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // Initializing
         markerPoints = new ArrayList<LatLng>();
-
-        Intent intent = getIntent();
-
-        locals = intent.getExtras().getParcelableArrayList("locais");
-
-        for (int i = 0; i < locals.size(); i++)
-        {
-            System.out.println("latitude " + locals.get(i).getLatitude() + " longitude " + locals.get(i).getLongitude());
-        }
-
+        locals = getIntent().getExtras().getParcelableArrayList("FILES_TO_SEND");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -78,6 +68,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
@@ -111,7 +103,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         markerPoints.add(paco_alfandega);
 */
 
-        for (int i = 0; i < locals.size(); i++) {
+        for (int i = 0; i < 5; i++) {
             LatLng aux = new LatLng(locals.get(i).getLatitude(), locals.get(i).getLongitude());
             map.addMarker(new MarkerOptions().position(aux));
             markerPoints.add(aux);
