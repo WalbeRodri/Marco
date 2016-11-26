@@ -24,4 +24,7 @@
     <string name="title_activity_maps">Mapa do Roteiro</string>
     <string name="title_activity_list_trips">Histórico de Viagens</string>
 
+    <string name="facebook_app_id">330829883957070</string>
+    <string name="fb_login_protocol_scheme">fb330829883957070</string>
+
 </resources>
