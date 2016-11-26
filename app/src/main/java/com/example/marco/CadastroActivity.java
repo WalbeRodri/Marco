@@ -84,7 +84,7 @@ public class CadastroActivity extends AppCompatActivity {
                     Toast.makeText(CadastroActivity.this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                 } else if (!senha1.getText().toString().equals(senha2.getText().toString())) {
                     Toast.makeText(CadastroActivity.this, "As senhas precisam ser iguais", Toast.LENGTH_SHORT).show();
-                } else{
+                } else {
                     mAuth.createUserWithEmailAndPassword(emailT, passwordT)
                             .addOnCompleteListener(CadastroActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -93,7 +93,12 @@ public class CadastroActivity extends AppCompatActivity {
                                     if (!task.isSuccessful()) {
                                         Toast.makeText(CadastroActivity.this, "Authentication failed.",
                                                 Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(CadastroActivity.this, "Cadastro Realizado com Sucesso, Você será redirecionado ao menu principal",
+                                                Toast.LENGTH_SHORT).show();
+                                                kill();
                                     }
+
                                 }
                             });
                 }
@@ -105,6 +110,10 @@ public class CadastroActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    private void kill(){
+        this.finish();
     }
 
     @Override

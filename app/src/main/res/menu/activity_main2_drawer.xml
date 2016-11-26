@@ -3,10 +3,6 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_gostos"
-            android:icon="@drawable/gostos"
-            android:title="Gerencie seus gostos" />
-        <item
             android:id="@+id/nav_feedback"
             android:icon="@drawable/feedback"
              android:title="Feedback" />

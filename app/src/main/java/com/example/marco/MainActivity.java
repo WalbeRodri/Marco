@@ -108,13 +108,6 @@ public class MainActivity extends AppCompatActivity
                 Toast.makeText(MainActivity.this, "Logout Succeed", Toast.LENGTH_SHORT).show();
             }
 
-        } else if (id == R.id.nav_gostos) {
-            if (mAuth.getCurrentUser() != null) {
-                Intent intent = new Intent(this, PerfilActivity.class);
-                startActivity(intent);
-            } else {
-                Toast.makeText(MainActivity.this, "Realize Login para setar suas preferências", Toast.LENGTH_SHORT).show();
-            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -129,6 +122,8 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         } else {
             Toast.makeText(MainActivity.this, "Realize Login para ver suas Viagens antigas", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
         }
 //        Intent intent = new Intent(this, DecisaoLocal.class);
 //        startActivity(intent);
@@ -144,4 +139,14 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
+    public void gerenciaGostos(View view) {
+        if (mAuth.getCurrentUser() != null) {
+            Intent intent = new Intent(this, PerfilActivity.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(MainActivity.this, "Realize Login para escolher suas preferências", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
+    }
 }

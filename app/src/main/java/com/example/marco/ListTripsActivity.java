@@ -84,7 +84,10 @@ public class ListTripsActivity extends AppCompatActivity {
 
 
     }
-
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        return false;
+    }
 
     public void createTrip(View view) {
         Intent intent = new Intent(this, CreateTripActivity.class);

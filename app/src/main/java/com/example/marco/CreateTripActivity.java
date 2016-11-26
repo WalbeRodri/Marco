@@ -55,16 +55,14 @@ public class CreateTripActivity extends AppCompatActivity {
         endereco = (EditText) findViewById(R.id.hostAdressField);
 
 
-
-
     }
 
     protected void confirmTrip(View view) {
         mAuth = FirebaseAuth.getInstance();
-        if(mAuth.getCurrentUser()!=null) {
+        if (mAuth.getCurrentUser() != null) {
             Date data = new Date(partida.getYear(), partida.getMonth(), partida.getDayOfMonth());
             Date cheg = new Date(chegada.getYear(), chegada.getMonth(), chegada.getDayOfMonth());
-
+            String enderecoAux;
             banco = new DataBaseMarco();
 
             String timeStart;
@@ -77,17 +75,22 @@ public class CreateTripActivity extends AppCompatActivity {
                 timeEnd = fim.getCurrentHour() + ":" + fim.getCurrentMinute();
             }
             //criacao do objeto que cria a viagem.
+            if (nome.getText().length() != 0 && orcamento.getText().length() != 0) {
 
-            if (nome.getText().length() != 0 && endereco.getText().length() != 0 && orcamento.getText().length() != 0) {
+                if (endereco.getText().length() != 0) {
+                    enderecoAux = "";
+                } else
+                    enderecoAux = endereco.getText().toString();
+
                 Double orcam = Double.parseDouble(orcamento.getText().toString());
-                Trip viagem = new Trip(nome.getText().toString(), orcam, "Recife", data, cheg, endereco.getText().toString(), null, timeStart, timeEnd);
+                Trip viagem = new Trip(nome.getText().toString(), orcam, "Recife", data, cheg, enderecoAux, null, timeStart, timeEnd);
                 banco.createTrip(viagem);
                 Intent intent = new Intent(this, TravelCardsActivity.class);
                 startActivity(intent);
             } else {
-                Toast.makeText(CreateTripActivity.this, "Preencha todos os campos para prosseguir", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateTripActivity.this, "Preencha todos os campos obrigatórios para prosseguir", Toast.LENGTH_SHORT).show();
             }
-        }else{
+        } else {
             Toast.makeText(CreateTripActivity.this, "Realize Login para poder criar seu Roteiro personalizado", Toast.LENGTH_SHORT).show();
         }
 
