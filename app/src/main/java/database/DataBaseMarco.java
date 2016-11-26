@@ -1,6 +1,7 @@
 package database;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -15,11 +16,13 @@ public class DataBaseMarco {
     private DatabaseReference tripRef;  //nó de viagem
     private DatabaseReference perfilRef; // nó de perfil
     private DatabaseReference localRef;
+    private FirebaseUser user;
 
     //  private DatabaseReference agendaRef;
     public DataBaseMarco() {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         String uidUser = auth.getCurrentUser().getUid();
+        user = auth.getCurrentUser();
         database = FirebaseDatabase.getInstance();
         localRef = database.getReference("local");
         tripRef = database.getReference("trip").child(uidUser);
@@ -32,8 +35,12 @@ public class DataBaseMarco {
     }
 
     public void createTrip(Trip trip) {
-       tripRef.push().setValue(trip);
+        tripRef.push().setValue(trip);
 
+    }
+
+    public FirebaseUser getUser(){
+        return user;
     }
 
     public void editTrip(Trip trip,String key){
@@ -63,7 +70,6 @@ public class DataBaseMarco {
     }
 
     public Query recoverLocal() {
-       return  localRef;
+        return  localRef;
     }
-
 }

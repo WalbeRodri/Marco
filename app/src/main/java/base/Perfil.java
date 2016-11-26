@@ -32,6 +32,12 @@ public class Perfil {
         this.data_born = data_born;
     }
 
+    public Perfil(String username, String gmail) {
+        this.username = username;
+        this.gmail = gmail;
+    }
+
+
     public String getUsername() {
         return username;
     }
