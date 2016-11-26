@@ -55,7 +55,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         markerPoints = new ArrayList<LatLng>();
 
         Intent intent = getIntent();
-        locals = (ArrayList<Local>) intent.getParcelableExtra("LOCAIS");
+
+        locals = intent.getExtras().getParcelableArrayList("locais");
+
+        for (int i = 0; i < locals.size(); i++)
+        {
+            System.out.println("latitude " + locals.get(i).getLatitude() + " longitude " + locals.get(i).getLongitude());
+        }
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()

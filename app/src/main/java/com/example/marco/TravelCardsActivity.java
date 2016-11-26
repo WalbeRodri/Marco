@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,7 +21,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.parceler.Parcels;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import adapters.LocalAdapter;
@@ -176,8 +176,11 @@ public class TravelCardsActivity extends AppCompatActivity {
 
     public void openMap(View view)
     {
+        Log.i("ocq", ca.getContactList().get(0).getName().toString());
         Intent intent = new Intent(this, MapsActivity.class);
-        intent.putExtra("LOCAIS", (Serializable) this.ca.getContactList());
+        Bundle b = new Bundle();
+        b.putParcelableArrayList("locais", mAdapterLocal);
+        intent.putExtras(b);
         startActivity(intent);
     }
 

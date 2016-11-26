@@ -8,7 +8,7 @@ import base.Local;
 public class Decision {
     private List<String> teste;
     //private Local[] array;
-    private List<Local> arrayLocais;
+    private ArrayList<Local> arrayLocais;
 
    /* public Decision() {
         teste = new ArrayList<String>();
@@ -25,14 +25,14 @@ public class Decision {
     }
 */
     //receber tempo inicial e a duração
-    public Decision(List<Local> arrayLocaisr, List<String> preferencias)
+    public Decision(ArrayList<Local> arrayLocaisr, List<String> preferencias)
 
     {
         this.teste = preferencias;
         this.arrayLocais = arrayLocaisr;
     }
 
-    public ArrayList<Local> packing(List<Local> listaUsuario, int dias, int tempoPorDia, double budget){
+    public ArrayList<Local> packing(ArrayList<Local> listaUsuario, int dias, int tempoPorDia, double budget){
         Local[] arrayLocais = new Local[listaUsuario.size()];
         listaUsuario.toArray(arrayLocais);
 
@@ -47,6 +47,10 @@ public class Decision {
             }
         }
         return packed;
+    }
+
+    public ArrayList<Local> getArrayLocais() {
+        return arrayLocais;
     }
 
     public ArrayList<Local> choice(){

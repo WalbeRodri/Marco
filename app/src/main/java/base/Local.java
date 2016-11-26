@@ -4,12 +4,11 @@ package base;
  * Created by Matheus on 30/10/2016.
  */
 
-import org.parceler.Parcel;
+import android.os.Parcelable;
 
-import java.io.Serializable;
+import android.os.Parcel;
 
-@Parcel
-public class Local implements Serializable{
+public class Local  implements Parcelable {
 
     String name;
     String description;
@@ -20,7 +19,8 @@ public class Local implements Serializable{
     double longitude;
     String type;
     String image;
-     String horario;
+    String horario;
+
     public Local(){}
 
     public Local(String name, String description, double price, String schedule, double timeSpend, double latitude, double longitude, String type,String image) {
@@ -35,6 +35,18 @@ public class Local implements Serializable{
         this.image = image;
     }
 
+    public Local(Parcel in) {
+        name = in.readString();
+        description = in.readString();
+        this.price = in.readDouble();
+        this.schedule = in.readString();
+        this.timeSpend = in.readDouble();
+        this.latitude = in.readDouble();
+        this.longitude = in.readDouble();
+        this.type = in.readString();
+        this.image = in.readString();
+        this.horario = in.readString();
+    }
 
     public String getName() {
         return name;
@@ -116,5 +128,37 @@ public class Local implements Serializable{
     public void setHorario(String horario) {
         this.horario = horario;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(android.os.Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(description);
+        dest.writeDouble(price);
+        dest.writeString(schedule);
+        dest.writeDouble(timeSpend);
+        dest.writeDouble(latitude);
+        dest.writeDouble(longitude);
+        dest.writeString(type);
+        dest.writeString(image);
+        dest.writeString(horario);
+    }
+
+    public static final Parcelable.Creator<Local> CREATOR = new Parcelable.Creator<Local>()
+    {
+        @Override
+        public Local createFromParcel(android.os.Parcel source) {
+            return null;
+        }
+
+        public Local[] newArray(int size)
+        {
+            return new Local[size];
+        }
+    };
 
 }
