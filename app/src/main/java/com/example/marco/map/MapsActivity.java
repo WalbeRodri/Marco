@@ -103,7 +103,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         markerPoints.add(paco_alfandega);
 */
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < locals.size(); i++) {
             LatLng aux = new LatLng(locals.get(i).getLatitude(), locals.get(i).getLongitude());
             map.addMarker(new MarkerOptions().position(aux));
             markerPoints.add(aux);
