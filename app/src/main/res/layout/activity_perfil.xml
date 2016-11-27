@@ -105,6 +105,60 @@
                     android:layout_margin="1pt" />
 
             </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="179dp">
+
+                <ToggleButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tbCinema"
+                    android:background="@drawable/check_artesanato"
+                    android:textOff=" "
+                    android:textOn=" "
+                    android:layout_weight="1"
+                    android:layout_margin="1pt"
+                    />
+
+                <ToggleButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tbArtesanato"
+                    android:textOff=" "
+                    android:textOn=" "
+                    android:background="@drawable/check_cinema"
+                    android:layout_weight="1"
+                    android:layout_margin="1pt" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="179dp">
+
+                <ToggleButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tbMusica"
+                    android:background="@drawable/check_musica"
+                    android:textOff=" "
+                    android:textOn=" "
+                    android:layout_weight="1"
+                    android:layout_margin="1pt"
+                    />
+
+                <ToggleButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tbIgreja"
+                    android:textOff=" "
+                    android:textOn=" "
+                    android:background="@drawable/check_igreja"
+                    android:layout_weight="1"
+                    android:layout_margin="1pt" />
+
+            </LinearLayout>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
