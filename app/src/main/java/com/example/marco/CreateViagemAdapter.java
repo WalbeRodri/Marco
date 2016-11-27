@@ -49,11 +49,30 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
 
         contactViewHolder.vNome.setText(ci.getName());
         contactViewHolder.vDesc.setText(ci.getDescription());
-        contactViewHolder.vSchedule.setText(ci.getHorario() + " -");
-        contactViewHolder.vTimeSpend.setText("Tempo Estimado: " + String.valueOf(ci.getTimespend()) + "h");
         contactViewHolder.vCategorias.setText(ci.getType());
 
-        // Trocar para o general_category
+        // Formatando para exibir Schedule como horário
+        float time = Float.valueOf(ci.getHorario());
+        int hours = (int) time;
+        int minutes = (int) (60 * (time - hours));
+        contactViewHolder.vSchedule.setText(String.format("%02d", hours) + ":" + String.format("%02d", minutes) + " -");
+
+        // Formatando para exibir timeSpend como tempo
+        double duration = Double.valueOf(ci.getTimespend());
+        hours = (int) duration;
+        minutes = (int) (60 * (duration - hours));
+        String str_duration = "Tempo Estimado: ";
+        if (hours > 0) {
+            str_duration += (String.valueOf(hours) + "h");
+        }
+        if (minutes > 0) {
+            str_duration += (String.valueOf(minutes) + "m");
+        }
+        contactViewHolder.vTimeSpend.setText(str_duration);
+
+
+
+        // TODO: Trocar para o general_category
         String cat = ci.getType();
         switch (cat) {
             case "Comida":
@@ -72,12 +91,6 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
             default:
                 contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#000000"));
         }
-
-
-
-
-        //context.getResources().getColor(android.R.color.white)
-        //contactViewHolder.vHead.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.white));
 
 
         FirebaseStorage storage = FirebaseStorage.getInstance();

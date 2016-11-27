@@ -129,22 +129,6 @@
                 android:inputType="number"
                 android:text="200" />
 
-            <TextView
-                android:id="@+id/hostAdressText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Qual o seu endereço de hospedagem? (Opcional)" />
-
-            <EditText
-                android:id="@+id/hostAdressField"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Ex: Av. Boa Viagem, n 32"
-                android:inputType="text"
-                android:focusableInTouchMode="true"
-                android:text="adress" />
-
             <Button
                 android:id="@+id/createTripButton"
                 style="@style/AppTheme.PrimaryButtonStyle"
