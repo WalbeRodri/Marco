@@ -1,13 +1,16 @@
 package com.example.marco;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
+import com.example.marco.map.MapsActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +29,7 @@ import base.Perfil;
 import database.DataBaseMarco;
 import rotisserie.Decision;
 
+
 public class TravelCardsActivity extends AppCompatActivity {
     private final static String SAVED_ADAPTER_ITEMS_LOCAL = "SAVED_ADAPTER_ITEMS_LOCAIS";
     private final static String SAVED_ADAPTER_KEYS_LOCAL = "SAVED_ADAPTER_KEYS_LOCAIS";
@@ -43,7 +47,7 @@ public class TravelCardsActivity extends AppCompatActivity {
     private ArrayList<String> mAdapterLocalKeys; //chaves de locais
 
     private Decision decisao = null;
-
+    private ArrayList<Local> locals;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +78,8 @@ public class TravelCardsActivity extends AppCompatActivity {
                     Toast.makeText(TravelCardsActivity.this, "Você não tem nenhum gosto escolhido :'(", Toast.LENGTH_SHORT).show();
                 } else {
                     decisao = new Decision(mAdapterLocal, perfil1.getPreferences().getPreferences());
-                    CreateViagemAdapter ca = new CreateViagemAdapter(decisao.choice());
+                    locals = decisao.choice();
+                    CreateViagemAdapter ca = new CreateViagemAdapter(locals);
                     recList.setAdapter(ca);
                 }
                 //PRINTS DE TESTE, FAVOR NAO TIRAR
@@ -171,4 +176,14 @@ public class TravelCardsActivity extends AppCompatActivity {
         localAdapter.destroy(); //destroindo os adapter criados
         perfilAdapter.destroy();
     }
+
+    public void openMap(View view)
+    {
+        Intent intent = new Intent(this, MapsActivity.class);
+        Bundle b = new Bundle();
+        b.putParcelableArrayList("FILES_TO_SEND", locals);
+        intent.putExtras(b);
+        startActivity(intent);
+    }
+
 }

@@ -57,7 +57,7 @@ public class CreateTripActivity extends AppCompatActivity {
 
     }
 
-    protected void confirmTrip(View view) {
+    public void confirmTrip(View view) {
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null) {
             Date data = new Date(partida.getYear(), partida.getMonth(), partida.getDayOfMonth());

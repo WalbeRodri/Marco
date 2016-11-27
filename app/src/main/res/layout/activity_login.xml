@@ -69,5 +69,19 @@
         android:layout_below="@+id/passwordField"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="19dp" />
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/facebook_login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="35dp"
+        android:paddingRight="35dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="47dp" />
 </RelativeLayout>
 

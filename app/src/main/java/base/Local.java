@@ -1,24 +1,26 @@
 package base;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Matheus on 30/10/2016.
  */
 
-import org.parceler.Parcel;
+@org.parceler.Parcel
+public class Local implements Parcelable {
 
-@Parcel
-public class Local  {
+    private String name;
+    private String description;
+    private double price;
+    private String schedule;
+    private double timeSpend;
+    private double latitude;
+    private double longitude;
+    private String type;
+    private String image;
+    private String horario;
 
-    String name;
-    String description;
-    double price;
-    String schedule;
-    double timeSpend;
-    double latitude;
-    double longitude;
-    String type;
-    String image;
-     String horario;
     public Local(){}
 
     public Local(String name, String description, double price, String schedule, double timeSpend, double latitude, double longitude, String type,String image) {
@@ -32,7 +34,6 @@ public class Local  {
         this.type = type;
         this.image = image;
     }
-
 
     public String getName() {
         return name;
@@ -114,5 +115,48 @@ public class Local  {
     public void setHorario(String horario) {
         this.horario = horario;
     }
+
+    private Local(Parcel in) {
+        name = in.readString();
+        description = in.readString();
+        price = in.readDouble();
+        schedule = in.readString();
+        timeSpend = in.readDouble();
+        latitude = in.readDouble();
+        longitude = in.readDouble();
+        type = in.readString();
+        image = in.readString();
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest. writeString(name);
+        dest.writeString(description);
+        dest.writeDouble(price);
+        dest.writeString(schedule);
+        dest.writeDouble(timeSpend);
+        dest.writeDouble(latitude);
+        dest.writeDouble(longitude);
+        dest.writeString(type);
+        dest.writeString(image);
+    }
+
+    public static final Parcelable.Creator<Local> CREATOR = new Parcelable.Creator<Local>()
+    {
+        public Local createFromParcel(Parcel in) {
+            return new Local(in);
+        }
+
+        public Local[] newArray(int size)
+        {
+            return new Local[size];
+        }
+    };
 
 }

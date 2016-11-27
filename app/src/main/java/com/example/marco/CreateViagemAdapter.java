@@ -12,8 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -21,11 +19,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import base.Local;
 
-public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapter.ContactViewHolder> {
+public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapter.ContactViewHolder> implements Serializable{
 
     private ArrayList<Local> contactList;
 
@@ -71,6 +70,11 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
         });
 
 //        contactViewHolder.vNome.setText(ci.nome + " " + ci.desc);
+    }
+
+
+    public ArrayList<Local> getContactList() {
+        return contactList;
     }
 
     @Override

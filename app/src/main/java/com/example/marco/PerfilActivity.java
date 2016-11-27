@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.google.firebase.database.DataSnapshot;
@@ -26,10 +25,8 @@ public class PerfilActivity extends AppCompatActivity {
     Preferences preferencias = new Preferences();
 
     private DataBaseMarco dbMarco;
-
     private Query mQuery; //caminho de Local
     private PerfilAdapter perfilAdapter; //adapter de perfil , não usado
-
     final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
 
     ToggleButton tbBar;
@@ -134,38 +131,44 @@ public class PerfilActivity extends AppCompatActivity {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Perfil perfil1 = perfilAdapter.getItems().get(0);
-                Preferences pref = perfil1.getPreferences();
-                if(pref != null) {
-                    Toast.makeText(PerfilActivity.this, "Foi", Toast.LENGTH_SHORT).show();
-                    if (pref.getPreferences().contains("Teatro")) {
-                        tbTeatro.setChecked(true);
-                    }
-                    if (pref.getPreferences().contains("Praia")) {
-                        tbPraia.setChecked(true);
-                    }
-                    if (pref.getPreferences().contains("Praca")) {
-                        tbPraca.setChecked(true);
-                    }
-                    if (pref.getPreferences().contains("Bar")) {
-                        tbBar.setChecked(true);
-                    }
-                    if (pref.getPreferences().contains("Comida")) {
-                        tbComida.setChecked(true);
-                    }
-                    if (pref.getPreferences().contains("Museu")) {
-                        tbMuseu.setChecked(true);
+                if(perfilAdapter !=null) {
+                    if(perfilAdapter.getItems() != null) {
+                        if(perfilAdapter.getItems().size()>0) {
+                            Perfil perfil1 = perfilAdapter.getItems().get(0);
+                            Preferences pref = perfil1.getPreferences();
+                            if (pref != null) {
+                                if (pref.getPreferences().contains("Teatro")) {
+                                    tbTeatro.setChecked(true);
+                                }
+                                if (pref.getPreferences().contains("Praia")) {
+                                    tbPraia.setChecked(true);
+                                }
+                                if (pref.getPreferences().contains("Praca")) {
+                                    tbPraca.setChecked(true);
+                                }
+                                if (pref.getPreferences().contains("Bar")) {
+                                    tbBar.setChecked(true);
+                                }
+                                if (pref.getPreferences().contains("Comida")) {
+                                    tbComida.setChecked(true);
+                                }
+                                if (pref.getPreferences().contains("Museu")) {
+                                    tbMuseu.setChecked(true);
+                                }
+                            }
+                        }else{
+                            Perfil perfil = new Perfil(dbMarco.getUser().getDisplayName(),dbMarco.getUser().getEmail());
+                            dbMarco.createPerfil(perfil);
+                        }
                     }
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(PerfilActivity.this, "NAUM Foi", Toast.LENGTH_SHORT).show();
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
-        //;
     }
 
     public void ConfirmaGosto(View view) {
