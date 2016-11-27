@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -58,8 +59,6 @@ public class ListTripsActivity extends AppCompatActivity {
         recList.setLayoutManager(llm);
 
 
-
-
         //tripsAdapter = new ListTripsAdapter(createList(3));
 
 
@@ -84,6 +83,7 @@ public class ListTripsActivity extends AppCompatActivity {
 
 
     }
+
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         return false;
@@ -127,7 +127,7 @@ public class ListTripsActivity extends AppCompatActivity {
         }
             */
     private void setUpFirebase() {
-        mQuery = dbMarco.recoverLocal(); //ACESANDO NÓS DE CONSULTA
+        mQuery = dbMarco.recoverTrips(); //ACESANDO NÓS DE CONSULTA
     }
 
     public void setUpAdapter() {
@@ -156,10 +156,29 @@ public class ListTripsActivity extends AppCompatActivity {
         outState.putStringArrayList(SAVED_ADAPTER_KEYS_TRIP, tripsAdapter.getKeys());
     }
 
+    //    public void deleteTrip(String key) {
+//        int i = tripsAdapter.getItem();
+//                String chave = mAdapterTripKeys.get(i);
+//        dbMarco.deleteTrip(chave);
+//        tripRef.child(key).removeValue();
+//    }
+//
+//    public long getPosition(){
+//        return position;
+//    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        tripsAdapter.destroy(); //destroindo os adapter criados
+
+        tripsAdapter.destroy(); //destruindo os adapter's criados
 
     }
+
+//    public void deleteTrip(View v) {
+//        int i = tripsAdapter.getItem();
+//        String chave = mAdapterTripKeys.get(i);
+//        dbMarco.deleteTrip(chave);
+//        Button button = (Button) findViewById(R.id.delete);
+//
+//    }
 }
