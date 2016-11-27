@@ -43,12 +43,12 @@ public class CreateTripActivity extends AppCompatActivity {
         if (currentapiVersion >= 23) {
             inicio.setHour(8);
             inicio.setMinute(0);
-            fim.setHour(8);
+            fim.setHour(17);
             fim.setMinute(0);
         } else {
             inicio.setCurrentHour(8);
             inicio.setCurrentMinute(0);
-            fim.setCurrentHour(8);
+            fim.setCurrentHour(17);
             fim.setCurrentMinute(0);
         }
         nome = (EditText) findViewById(R.id.tripNameField);
@@ -71,6 +71,7 @@ public class CreateTripActivity extends AppCompatActivity {
                 timeStart = inicio.getCurrentHour() + ":" + inicio.getCurrentMinute();
                 timeEnd = fim.getCurrentHour() + ":" + fim.getCurrentMinute();
             }
+
             //criacao do objeto que cria a viagem.
             if (nome.getText().length() != 0 && orcamento.getText().length() != 0) {
 
@@ -78,6 +79,9 @@ public class CreateTripActivity extends AppCompatActivity {
                 Trip viagem = new Trip(nome.getText().toString(), orcam, "Recife", data, null, timeStart, timeEnd);
                 banco.createTrip(viagem);
                 Intent intent = new Intent(this, TravelCardsActivity.class);
+                intent.putExtra("TRIP_TIME_START",timeStart);
+                intent.putExtra("TRIP_TIME_END", timeEnd);
+                intent.putExtra("TRIP_ORCAMENTO", orcam);
                 startActivity(intent);
             } else {
                 Toast.makeText(CreateTripActivity.this, "Preencha todos os campos obrigatórios para prosseguir", Toast.LENGTH_SHORT).show();
