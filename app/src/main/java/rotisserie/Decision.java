@@ -9,12 +9,18 @@ public class Decision {
     private List<String> teste;
     //private Local[] array;
     private ArrayList<Local> arrayLocais;
+    private String horaInicio;
+    private String  horaFinal;
+    private double  orcamento;
 
 
     //receber tempo inicial e a duração
-    public Decision(ArrayList<Local> arrayLocaisr, List<String> preferencias) {
+    public Decision(ArrayList<Local> arrayLocaisr, List<String> preferencias,String horaInicio,String horaFinal,double orcamento) {
         this.teste = preferencias;
         this.arrayLocais = arrayLocaisr;
+        this.horaInicio =horaInicio;
+        this.horaFinal = horaFinal;
+        this.orcamento = orcamento;
     }
 
     public double horaToDouble(String hora){
@@ -28,7 +34,7 @@ public class Decision {
         return hora;
     }
 
-    public ArrayList<Local> packing(ArrayList<Local> listaUsuario, String horaInicio, double tempoPorDia, double budget) {
+    public ArrayList<Local> packing(ArrayList<Local> listaUsuario, String horaInicio, String horaFinal, double budget) {
         Local[] arrayLocais = new Local[listaUsuario.size()];
         listaUsuario.toArray(arrayLocais);
 
@@ -36,6 +42,7 @@ public class Decision {
         double aux = 0;
         double auxMoney = 0;
         double horaAtual = timeToDouble(horaInicio);
+        double tempoPorDia = timeToDouble(horaFinal)-timeToDouble(horaInicio);
 //    System.out.println(horaAtual);
         for (int i = 0; i < arrayLocais.length; i++) {
             if((arrayLocais[i].getTimespend() + aux <= tempoPorDia)
@@ -88,7 +95,7 @@ public class Decision {
 
 
     public ArrayList<Local> choice(){
-        return packing(escolha(this.teste, this.arrayLocais), "12:00", 5, 800);
+        return packing(escolha(this.teste, this.arrayLocais), this.horaInicio, this.horaFinal, this.orcamento);
     }
 
     private ArrayList<Local> escolha(List<String> preferencias, ArrayList<Local> locals){

@@ -63,7 +63,7 @@
                 android:selectAllOnFocus="false"
                 android:descendantFocusability="beforeDescendants"
                 android:focusableInTouchMode="true"
-                android:text="nome" />
+                 />
 
 
             <TextView
@@ -103,7 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Quantas horas você gostaria que durasse o roteiro?" />
+                android:text="Que horas você deseja que seu roteiro Termine?" />
             <TimePicker
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
@@ -127,7 +127,7 @@
                 android:hint="Ex: 200"
                 android:focusableInTouchMode="true"
                 android:inputType="number"
-                android:text="200" />
+                 />
 
             <Button
                 android:id="@+id/createTripButton"

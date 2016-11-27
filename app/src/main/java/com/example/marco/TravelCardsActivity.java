@@ -34,6 +34,10 @@ public class TravelCardsActivity extends AppCompatActivity {
     private final static String SAVED_ADAPTER_ITEMS_LOCAL = "SAVED_ADAPTER_ITEMS_LOCAIS";
     private final static String SAVED_ADAPTER_KEYS_LOCAL = "SAVED_ADAPTER_KEYS_LOCAIS";
 
+    private String startTime;
+    private String endTime;
+    private Double orcamento;
+
     private DataBaseMarco dbMarco;
     private Query mQuery; //caminho de Local
     private LocalAdapter localAdapter; //adapter
@@ -62,7 +66,10 @@ public class TravelCardsActivity extends AppCompatActivity {
         // arrayLocal = decisao.choice();
         setContentView(R.layout.activity_travel_cards);
         final RecyclerView recList = (RecyclerView) findViewById(R.id.cardList);
-
+        Intent intent = getIntent();
+        final String startTime =  intent.getStringExtra("TRIP_TIME_START");
+        final String endTime = intent.getStringExtra("TRIP_TIME_END");
+        final double orcamento =  intent.getDoubleExtra("TRIP_ORCAMENTO", 100);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
@@ -77,7 +84,7 @@ public class TravelCardsActivity extends AppCompatActivity {
                 if(perfil1.getPreferences()==null){
                     Toast.makeText(TravelCardsActivity.this, "Você não tem nenhum gosto escolhido :'(", Toast.LENGTH_SHORT).show();
                 } else {
-                    decisao = new Decision(mAdapterLocal, perfil1.getPreferences().getPreferences());
+                    decisao = new Decision(mAdapterLocal, perfil1.getPreferences().getPreferences(),startTime,endTime,orcamento);
                     locals = decisao.choice();
                     CreateViagemAdapter ca = new CreateViagemAdapter(locals);
                     recList.setAdapter(ca);
@@ -173,7 +180,7 @@ public class TravelCardsActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        localAdapter.destroy(); //destroindo os adapter criados
+        localAdapter.destroy(); //destruindo os adapter criados
         perfilAdapter.destroy();
     }
 
