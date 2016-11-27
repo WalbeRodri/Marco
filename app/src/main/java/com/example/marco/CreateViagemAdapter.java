@@ -6,12 +6,16 @@ package com.example.marco;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -48,6 +52,27 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
         contactViewHolder.vSchedule.setText(ci.getSchedule() + " -");
         contactViewHolder.vTimeSpend.setText("Tempo Estimado: " + String.valueOf(ci.getTimeSpend()) + "h");
         contactViewHolder.vCategorias.setText(ci.getType());
+
+        // Trocar para o general_category
+        String cat = ci.getType();
+        switch (cat) {
+            case "Musica/Comida":
+                contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#000000"));
+                break;
+            case "Bar/Comida":
+                contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#ff0000"));
+                break;
+            case "Museu":
+                contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#00ff00"));
+                break;
+            case "Igreja/Museu":
+                contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#0000ff"));
+                break;
+            default:
+                contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#ffb14d"));
+        }
+        //context.getResources().getColor(android.R.color.white)
+        //contactViewHolder.vHead.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.white));
 
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -93,6 +118,7 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
         protected TextView vSchedule;
         protected TextView vCategorias;
         protected TextView vTimeSpend;
+        protected LinearLayout vHead;
 
         public ContactViewHolder(View v) {
             super(v);
@@ -102,7 +128,7 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
             vSchedule = (TextView)  v.findViewById(R.id.txtSchedule);
             vCategorias = (TextView) v.findViewById(R.id.txtCategoria);
             vTimeSpend = (TextView) v.findViewById(R.id.txtTimeSpend);
-
+            vHead = (LinearLayout) v.findViewById(R.id.head);
         }
     }
 }
