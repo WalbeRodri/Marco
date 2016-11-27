@@ -35,6 +35,10 @@ public class PerfilActivity extends AppCompatActivity {
     ToggleButton tbPraia;
     ToggleButton tbTeatro;
     ToggleButton tbComida;
+    ToggleButton tbMusica;
+    ToggleButton tbArtesanato;
+    ToggleButton tbCinema;
+    ToggleButton tbIgreja;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,10 @@ public class PerfilActivity extends AppCompatActivity {
         tbPraia = (ToggleButton) findViewById(R.id.tbPraia);
         tbTeatro = (ToggleButton) findViewById(R.id.tbTeatro);
         tbComida = (ToggleButton) findViewById(R.id.tbComida);
+        tbMusica = (ToggleButton) findViewById(R.id.tbMusica);
+        tbArtesanato = (ToggleButton) findViewById(R.id.tbArtesanato);
+        tbCinema = (ToggleButton) findViewById(R.id.tbCinema);
+        tbIgreja = (ToggleButton) findViewById(R.id.tbIgreja);
 
         dbMarco = new DataBaseMarco(); //inicializando banco de dados
         setUpFirebase();
@@ -124,6 +132,54 @@ public class PerfilActivity extends AppCompatActivity {
             }
         });
 
+        tbCinema.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    preferencias.addPreferences("Cinema");
+                } else {
+                    List <String> Gostos = preferencias.getPreferences();
+                    Gostos.remove("Cinema");
+                    preferencias.setPreferences(Gostos);
+                }
+            }
+        });
+
+        tbArtesanato.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    preferencias.addPreferences("Artesanato");
+                } else {
+                    List <String> Gostos = preferencias.getPreferences();
+                    Gostos.remove("Artesanato");
+                    preferencias.setPreferences(Gostos);
+                }
+            }
+        });
+
+        tbMusica.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    preferencias.addPreferences("Musica");
+                } else {
+                    List <String> Gostos = preferencias.getPreferences();
+                    Gostos.remove("Musica");
+                    preferencias.setPreferences(Gostos);
+                }
+            }
+        });
+
+        tbIgreja.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    preferencias.addPreferences("Igreja");
+                } else {
+                    List <String> Gostos = preferencias.getPreferences();
+                    Gostos.remove("Igreja");
+                    preferencias.setPreferences(Gostos);
+                }
+            }
+        });
+
         //final FirebaseDatabase database = FirebaseDatabase.getInstance();
         //DatabaseReference ref = database.getReference("https://marco-52cd1.firebaseio.com/");
 
@@ -154,6 +210,15 @@ public class PerfilActivity extends AppCompatActivity {
                                 }
                                 if (pref.getPreferences().contains("Museu")) {
                                     tbMuseu.setChecked(true);
+                                }
+                                if (pref.getPreferences().contains("Musica")) {
+                                    tbMusica.setChecked(true);
+                                }if (pref.getPreferences().contains("Artesanato")) {
+                                    tbArtesanato.setChecked(true);
+                                }if (pref.getPreferences().contains("Igreja")) {
+                                    tbIgreja.setChecked(true);
+                                }if (pref.getPreferences().contains("Cinema")) {
+                                    tbCinema.setChecked(true);
                                 }
                             }
                         }else{
