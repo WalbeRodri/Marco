@@ -20,7 +20,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_margin="5dp"
             android:background="@color/colorAccent">
 
             <Button
@@ -38,8 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="0dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginStart="5dp"
+                android:layout_marginRight="5dp"
                 android:gravity="center_vertical"
                 android:text="Hora"
                 android:textColor="@color/white"
@@ -68,32 +69,36 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/imagem"
-            android:orientation="horizontal"
-            android:layout_marginBottom="10dp"
+            android:orientation="vertical"
+            android:layout_margin="5dp"
             >
-
-            <TextView
-                android:id="@+id/txtTimeSpend"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Tempo Estimado"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/txtCategoria"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="0dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginRight="0dp"
                 android:text="Categoria"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:textSize="14dp" />
+                android:textSize="14dp"
+                android:textAlignment="center"
+                />
+
+            <TextView
+                android:id="@+id/txtTimeSpend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp"
+                android:text="Tempo Estimado"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="14dp"
+                android:textAlignment="center"
+                />
 
         </LinearLayout>
 

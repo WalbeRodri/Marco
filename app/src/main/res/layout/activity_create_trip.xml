@@ -67,7 +67,7 @@
 
 
             <TextView
-                android:id="@+id/tripFinishDateText"
+                android:id="@+id/tripStartDateText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -83,23 +83,6 @@
                 android:calendarViewShown="false"
                 android:datePickerMode="spinner"
                 android:theme="@style/AppTheme.DatePicker"/>
-
-            <TextView
-                android:id="@+id/tripStartDateText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center_vertical"
-                android:text="Data de Chegada:" />
-            <DatePicker
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:id="@+id/tripFinishDateField"
-                android:descendantFocusability="beforeDescendants"
-                android:focusableInTouchMode="true"
-                android:calendarViewShown="false"
-                android:datePickerMode="spinner"
-                android:theme="@style/AppTheme.DatePicker" />
 
             <TextView
                 android:id="@+id/tripStartTimeText"
@@ -121,11 +104,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Quantas horas você gostaria que durasse o roteiro?" />
-
             <TimePicker
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:id="@+id/timeEndPicker"
+                android:id="@+id/durationPicker"
                 android:timePickerMode="spinner"
                 android:theme="@style/AppTheme.DatePicker"/>
 
@@ -146,22 +128,6 @@
                 android:focusableInTouchMode="true"
                 android:inputType="number"
                 android:text="200" />
-
-            <TextView
-                android:id="@+id/hostAdressText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Qual o seu endereço de hospedagem? (Opcional)" />
-
-            <EditText
-                android:id="@+id/hostAdressField"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Ex: Av. Boa Viagem, n 32"
-                android:inputType="text"
-                android:focusableInTouchMode="true"
-                android:text="adress" />
 
             <Button
                 android:id="@+id/createTripButton"

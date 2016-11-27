@@ -22,7 +22,23 @@ public class Trip {
 
     public Trip(){}
 
+    /**
+     * Construtor sem Data Chegada e Endereço
+     */
+    public Trip( String name,Double budget, String destiny,
+                 Date start_date, Agenda agenda, String timeStar, String timeEnd) {
+        this.budget = budget;
+        this.name = name;
+        this.destiny = destiny;
+        this.start_date = start_date;
+        this.agenda = agenda;
+        this.timeStar = timeStar;
+        this.timeEnd = timeEnd;
+    }
 
+    /**
+     *  Construtor com todos os campos
+     */
     public Trip( String name,Double budget, String destiny,
                 Date start_date, Date end_date, String adress, Agenda agenda, String timeStar, String timeEnd) {
         this.budget = budget;

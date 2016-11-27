@@ -19,10 +19,9 @@ import database.DataBaseMarco;
 
 public class CreateTripActivity extends AppCompatActivity {
     protected EditText nome;
-    protected DatePicker partida, chegada;
+    protected DatePicker partida;
     protected TimePicker inicio, fim;
     protected EditText orcamento;
-    protected EditText endereco;
     protected int currentapiVersion;
     private FirebaseAuth mAuth;
     private DataBaseMarco banco;
@@ -34,7 +33,7 @@ public class CreateTripActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         inicio = (TimePicker) findViewById(R.id.timeBeginPicker);
-        fim = (TimePicker) findViewById(R.id.timeEndPicker);
+        fim = (TimePicker) findViewById(R.id.durationPicker);
         fim.setIs24HourView(true);
         inicio.setIs24HourView(true);
 
@@ -43,26 +42,24 @@ public class CreateTripActivity extends AppCompatActivity {
         // Precisa testar em outros aparelhos!!!
         if (currentapiVersion >= 23) {
             inicio.setHour(8);
-            fim.setHour(17);
+            inicio.setMinute(0);
+            fim.setHour(8);
+            fim.setMinute(0);
         } else {
             inicio.setCurrentHour(8);
-            inicio.setCurrentHour(17);
+            inicio.setCurrentMinute(0);
+            fim.setCurrentHour(8);
+            fim.setCurrentMinute(0);
         }
         nome = (EditText) findViewById(R.id.tripNameField);
         partida = (DatePicker) findViewById(R.id.tripStartDateField);
-        chegada = (DatePicker) findViewById(R.id.tripFinishDateField);
         orcamento = (EditText) findViewById(R.id.dailyBudgetField);
-        endereco = (EditText) findViewById(R.id.hostAdressField);
-
-
     }
 
     public void confirmTrip(View view) {
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null) {
             Date data = new Date(partida.getYear(), partida.getMonth(), partida.getDayOfMonth());
-            Date cheg = new Date(chegada.getYear(), chegada.getMonth(), chegada.getDayOfMonth());
-            String enderecoAux;
             banco = new DataBaseMarco();
 
             String timeStart;
@@ -77,13 +74,8 @@ public class CreateTripActivity extends AppCompatActivity {
             //criacao do objeto que cria a viagem.
             if (nome.getText().length() != 0 && orcamento.getText().length() != 0) {
 
-                if (endereco.getText().length() != 0) {
-                    enderecoAux = "";
-                } else
-                    enderecoAux = endereco.getText().toString();
-
                 Double orcam = Double.parseDouble(orcamento.getText().toString());
-                Trip viagem = new Trip(nome.getText().toString(), orcam, "Recife", data, cheg, enderecoAux, null, timeStart, timeEnd);
+                Trip viagem = new Trip(nome.getText().toString(), orcam, "Recife", data, null, timeStart, timeEnd);
                 banco.createTrip(viagem);
                 Intent intent = new Intent(this, TravelCardsActivity.class);
                 startActivity(intent);
