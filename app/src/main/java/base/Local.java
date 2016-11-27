@@ -75,11 +75,11 @@ public class Local implements Parcelable {
         this.schedule = schedule;
     }
 
-    public double getTimeSpend() {
+    public double getTimespend() {
         return timeSpend;
     }
 
-    public void setTimeSpend(double timeSpend) {
+    public void setTimespend(double timeSpend) {
         this.timeSpend = timeSpend;
     }
 
