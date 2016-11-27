@@ -56,21 +56,26 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
         // Trocar para o general_category
         String cat = ci.getType();
         switch (cat) {
+            case "Comida":
+                contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#658e74"));
+                break;
             case "Musica/Comida":
-                contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#000000"));
+                contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#ffb14d"));
                 break;
             case "Bar/Comida":
-                contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#ff0000"));
+                contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#7d5bb2"));
                 break;
             case "Museu":
-                contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#00ff00"));
+                contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#f9524c"));
                 break;
-            case "Igreja/Museu":
-                contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#0000ff"));
-                break;
+
             default:
-                contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#ffb14d"));
+                contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#000000"));
         }
+
+
+
+
         //context.getResources().getColor(android.R.color.white)
         //contactViewHolder.vHead.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.white));
 
