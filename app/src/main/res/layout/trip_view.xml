@@ -32,7 +32,7 @@
 
         <LinearLayout
             android:id="@+id/specs"
-            android:layout_width="120dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/head"
             android:layout_marginBottom="2dp"
@@ -57,7 +57,17 @@
                 android:text="Data"
                 android:textColor="@color/black"
                 android:textSize="10dp" />
+            <Button
+
+                android:background="@mipmap/lixo"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="end"
+                android:onClick="deleteTrip"
+                android:id="@+id/delete" />
+
         </LinearLayout>
+
 
 
     </RelativeLayout>

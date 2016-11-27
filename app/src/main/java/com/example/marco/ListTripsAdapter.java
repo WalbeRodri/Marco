@@ -1,6 +1,8 @@
 package com.example.marco;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import base.Trip;
+
+import static android.content.ContentValues.TAG;
 
 
 public class ListTripsAdapter extends RecyclerView.Adapter<com.example.marco.ListTripsAdapter.ContactViewHolder> {
@@ -24,6 +28,12 @@ public class ListTripsAdapter extends RecyclerView.Adapter<com.example.marco.Lis
     public int getItemCount() {
         return tripList.size();
     }
+
+
+    public Object getItem( int position ) {
+        return tripList.get( position );
+    }
+
 
     @Override
     public void onBindViewHolder(com.example.marco.ListTripsAdapter.ContactViewHolder contactViewHolder, int i) {
@@ -56,4 +66,5 @@ public class ListTripsAdapter extends RecyclerView.Adapter<com.example.marco.Lis
 
         }
     }
+
 }
