@@ -139,6 +139,13 @@
                 android:onClick="confirmTrip"
                 android:text="Criar Viagem" />
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/ad_example" />
+
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
