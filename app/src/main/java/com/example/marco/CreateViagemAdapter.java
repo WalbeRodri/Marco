@@ -74,16 +74,16 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
         String cat = ci.getGeneral_category();
         switch (cat) {
             case "food":
-                contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#658e74"));
+                contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#f9524c"));
                 break;
             case "outdoor":
-                contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#ffb14d"));
+                contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#658e74"));
                 break;
             case "shop":
                 contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#7d5bb2"));
                 break;
             case "indoor":
-                contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#f9524c"));
+                contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#ffb14d"));
                 break;
 
             default:
