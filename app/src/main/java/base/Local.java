@@ -20,10 +20,11 @@ public class Local implements Parcelable {
     private String type;
     private String image;
     private String horario;
-
+    private String general_category;
     public Local(){}
 
-    public Local(String name, String description, double price, String schedule, double timeSpend, double latitude, double longitude, String type,String image) {
+    public Local(String name, String description, double price, String schedule, double timeSpend,
+                 double latitude, double longitude, String type,String image,String general_category) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -33,6 +34,7 @@ public class Local implements Parcelable {
         this.longitude = longitude;
         this.type = type;
         this.image = image;
+        this.general_category = general_category;
     }
 
     public String getName() {
@@ -114,6 +116,10 @@ public class Local implements Parcelable {
 
     public void setHorario(String horario) {
         this.horario = horario;
+    }
+
+    public String getGeneral_category() {
+        return general_category;
     }
 
     private Local(Parcel in) {
