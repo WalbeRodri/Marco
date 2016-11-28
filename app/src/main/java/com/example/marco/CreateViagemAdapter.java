@@ -8,9 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,18 +71,18 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
 
 
         // TODO: Trocar para o general_category
-        String cat = ci.getType();
+        String cat = ci.getGeneral_category();
         switch (cat) {
-            case "Comida":
+            case "food":
                 contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#658e74"));
                 break;
-            case "Musica/Comida":
+            case "outdoor":
                 contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#ffb14d"));
                 break;
-            case "Bar/Comida":
+            case "shop":
                 contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#7d5bb2"));
                 break;
-            case "Museu":
+            case "indoor":
                 contactViewHolder.vHead.setBackgroundColor(Color.parseColor("#f9524c"));
                 break;
 
