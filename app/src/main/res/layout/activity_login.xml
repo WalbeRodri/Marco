@@ -80,8 +80,8 @@
         android:paddingLeft="35dp"
         android:paddingRight="35dp"
         android:layout_gravity="center_horizontal"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/cadastroButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="47dp" />
+        android:layout_marginTop="50dp" />
 </RelativeLayout>
 
