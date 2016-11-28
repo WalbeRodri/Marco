@@ -14,4 +14,22 @@
     <color name="colorPrimaryDark">#434443</color>
     <color name="colorAccent">#ffb14d</color>
     <color name="colorVerde">#92ead1</color>
+
+
+
+    <!-- Cores para o Tutorial -->
+    <color name="bg_screen1">#f64c73</color>
+    <color name="bg_screen2">#20d2bb</color>
+    <color name="bg_screen3">#3395ff</color>
+    <color name="bg_screen4">#c873f4</color>
+
+
+    <color name="dot_light">#AFBCBC</color>
+    <color name="dot_dark">#707575</color>
+
+    <array name="array_dot_colors">
+        <item>@color/dot_light</item>
+        <item>@color/dot_dark</item>
+    </array>
+
 </resources>
