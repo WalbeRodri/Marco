@@ -55,7 +55,6 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -73,25 +72,34 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ListTripsActivity" />
+        <activity android:name=".ListTripsActivity"
+            android:label="Histórico"/>
         <activity
             android:name=".CreateTripActivity"
             android:label="@string/title_activity_create_trip"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".PerfilActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity
+            android:name=".PerfilActivity"
+            android:label="Gostos" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="Login" />
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".ConfirmaViagemFragmentActivity" />
-        <activity android:name=".TravelCardsActivity" />
-        <activity android:name=".CadastroActivity" />
+        <activity
+            android:name=".TravelCardsActivity"
+            android:label="Roteiro" />
+        <activity
+            android:name=".CadastroActivity"
+            android:label="Cadastro" />
         <!--<activity android:name=".DecisaoLocal" />-->
         <activity
             android:name=".map.MapsActivity"
-            android:label="@string/title_activity_maps"/>
+            android:label="@string/title_activity_maps" />
     </application>
 
 </manifest>
