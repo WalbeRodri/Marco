@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -23,6 +24,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
 
 import base.Local;
 
@@ -42,9 +44,12 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
 
     @Override
     public void onBindViewHolder(final ContactViewHolder contactViewHolder, int i) {
-
+        Random r = new Random();
         Local ci = contactList.get(i);
-
+        contactViewHolder.rBar.setStepSize(1);
+        contactViewHolder.rBar.setMax(5);
+        contactViewHolder.rBar.setNumStars(5);
+        contactViewHolder.rBar.setRating(r.nextInt(5));
         contactViewHolder.vNome.setText(ci.getName());
         contactViewHolder.vDesc.setText(ci.getDescription());
         contactViewHolder.vCategorias.setText(ci.getType());
@@ -135,7 +140,7 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
         protected TextView vCategorias;
         protected TextView vTimeSpend;
         protected LinearLayout vHead;
-
+        protected RatingBar rBar;
         public ContactViewHolder(View v) {
             super(v);
             vImagem = (ImageView) v.findViewById(R.id.imagem);
@@ -145,6 +150,7 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
             vCategorias = (TextView) v.findViewById(R.id.txtCategoria);
             vTimeSpend = (TextView) v.findViewById(R.id.txtTimeSpend);
             vHead = (LinearLayout) v.findViewById(R.id.head);
+            rBar=(RatingBar) v.findViewById(R.id.rating_bar);
         }
     }
 }
