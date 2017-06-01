@@ -4,6 +4,7 @@ package com.example.marco;
  * Created by Walber Rodrigues on 10/11/2016.
  */
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -28,12 +30,15 @@ import java.util.Random;
 
 import base.Local;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
+
 public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapter.ContactViewHolder> implements Serializable{
 
-    private ArrayList<Local> contactList;
-
-    public CreateViagemAdapter(ArrayList<Local> contactList) {
+    static ArrayList<Local> contactList;
+    static Context travelCA;
+    public CreateViagemAdapter(ArrayList<Local> contactList, Context TCA) {
         this.contactList = contactList;
+        this.travelCA = TCA;
     }
 
 
@@ -151,6 +156,12 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
             vTimeSpend = (TextView) v.findViewById(R.id.txtTimeSpend);
             vHead = (LinearLayout) v.findViewById(R.id.head);
             rBar=(RatingBar) v.findViewById(R.id.rating_bar);
+            rBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener(){
+                @Override
+                public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser){
+                    Toast.makeText(travelCA.getApplicationContext(), "Opa, olha nosso rating"+rBar.getRating(), Toast.LENGTH_SHORT ).show();
+                }
+            });
         }
     }
 }

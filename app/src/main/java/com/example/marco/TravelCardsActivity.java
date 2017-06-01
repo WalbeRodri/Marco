@@ -52,7 +52,7 @@ public class TravelCardsActivity extends AppCompatActivity {
 
     private Decision decisao = null;
     private ArrayList<Local> locals;
-
+    static TravelCardsActivity travelCardsActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,8 +86,9 @@ public class TravelCardsActivity extends AppCompatActivity {
                 } else {
                     decisao = new Decision(mAdapterLocal, perfil1.getPreferences().getPreferences(),startTime,endTime,orcamento);
                     locals = decisao.choice();
-                    CreateViagemAdapter ca = new CreateViagemAdapter(locals);
+                    CreateViagemAdapter ca = new CreateViagemAdapter(locals, getApplicationContext());
                     recList.setAdapter(ca);
+
                 }
                 //PRINTS DE TESTE, FAVOR NAO TIRAR
                 /*for(int i = 0; i < perfil1.getPreferences().getPreferences().size(); i++){
