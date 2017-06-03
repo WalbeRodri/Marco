@@ -1,57 +1,53 @@
 package base;
+
+import java.util.ArrayList;
 import java.util.Date;
-
-/**
- * Created by Matheus on 30/10/2016.
- */
-
-
 
 public class Trip {
 
-  private   String name;
-   private   Double budget;
-   private  String destiny;
-    private  Date start_date;
-    private   Date end_date;
-    private String adress;
-    private  Agenda agenda;
-    private String timeStar;
+    private String name;
+    private Double budget;
+    private String destiny;
+    private Date start_date;
+    private Date end_date;
+    private String address;
+    private ArrayList<Day> agenda;
+    private String timeStart;
     private String timeEnd;
 
 
-    public Trip(){}
+    public Trip() {
+    }
 
     /**
      * Construtor sem Data Chegada e Endereço
      */
-    public Trip( String name,Double budget, String destiny,
-                 Date start_date, Agenda agenda, String timeStar, String timeEnd) {
+    public Trip(String name, Double budget, String destiny,
+                Date start_date, ArrayList<Day> agenda, String timeStart, String timeEnd) {
         this.budget = budget;
         this.name = name;
         this.destiny = destiny;
         this.start_date = start_date;
         this.agenda = agenda;
-        this.timeStar = timeStar;
+        this.timeStart = timeStart;
         this.timeEnd = timeEnd;
     }
 
     /**
-     *  Construtor com todos os campos
+     * Construtor com todos os campos
      */
-    public Trip( String name,Double budget, String destiny,
-                Date start_date, Date end_date, String adress, Agenda agenda, String timeStar, String timeEnd) {
+    public Trip(String name, Double budget, String destiny,
+                Date start_date, Date end_date, String address, ArrayList<Day> agenda, String timeStart, String timeEnd) {
         this.budget = budget;
         this.name = name;
         this.destiny = destiny;
         this.start_date = start_date;
         this.end_date = end_date;
-        this.adress = adress;
+        this.address = address;
         this.agenda = agenda;
-        this.timeStar = timeStar;
+        this.timeStart = timeStart;
         this.timeEnd = timeEnd;
     }
-
 
 
     public Double getBudget() {
@@ -94,29 +90,28 @@ public class Trip {
         this.end_date = end_date;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getTimeStar() {
-        return timeStar;
+    public String getTimeStart() {
+        return timeStart;
     }
 
-    public void setTimeStar(String timeStar) {
-        this.timeStar = timeStar;
+    public void setTimeStart(String timeStart) {
+        this.timeStart = timeStart;
     }
 
-    public Agenda getAgenda() {
+    public ArrayList<Day> getAgenda() {
         return agenda;
     }
 
-    public void setAgenda(Agenda agenda) {
+    public void setAgenda(ArrayList<Day> agenda) {
         this.agenda = agenda;
     }
-
 
 }

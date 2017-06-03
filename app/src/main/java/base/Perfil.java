@@ -16,7 +16,8 @@ public class Perfil {
     Preferences preferences;
 //    private String id;
 
-    public Perfil(){}
+    public Perfil() {
+    }
 
     public Perfil(String username, String gmail, String gender, Date data_born, Preferences preferences) {
         this.username = username;
@@ -25,6 +26,7 @@ public class Perfil {
         this.data_born = data_born;
         this.preferences = preferences;
     }
+
     public Perfil(String username, String gmail, String gender, Date data_born) {
         this.username = username;
         this.gmail = gmail;

@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import base.Trip;
@@ -25,6 +26,7 @@ public class CreateTripActivity extends AppCompatActivity {
     protected int currentapiVersion;
     private FirebaseAuth mAuth;
     private DataBaseMarco banco;
+    Trip viagem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +78,7 @@ public class CreateTripActivity extends AppCompatActivity {
             if (nome.getText().length() != 0 && orcamento.getText().length() != 0) {
 
                 Double orcam = Double.parseDouble(orcamento.getText().toString());
-                Trip viagem = new Trip(nome.getText().toString(), orcam, "Recife", data, null, timeStart, timeEnd);
+                viagem = new Trip(nome.getText().toString(), orcam, "Recife", data, null, timeStart, timeEnd);
                 banco.createTrip(viagem);
                 Intent intent = new Intent(this, TravelCardsActivity.class);
                 intent.putExtra("TRIP_TIME_START",timeStart);

@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.parceler.Parcels;
 
+import java.io.Console;
 import java.util.ArrayList;
 
 import adapters.LocalAdapter;
@@ -53,10 +54,10 @@ public class TravelCardsActivity extends AppCompatActivity {
     private Decision decisao = null;
     private ArrayList<Local> locals;
     static TravelCardsActivity travelCardsActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         dbMarco = new DataBaseMarco(); //inicializando banco de dados
         handleInstanceState(savedInstanceState);
         setUpFirebase();
@@ -67,9 +68,9 @@ public class TravelCardsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_travel_cards);
         final RecyclerView recList = (RecyclerView) findViewById(R.id.cardList);
         Intent intent = getIntent();
-        final String startTime =  intent.getStringExtra("TRIP_TIME_START");
+        final String startTime = intent.getStringExtra("TRIP_TIME_START");
         final String endTime = intent.getStringExtra("TRIP_TIME_END");
-        final double orcamento =  intent.getDoubleExtra("TRIP_ORCAMENTO", 100);
+        final double orcamento = intent.getDoubleExtra("TRIP_ORCAMENTO", 100);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
@@ -81,10 +82,10 @@ public class TravelCardsActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 Perfil perfil1 = perfilAdapter.getItems().get(0);
-                if(perfil1.getPreferences()==null){
+                if (perfil1.getPreferences() == null) {
                     Toast.makeText(TravelCardsActivity.this, "Você não tem nenhum gosto escolhido :'(", Toast.LENGTH_SHORT).show();
                 } else {
-                    decisao = new Decision(mAdapterLocal, perfil1.getPreferences().getPreferences(),startTime,endTime,orcamento);
+                    decisao = new Decision(mAdapterLocal, perfil1.getPreferences().getPreferences(), startTime, endTime, orcamento);
                     locals = decisao.choice();
                     CreateViagemAdapter ca = new CreateViagemAdapter(locals, getApplicationContext());
                     recList.setAdapter(ca);
@@ -108,7 +109,7 @@ public class TravelCardsActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                //Toast.makeText(DecisaoLocal.this, "Falha conexão!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(DecisaoLocal.this, "Falha conexão!", Toast.LENGTH_SHORT).show();
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
@@ -136,6 +137,7 @@ public class TravelCardsActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     public boolean onPrepareOptionsMenu(Menu menu) {
         return false;
     }
@@ -185,8 +187,7 @@ public class TravelCardsActivity extends AppCompatActivity {
         perfilAdapter.destroy();
     }
 
-    public void openMap(View view)
-    {
+    public void openMap(View view) {
         Intent intent = new Intent(this, MapsActivity.class);
         Bundle b = new Bundle();
         b.putParcelableArrayList("FILES_TO_SEND", locals);

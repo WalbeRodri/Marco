@@ -1,4 +1,5 @@
 package base;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,7 +7,7 @@ public class Preferences {
 
     private List<String> preferences;
 
-    public Preferences(){
+    public Preferences() {
         this.preferences = new ArrayList<>();
     }
 

@@ -20,11 +20,8 @@ public class PerfilAdapter extends FirebaseRecyclerAdapterNovo<PerfilAdapter.Vie
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-
-
         public ViewHolder(View view) {
             super(view);
-
         }
     }
 
@@ -35,26 +32,21 @@ public class PerfilAdapter extends FirebaseRecyclerAdapterNovo<PerfilAdapter.Vie
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
     }
 
     @Override
     protected void itemAdded(Perfil item, String key, int position) {
-
     }
 
     @Override
     protected void itemChanged(Perfil oldItem, Perfil newItem, String key, int position) {
-
     }
 
     @Override
     protected void itemRemoved(Perfil item, String key, int position) {
-
     }
 
     @Override
     protected void itemMoved(Perfil item, String key, int oldPosition, int newPosition) {
-
     }
 }
