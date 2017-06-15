@@ -138,8 +138,9 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public void currentTrip() {
-
+    public void currentTrip(View view) {
+        Intent intent = new Intent(this, CurrentTripActivity.class);
+        startActivity(intent);
     }
 
     public void createTrip(View view) {

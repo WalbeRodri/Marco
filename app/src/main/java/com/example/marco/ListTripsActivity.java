@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-
+import android.widget.Toast;
+import java.util.Calendar;
 import com.example.marco.map.MapsActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import adapters.TripAdapter;
 import base.Trip;
@@ -36,24 +39,23 @@ public class ListTripsActivity extends AppCompatActivity {
     private TripAdapter tripsAdapter;
     private ArrayList<Trip> mAdapterTrip; //armazena lista de locais
     private ArrayList<String> mAdapterTripKeys; //chaves de locais
+    protected Date dia_atual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_trips);
-
         dbMarco = new DataBaseMarco(); //inicializando banco de dados
         handleInstanceState(savedInstanceState);
         setUpFirebase();
         setUpAdapter();
+
 
         final RecyclerView recList = (RecyclerView) findViewById(R.id.tripsList);
         recList.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
-
-
         //tripsAdapter = new ListTripsAdapter(createList(3));
 
 
@@ -75,8 +77,6 @@ public class ListTripsActivity extends AppCompatActivity {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
-
-
     }
 
     @Override
@@ -142,6 +142,16 @@ public class ListTripsActivity extends AppCompatActivity {
         }
     }
 
+    /*private void currentTrip(){
+        for(int i=0;i<mAdapterTrip.size();i++){
+            Date dt = mAdapterTrip.get(i).getStart_date();
+            if(dt.getDay()==dia_atual.getDay()&&
+                    dt.getYear()==dia_atual.getYear()&&
+                    dt.getMonth()==dia_atual.getMonth()){
+                Intent j = new Intent(getApplicationContext(),TravelCardsActivity.class);
+            }
+        }
+    }*/
 
     // Saving the list of items and keys of the items on rotation
     @Override
