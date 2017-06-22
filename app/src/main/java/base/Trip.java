@@ -16,7 +16,7 @@ public class Trip {
     private String address;
     private ArrayList<Day> agenda;
     private String timeStart;
-    private String timeEnd;
+    private String timeEnd  ;
 
 
     public Trip() {

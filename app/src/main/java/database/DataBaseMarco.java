@@ -7,10 +7,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import base.*;
 
-/**
- * Created by Matheus on 06/11/2016.
- */
-
 public class DataBaseMarco {
     private FirebaseDatabase database;
     private DatabaseReference tripRef;  //nó de viagem
