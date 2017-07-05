@@ -1,7 +1,19 @@
 package com.example.marco;
 
+import android.*;
+import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.multidex.MultiDex;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +22,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+
 import com.example.marco.map.MapsActivity;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,8 +49,14 @@ import base.Perfil;
 import database.DataBaseMarco;
 import rotisserie.Decision;
 
+import android.location.Location;
+import android.location.LocationManager;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 
-public class TravelCardsActivity extends AppCompatActivity {
+
+public class TravelCardsActivity extends AppCompatActivity{
     private final static String SAVED_ADAPTER_ITEMS_LOCAL = "SAVED_ADAPTER_ITEMS_LOCAIS";
     private final static String SAVED_ADAPTER_KEYS_LOCAL = "SAVED_ADAPTER_KEYS_LOCAIS";
 
@@ -54,12 +79,33 @@ public class TravelCardsActivity extends AppCompatActivity {
     private Decision decisao = null;
     private ArrayList<Local> locals;
     static TravelCardsActivity travelCardsActivity;
+    private GoogleApiClient playService;
+    TravelCardsReceiver tvc;
+    private boolean achouLocal;
+    private boolean concedePerm = false;
+    private static final int ID_PERMISSION_REQUEST = 123;
+    private static final String TEM_PERMISSAO = "ComPerm";
+    private Bundle estado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.estado = savedInstanceState;
+        if(estado!=null){
+            concedePerm = estado.getBoolean(TEM_PERMISSAO,false);
+
+        }
+        if(todasPermitidas(getRequisitos())){
+            executando();
+        }else if(!concedePerm){
+            ActivityCompat.requestPermissions(this,grupoRequisitos(getRequisitos()),ID_PERMISSION_REQUEST);
+        }
+
+
+    }
+    protected void executando(){
         dbMarco = new DataBaseMarco(); //inicializando banco de dados
-        handleInstanceState(savedInstanceState);
+        handleInstanceState(estado);
         setUpFirebase();
         setUpAdapter();
 
@@ -74,8 +120,7 @@ public class TravelCardsActivity extends AppCompatActivity {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
-
-
+        tvc = new TravelCardsReceiver();
         ArrayList<Local> arrayLocal = new ArrayList<Local>();
         ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -89,7 +134,7 @@ public class TravelCardsActivity extends AppCompatActivity {
                     locals = decisao.choice();
                     CreateViagemAdapter ca = new CreateViagemAdapter(locals, getApplicationContext());
                     recList.setAdapter(ca);
-
+                    LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(new Intent("RODAR_FUSED_LOCATION"));
                 }
                 //PRINTS DE TESTE, FAVOR NAO TIRAR
                 /*for(int i = 0; i < perfil1.getPreferences().getPreferences().size(); i++){
@@ -113,10 +158,7 @@ public class TravelCardsActivity extends AppCompatActivity {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
-
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -124,7 +166,11 @@ public class TravelCardsActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main2, menu);
         return true;
     }
-
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(getBaseContext());
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -136,6 +182,119 @@ public class TravelCardsActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    protected void onResume(){
+        LocalBroadcastManager.getInstance(this).registerReceiver(tvc,
+                new IntentFilter("RODAR_FUSED_LOCATION"));
+        super.onResume();
+    }
+
+    /*@Override
+    public void onLocationChanged(Location location) {
+
+    }*/
+
+    public class TravelCardsReceiver extends BroadcastReceiver implements GoogleApiClient.ConnectionCallbacks,
+            GoogleApiClient.OnConnectionFailedListener{
+        private LocationRequest locreq;
+        private Location loc;
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            playService = new GoogleApiClient.Builder(context)
+                    .addApi(LocationServices.API)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .build();
+            playService.connect();
+        }
+
+        @Override
+        @SuppressWarnings("MissingPermission")
+        public void onConnected(@Nullable Bundle bundle) {
+            achouLocal = false;
+            loc=LocationServices.FusedLocationApi.getLastLocation(playService);
+            locreq = new LocationRequest()
+                    .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY)
+                    .setInterval(1000)
+                    .setFastestInterval(1000);
+            LocationServices.FusedLocationApi.requestLocationUpdates(
+                    playService, locreq, new LocationListener() {
+                        @Override
+                        public void onLocationChanged(Location location) {
+                            loc = location;
+                            for(int i=0;i<locals.size();i++){
+                                if(loc.getLatitude()==locals.get(i).getLatitude() //calibrar depois
+                                        && loc.getLongitude()==locals.get(i).getLongitude()){
+                                    achouLocal=true;
+                                }
+                            }
+                            if(achouLocal){
+                                Toast.makeText(getApplicationContext(),"Passando por um dos locais!",Toast.LENGTH_LONG).show();
+                            }else{
+                                Toast.makeText(getApplicationContext(),"Não achei :c "+location.getLongitude()+" "+location.getLatitude(),Toast.LENGTH_LONG).show();
+                            }
+                            playService.disconnect();
+                        }
+                    }
+            );
+        }
+
+        @Override
+        public void onConnectionSuspended(int i) {
+
+        }
+
+        @Override
+        public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+        }
+
+    }
+
+    protected boolean temPermissao(String perm) {
+        return(ContextCompat.checkSelfPermission(this, perm)== PackageManager.PERMISSION_GRANTED);
+    }
+
+    private String[] grupoRequisitos(String[] reqs){
+        ArrayList<String> resultado = new ArrayList<>();
+        for(String permissao : reqs){
+            if(!temPermissao(permissao)){
+                resultado.add(permissao);
+            }
+        }
+        return (resultado.toArray(new String[resultado.size()]));
+    }
+
+    private boolean todasPermitidas(String[] perms){
+        for(String permitida: perms){
+            if(!temPermissao(permitida)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private String[] getRequisitos(){
+        return(new String[]{ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION});
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int codigoReq,
+                                           @NonNull String[] permissoes,
+                                           @NonNull int[] resultados) {
+        concedePerm=false;
+
+        if (codigoReq==ID_PERMISSION_REQUEST) {
+            if (todasPermitidas(getRequisitos())) {
+                executando();//prossegue com o onCreate original
+            }
+            else {
+                Toast.makeText(getApplicationContext(),"Sem as permissões de local!",Toast.LENGTH_LONG).show();
+                finish();
+            }
+        }
     }
 
     public boolean onPrepareOptionsMenu(Menu menu) {
@@ -179,6 +338,20 @@ public class TravelCardsActivity extends AppCompatActivity {
         outState.putParcelable(SAVED_ADAPTER_ITEMS_LOCAL, Parcels.wrap(localAdapter.getItems())); //SETANDO LOCAL QUE IRÁ ARMAZENAR
         outState.putStringArrayList(SAVED_ADAPTER_KEYS_LOCAL, localAdapter.getKeys());
     }
+
+    @Override
+    protected void onPause() {
+        // Unregister since the activity is not visible
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(tvc);
+        super.onPause();
+    }
+
+    /*protected void onStop(){
+        if(playService!=null){
+            playService.disconnect();
+        }
+        super.onStop();
+    }*/
 
     @Override
     protected void onDestroy() {

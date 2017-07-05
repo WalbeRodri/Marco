@@ -11,11 +11,28 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.marco.CurrentTripActivity">
 
-    <TextView
+    <!--<TextView
         android:id="@+id/infor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:text="Nada a mostrar :(" />-->
+   <ListView
+       android:layout_height="match_parent"
+       android:layout_width="match_parent">
+       <TextView
+        android:id="@+id/nominho"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Nada a mostrar :(" />
+       <TextView
+           android:id="@+id/descinho"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Nada a mostrar :(" />
+   </ListView>
+
+
+
 </RelativeLayout>

@@ -55,6 +55,12 @@
                 android:text="Título"
                 android:textColor="@color/white"
                 android:textSize="20dp" />
+            <CheckedTextView
+                android:id="@+id/checkedTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CheckedTextView"
+                android:layout_gravity="right"/>
         </LinearLayout>
 
         <ImageView
@@ -125,6 +131,7 @@
                 android:id="@+id/rating_bar"/>
         </LinearLayout>
     </RelativeLayout>
+
 
 
 
