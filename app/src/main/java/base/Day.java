@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by Matheus on 30/10/2016.
- */
-
 public class Day {
 
 

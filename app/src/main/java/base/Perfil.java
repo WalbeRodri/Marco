@@ -3,9 +3,6 @@ package base;
 
 import java.util.Date;
 
-/**
- * Created by Matheus on 30/10/2016.
- */
 
 public class Perfil {
 
