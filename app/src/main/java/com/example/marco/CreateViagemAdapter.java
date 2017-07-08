@@ -8,17 +8,24 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.location.Location;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckedTextView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -30,21 +37,32 @@ import java.util.Random;
 
 import base.Local;
 
+import static com.example.marco.R.mipmap.lixo;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapter.ContactViewHolder> implements Serializable{
 
     static ArrayList<Local> contactList;
     static Context travelCA;
+    static Location locAtual;
+    static boolean achou;
     public CreateViagemAdapter(ArrayList<Local> contactList, Context TCA) {
         this.contactList = contactList;
         this.travelCA = TCA;
+        this.achou = false;
     }
-
 
     @Override
     public int getItemCount() {
         return contactList.size();
+    }
+
+    public void setLocAtual(Location loc){
+        this.locAtual = loc;
+    }
+
+    public void setAchou(boolean achou){
+        this.achou=achou;
     }
 
     @Override
@@ -55,10 +73,22 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
         contactViewHolder.rBar.setMax(5);
         contactViewHolder.rBar.setNumStars(5);
         contactViewHolder.rBar.setRating(r.nextInt(5));
+
         contactViewHolder.vNome.setText(ci.getName());
         contactViewHolder.vDesc.setText(ci.getDescription());
         contactViewHolder.vCategorias.setText(ci.getType());
 
+        if (contactViewHolder.check.isChecked()){
+
+        }
+//        if (!contactViewHolder.check.isChecked()){
+//            contactViewHolder.check.setCheckMarkDrawable(lixo);
+//        }
+      /*  Log.d("Opa visitado : ","Bool: "+ci.getVisitado());
+        if(ci.getVisitado().equals("True")) {
+            contactViewHolder.check.setChecked(true);
+            contactViewHolder.check.setCheckMarkDrawable(R.mipmap.check_ic);
+        }*/
         // Formatando para exibir Schedule como horário
         float time = Float.valueOf(ci.getHorario());
         int hours = (int) time;
@@ -119,10 +149,19 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
                 // Handle any errors
             }
         });
-
+//        if(achou){
+//            contactViewHolder.cTextView.setChecked(true);
+//            //contactViewHolder.cTextView.setCheckMarkDrawable();
+//        }
+        //
 //        contactViewHolder.vNome.setText(ci.nome + " " + ci.desc);
     }
 
+    /*public void achouLocal(boolean achou){
+        if(achou){
+            contactViewHolder.cTextView.setChecked(true);
+        }
+    }*/
 
     public ArrayList<Local> getContactList() {
         return contactList;
@@ -137,6 +176,7 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
         return new ContactViewHolder(itemView);
     }
 
+
     public static class ContactViewHolder extends RecyclerView.ViewHolder {
         protected ImageView vImagem;
         protected TextView vNome;
@@ -146,6 +186,8 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
         protected TextView vTimeSpend;
         protected LinearLayout vHead;
         protected RatingBar rBar;
+        protected CheckedTextView check;
+
         public ContactViewHolder(View v) {
             super(v);
             vImagem = (ImageView) v.findViewById(R.id.imagem);
@@ -156,12 +198,16 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
             vTimeSpend = (TextView) v.findViewById(R.id.txtTimeSpend);
             vHead = (LinearLayout) v.findViewById(R.id.head);
             rBar=(RatingBar) v.findViewById(R.id.rating_bar);
-            rBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener(){
+            /*rBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener(){
                 @Override
                 public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser){
-                    Toast.makeText(travelCA.getApplicationContext(), "Opa, olha nosso rating"+rBar.getRating(), Toast.LENGTH_SHORT ).show();
+
                 }
-            });
+            });*/
+            check = (CheckedTextView) v.findViewById(R.id.check);
+        }
+
+        public void rCheck() {
         }
     }
 }

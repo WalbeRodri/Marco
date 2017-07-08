@@ -1,6 +1,8 @@
 package com.example.marco;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +15,9 @@ import android.widget.Button;
 import android.widget.Toast;
 import java.util.Calendar;
 import com.example.marco.map.MapsActivity;
+
+import android.location.LocationManager;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,6 +45,7 @@ public class ListTripsActivity extends AppCompatActivity {
     private ArrayList<Trip> mAdapterTrip; //armazena lista de locais
     private ArrayList<String> mAdapterTripKeys; //chaves de locais
     protected Date dia_atual;
+    //private LocationManager mgr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,7 @@ public class ListTripsActivity extends AppCompatActivity {
         handleInstanceState(savedInstanceState);
         setUpFirebase();
         setUpAdapter();
+      //  mgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
 
         final RecyclerView recList = (RecyclerView) findViewById(R.id.tripsList);
@@ -179,7 +186,7 @@ public class ListTripsActivity extends AppCompatActivity {
 
     }
 
-//    public void deleteTrip(View v) {
+   //    public void deleteTrip(View v) {
 //        int i = tripsAdapter.getItem();
 //        String chave = mAdapterTripKeys.get(i);
 //        dbMarco.deleteTrip(chave);

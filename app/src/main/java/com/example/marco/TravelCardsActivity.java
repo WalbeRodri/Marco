@@ -2,12 +2,14 @@ package com.example.marco;
 
 import android.*;
 import android.Manifest;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.provider.SyncStateContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.multidex.MultiDex;
@@ -17,6 +19,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +31,11 @@ import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import com.example.marco.map.MapsActivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.Geofence;
+import com.google.android.gms.location.GeofencingApi;
+import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.firebase.database.DataSnapshot;
@@ -76,6 +84,7 @@ public class TravelCardsActivity extends AppCompatActivity{
     private ArrayList<Local> mAdapterLocal; //armazena lista de locais
     private ArrayList<String> mAdapterLocalKeys; //chaves de locais
 
+    private CreateViagemAdapter ca;
     private Decision decisao = null;
     private ArrayList<Local> locals;
     static TravelCardsActivity travelCardsActivity;
@@ -86,6 +95,7 @@ public class TravelCardsActivity extends AppCompatActivity{
     private static final int ID_PERMISSION_REQUEST = 123;
     private static final String TEM_PERMISSAO = "ComPerm";
     private Bundle estado;
+    private Geofence geof;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,9 +142,9 @@ public class TravelCardsActivity extends AppCompatActivity{
                 } else {
                     decisao = new Decision(mAdapterLocal, perfil1.getPreferences().getPreferences(), startTime, endTime, orcamento);
                     locals = decisao.choice();
-                    CreateViagemAdapter ca = new CreateViagemAdapter(locals, getApplicationContext());
+                    ca = new CreateViagemAdapter(locals, getApplicationContext());
                     recList.setAdapter(ca);
-                    LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(new Intent("RODAR_FUSED_LOCATION"));
+                    LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(new Intent("RODAR_FUSED_LOCATION")); //manda broadcast quando finaliza query
                 }
                 //PRINTS DE TESTE, FAVOR NAO TIRAR
                 /*for(int i = 0; i < perfil1.getPreferences().getPreferences().size(); i++){
@@ -190,15 +200,17 @@ public class TravelCardsActivity extends AppCompatActivity{
         super.onResume();
     }
 
-    /*@Override
-    public void onLocationChanged(Location location) {
+    protected void onStart(){
+        if(playService!=null){
+            playService.reconnect(); //como o comando connect é chamado no onReceive, faço a reconexão para que sempre possa verificar
+        }
+        super.onStart();
+    }
 
-    }*/
 
     public class TravelCardsReceiver extends BroadcastReceiver implements GoogleApiClient.ConnectionCallbacks,
-            GoogleApiClient.OnConnectionFailedListener{
+            GoogleApiClient.OnConnectionFailedListener{ //broadcast receiver que vai tratar o fused location ao fim da query
         private LocationRequest locreq;
-        private Location loc;
 
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -214,28 +226,36 @@ public class TravelCardsActivity extends AppCompatActivity{
         @SuppressWarnings("MissingPermission")
         public void onConnected(@Nullable Bundle bundle) {
             achouLocal = false;
-            loc=LocationServices.FusedLocationApi.getLastLocation(playService);
+            //loc=LocationServices.FusedLocationApi.getLastLocation(playService);
             locreq = new LocationRequest()
                     .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY)
-                    .setInterval(1000)
-                    .setFastestInterval(1000);
+                    .setInterval(1800000)
+                    .setFastestInterval(900000); //procurar no máximo a cada 30min, ou no mínimo a cada 15min
             LocationServices.FusedLocationApi.requestLocationUpdates(
                     playService, locreq, new LocationListener() {
                         @Override
                         public void onLocationChanged(Location location) {
-                            loc = location;
+                            //loc = location;
                             for(int i=0;i<locals.size();i++){
-                                if(loc.getLatitude()==locals.get(i).getLatitude() //calibrar depois
-                                        && loc.getLongitude()==locals.get(i).getLongitude()){
-                                    achouLocal=true;
+                                float[] results = new float[3];
+                                for(Local l: locals){
+                                    Location.distanceBetween(location.getLatitude(),location.getLongitude(),l.getLatitude(),l.getLongitude(),results);
+                                    //a cada mudança de localização, calcula-se a distância em metros entre o local atual e os locais pertencentes ao roteiro
+                                    Log.d("Geofence Check",""+results[0]);
+                                    if(results[0]<100){ //a distância menor do que 100 metros é suficiente, no nosso caso, para dizer que a pessoa está de fato no local
+                                        //a distância é armazenada no índice 0 segundo a documentação
+                                        //tentar mexer no check do xml da view
+                                        Toast.makeText(getApplicationContext(),""+results[0],Toast.LENGTH_SHORT).show();
+                                    }
                                 }
+
                             }
-                            if(achouLocal){
+                          /*  if(achouLocal){
                                 Toast.makeText(getApplicationContext(),"Passando por um dos locais!",Toast.LENGTH_LONG).show();
                             }else{
                                 Toast.makeText(getApplicationContext(),"Não achei :c "+location.getLongitude()+" "+location.getLatitude(),Toast.LENGTH_LONG).show();
-                            }
-                            playService.disconnect();
+                            }*/
+
                         }
                     }
             );
@@ -250,8 +270,8 @@ public class TravelCardsActivity extends AppCompatActivity{
         public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
         }
-
     }
+
 
     protected boolean temPermissao(String perm) {
         return(ContextCompat.checkSelfPermission(this, perm)== PackageManager.PERMISSION_GRANTED);
@@ -341,17 +361,17 @@ public class TravelCardsActivity extends AppCompatActivity{
 
     @Override
     protected void onPause() {
-        // Unregister since the activity is not visible
+        // Activity não visível, faz unregister do broadcast receiver
         LocalBroadcastManager.getInstance(this).unregisterReceiver(tvc);
         super.onPause();
     }
 
-    /*protected void onStop(){
+    protected void onStop(){
         if(playService!=null){
             playService.disconnect();
         }
         super.onStop();
-    }*/
+    }
 
     @Override
     protected void onDestroy() {

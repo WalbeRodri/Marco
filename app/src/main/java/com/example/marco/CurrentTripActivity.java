@@ -43,24 +43,21 @@ import base.Local;
 import base.Trip;
 import database.DataBaseMarco;
 
-public class CurrentTripActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener, Runnable{
+public class CurrentTripActivity extends AppCompatActivity{
     private final static String SAVED_ADAPTER_ITEMS_TRIP = "SAVED_ADAPTER_ITEMS_TRIP";
     private final static String SAVED_ADAPTER_KEYS_TRIP = "SAVED_ADAPTER_KEYS_TRIP";
     private FirebaseAuth f_auth;
     private DatabaseReference dbref = FirebaseDatabase.getInstance().getReference();
     private DataBaseMarco dbmarco;
-    private boolean viagemAtual;
     Query myquery;
     LocalAdapter localAdapter;
     ArrayList<Local> listaLocais;
+    private boolean viagemAtual;
     ArrayList<Trip> listaViagem;
     ArrayList<String> listaChave;
     Date dia_atual;
     ArrayList<Date> dataViagens;
     TextView tv;
-    private GoogleApiClient playService;
-    private boolean achouLocal;
    // private TripAdapter ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,18 +73,10 @@ public class CurrentTripActivity extends AppCompatActivity implements GoogleApiC
             dbmarco = new DataBaseMarco();
            // handleInstanceState(savedInstanceState);
             //setUpFirebase();
-            viagemAtual = false;
-            achouLocal = false;
             listaLocais = new ArrayList<>();
             setUpAdapter();
             dataViagens = new ArrayList<Date>();
             //tv = (TextView) findViewById(R.id.infor);
-            playService = new GoogleApiClient.Builder(this)
-                    .addApi(LocationServices.API)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .build();
-
            /* Calendar hoje = Calendar.getInstance(); pegar dia de hoje, NÃO EXCLUIR
 
             int ano = hoje.get(Calendar.YEAR);
@@ -172,9 +161,6 @@ public class CurrentTripActivity extends AppCompatActivity implements GoogleApiC
         }
     }
     protected void onStart(){
-        if (playService!=null) {
-            playService.connect();
-        }
         /*try{ antigo método mas preservar
             dia_atual = new Date(); //pega o dia atual sem precisar passar parâmetros
             Query take_last_trip_day = dbref.child("trip").child(f_auth.getCurrentUser().getUid()).orderByKey();
@@ -272,42 +258,8 @@ public class CurrentTripActivity extends AppCompatActivity implements GoogleApiC
         super.onStart();
     }
 
-    protected void onStop(){
-        if(playService!=null){
-            playService.disconnect();
-        }
+    protected void onStop() {
         super.onStop();
-    }
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-        run();
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
-
-    @Override
-    @SuppressWarnings({"MissingPermission"})
-    public void run() {
-        Location loc=LocationServices.FusedLocationApi.getLastLocation(playService);
-        for(int i=0;i<listaLocais.size();i++){
-            if(loc.getLatitude()==listaLocais.get(i).getLatitude()
-                    && loc.getLongitude()==listaLocais.get(i).getLongitude()){
-                achouLocal=true;
-            }
-        }
-        if(achouLocal){
-            Toast.makeText(getApplicationContext(),"Passando por um dos locais!",Toast.LENGTH_LONG).show();
-        }else{
-            Toast.makeText(getApplicationContext(),"Não achei :c",Toast.LENGTH_LONG).show();
-        }
     }
 
     private class ProcuraViagem extends AsyncTask<Date,Void,Void>{
