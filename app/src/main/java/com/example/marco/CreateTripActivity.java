@@ -1,5 +1,6 @@
 package com.example.marco;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import base.Trip;
@@ -26,6 +28,7 @@ public class CreateTripActivity extends AppCompatActivity {
     protected int currentapiVersion;
     private FirebaseAuth mAuth;
     private DataBaseMarco banco;
+    private DBOpenHelper dbhelper;
     Trip viagem;
 
     @Override
@@ -38,7 +41,6 @@ public class CreateTripActivity extends AppCompatActivity {
         fim = (TimePicker) findViewById(R.id.durationPicker);
         fim.setIs24HourView(true);
         inicio.setIs24HourView(true);
-
         currentapiVersion = android.os.Build.VERSION.SDK_INT;
         // O método setCurrentHour está obsoleto, mas o setHour é novo demais pro nosso minSDK
         // Precisa testar em outros aparelhos!!!
@@ -56,6 +58,12 @@ public class CreateTripActivity extends AppCompatActivity {
         nome = (EditText) findViewById(R.id.tripNameField);
         partida = (DatePicker) findViewById(R.id.tripStartDateField);
         orcamento = (EditText) findViewById(R.id.dailyBudgetField);
+    }
+
+    protected void onDestroy(){
+        dbhelper.getWritableDatabase().close();
+        dbhelper.getReadableDatabase().close();
+        super.onDestroy();
     }
 
     public void confirmTrip(View view) {
@@ -79,7 +87,17 @@ public class CreateTripActivity extends AppCompatActivity {
 
                 Double orcam = Double.parseDouble(orcamento.getText().toString());
                 viagem = new Trip(nome.getText().toString(), orcam, "Recife", data, null, timeStart, timeEnd);
+                dbhelper = new DBOpenHelper(getApplicationContext());
+                ContentValues values = new ContentValues();
+                values.put("Nome",nome.getText().toString());
+                String formattedDate = new SimpleDateFormat("dd/MM/yyyy").format(data);
+                values.put("DataInicio",formattedDate);
+                values.put("Destino","Recife");
+                values.put("HoraInicio",timeStart);
+                values.put("HoraFinal",timeEnd);
+                dbhelper.getWritableDatabase().insert(DBOpenHelper.TRIP,null,values);
                 banco.createTrip(viagem);
+                values.clear();
                 Intent intent = new Intent(this, TravelCardsActivity.class);
                 intent.putExtra("TRIP_TIME_START",timeStart);
                 intent.putExtra("TRIP_TIME_END", timeEnd);

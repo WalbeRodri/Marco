@@ -1,5 +1,6 @@
 package com.example.marco;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -24,6 +25,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.marco.map.ViagemAtualActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,6 +33,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+
+import base.Trip;
+
+import static com.example.marco.DBOpenHelper.GOSTOS;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -44,6 +52,7 @@ public class MainActivity extends AppCompatActivity
         Log.d("Cria DB",">>>>>>>>>>>>>>>>>>>>>>>");
         dbHelper = new DBOpenHelper(this);
         Log.d("Cria DB",">>>>>>>>>>>>>>>>>>>>>>>");
+//        povoaDesgraça(10);
         if (mAuth.getCurrentUser() == null) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
@@ -149,14 +158,57 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public void currentTrip(View view) {
-        Intent intent = new Intent(this, CurrentTripActivity.class);
+    public void currentTrip(View view) throws NullPointerException{
+        Cursor q = dbHelper.getReadableDatabase().query(
+                DBOpenHelper.TRIP
+                ,new String[]{"DataInicio"}
+                ,null
+                ,new String[]{}
+                ,null
+                ,null
+                ,null);
+        String dtInText="";
+        int i=-1;
+        try{
+            i = q.getColumnIndex("DataInicio");
+            if(q.moveToFirst()){
+                dtInText=q.getString(i);
+            }else{
+                Log.d("Cursor","carai nenhum");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        Log.d("Cursor",i+" "+dtInText);
+        q.close();
+        Intent intent = new Intent(this, ViagemAtualActivity.class);
         startActivity(intent);
     }
 
     public void createTrip(View view) {
         Intent intent = new Intent(this, CreateTripActivity.class);
         startActivity(intent);
+    }
+    public void povoaDesgraça(int i){
+        for(int z = 0; z<i; z++){
+            ContentValues values = new ContentValues();
+            values.put("Nome","viage"+z);
+            values.put("DataInicio","dd/MM/yyyy"+z);
+            values.put("Destino","Recife"+z);
+            values.put("HoraInicio",8);
+            values.put("HoraFinal",18);
+             dbHelper.getWritableDatabase().insert(DBOpenHelper.TRIP,null,values);
+
+        }
+        Cursor cursor;
+        cursor = dbHelper.getWritableDatabase().query(DBOpenHelper.TRIP
+                ,new String[]{"DataInicio"}
+                ,null
+                ,new String[]{}
+                ,null
+                ,null
+                ,null);
+        Log.d("COLUNAS: ", ""+cursor.getCount());
     }
 
     public void gerenciaGostos(View view) {

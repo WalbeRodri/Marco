@@ -32,13 +32,13 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     final private static Integer VERSION = 1;
     final private Context mContext;
     final private static String CREATE_TRIP = "CREATE TABLE IF NOT EXISTS "+TRIP+" (" + _ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                    "Nome"+ " TEXT NOT NULL, "+
-                    "Destino" +" TEXT NOT NULL, "+
-                    "Endereço"+" TEXT NOT NULL, "+
-                    "HoraInicio"+" TEXT NOT NULL, "+
-                    "DataInicio"+" DATE NOT NULL, "+
-                    "DataFinal"+" DATE NOT NULL, "+
-                    "HoraFinal" +" TEXT NOT NULL)";
+                    "Nome"+ " TEXT, "+
+                    "Destino" +" TEXT, "+
+                    "Orcamento"+" INTEGER, "+
+                    "HoraInicio"+" TEXT, "+
+                    "DataInicio"+" TEXT, "+
+                    "DataFinal"+" TEXT, "+
+                    "HoraFinal" +" TEXT)";
     final private static String CREATE_PREFERENCES = "CREATE TABLE IF NOT EXISTS "+PREFERENCES+" (" + _ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, "+
             "Preferencia"+" TEXT NOT NULL)";
     final private static String CREATE_LOCAL = "CREATE TABLE IF NOT EXISTS "+LOCAL+" (" + _ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, "+
