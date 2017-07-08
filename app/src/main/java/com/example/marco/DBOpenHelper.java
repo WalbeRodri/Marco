@@ -3,6 +3,10 @@ package com.example.marco;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.util.StringBuilderPrinter;
+
+import android.widget.Toast;
 
 /**
  * Created by Walber Rodrigues on 22/06/2017.
@@ -20,7 +24,10 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     final static String PREFERENCES = "Preferencias";
     final static String LOCAL = "Local";
     final static String DAY = "Dia";
-//    final static String[] columns = { _ID, TITLE, PUB_DATE, LINK, DESCRIPTION };
+    final static String GOSTOS = "PREF";
+    final static String TB_GOSTOS = "TB_PREF";
+
+    //    final static String[] columns = { _ID, TITLE, PUB_DATE, LINK, DESCRIPTION };
     final private static String NAME = "trip_db";
     final private static Integer VERSION = 1;
     final private Context mContext;
@@ -45,6 +52,9 @@ public class DBOpenHelper extends SQLiteOpenHelper {
             "Tipo"+" TEXT NOT NULL, "+
             "Imagem"+" BLOB, "+
             ""+" TEXT NOT NULL)";
+    final private static String CREATE_GOSTOS = "CREATE TABLE IF NOT EXISTS "+TB_GOSTOS+" ("+_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+
+            GOSTOS+ " TEXT NOT NULL)";
+
     public DBOpenHelper(Context ctx){
         super(ctx, NAME, null, VERSION);
         mContext = ctx;
@@ -56,11 +66,14 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TRIP);
         db.execSQL(CREATE_PREFERENCES);
         db.execSQL(CREATE_LOCAL);
+        Log.d("CRIEI GOSTO","GOSTOS");
+        db.execSQL(CREATE_GOSTOS);
 //        db.execSQL(CREATE_AGENDA);
 //        db.execSQL(CREATE_PERFIL);
 //        db.execSQL(CREATE_DAY);
 
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
