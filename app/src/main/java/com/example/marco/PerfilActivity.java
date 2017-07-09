@@ -295,7 +295,7 @@ public class PerfilActivity extends AppCompatActivity {
         values.clear();
     }
     protected void delete_item(String itemRow){
-        dbOpenHelper.getReadableDatabase().delete(TB_GOSTOS,GOSTOS+" = '"+ itemRow+"' ",null);
+        dbOpenHelper.getReadableDatabase().delete(TB_GOSTOS,GOSTOS+" = '"+itemRow+"' ",null);
     }
     private void setUpFirebase() {
         mQuery = dbMarco.recoverPerfil(); //ACESANDO NÓS DE CONSULTA

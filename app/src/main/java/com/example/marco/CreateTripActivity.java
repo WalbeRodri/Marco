@@ -97,7 +97,7 @@ public class CreateTripActivity extends AppCompatActivity {
                 values.put("HoraFinal",timeEnd);
                 values.put("Orcamento",orcam);
                 dbhelper.getWritableDatabase().insert(DBOpenHelper.TRIP,null,values);
-                banco.createTrip(viagem);
+//                banco.createTrip(viagem);
                 values.clear();
                 Intent intent = new Intent(this, TravelCardsActivity.class);
                 intent.putExtra("TRIP_TIME_START",timeStart);

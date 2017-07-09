@@ -106,7 +106,7 @@ public class ListTripsActivity extends AppCompatActivity {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //tratar a adição de viagens que ja estejam no firebase e pass-las ao bd
+                //tratar a adição de viagens que ja estejam no firebase e passa-las ao bd
 //                decisao = new Decision(mAdapterLocal, perfil1.getPreferences().getPreferences());
 //                ListTripsAdapter ca = new ListTripsAdapter(mAdapterTrip);
 //                ListTripsAdapter ca = new ListTripsAdapter(viagensBD);

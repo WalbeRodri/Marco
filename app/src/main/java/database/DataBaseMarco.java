@@ -54,7 +54,6 @@ public class DataBaseMarco {
 
     public void createTrip(Trip trip) {
         tripRef.push().setValue(trip);
-
     }
 
     public FirebaseUser getUser(){

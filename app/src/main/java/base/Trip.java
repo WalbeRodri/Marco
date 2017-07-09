@@ -85,11 +85,11 @@ public class Trip {
         this.destiny = destiny;
     }
 
-    public Date getStart_date() {
+    public Date getStartDate() {
         return start_date;
     }
 
-    public void setStart_date(Date start_date) {
+    public void setStartdate(Date start_date) {
         this.start_date = start_date;
     }
 
@@ -125,4 +125,11 @@ public class Trip {
         this.agenda = agenda;
     }
 
+    public String getTimeEnd() {
+        return timeEnd;
+    }
+
+    public void setTimeEnd(String timeEnd) {
+        this.timeEnd = timeEnd;
+    }
 }
