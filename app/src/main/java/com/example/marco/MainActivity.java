@@ -1,17 +1,11 @@
 package com.example.marco;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.multidex.MultiDex;
 
-import android.support.v4.os.AsyncTaskCompat;
 import android.util.Log;
 
 import android.view.View;
@@ -25,20 +19,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.marco.map.ViagemAtualActivity;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
-
-import base.Trip;
-
-import static com.example.marco.DBOpenHelper.GOSTOS;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -161,28 +148,54 @@ public class MainActivity extends AppCompatActivity
     public void currentTrip(View view) throws NullPointerException{
         Cursor q = dbHelper.getReadableDatabase().query(
                 DBOpenHelper.TRIP
-                ,new String[]{"DataInicio"}
+                ,new String[]{"DataInicio","Orcamento","HoraInicio","Horafinal"}
                 ,null
                 ,new String[]{}
                 ,null
                 ,null
                 ,null);
         String dtInText="";
-        int i=-1;
+        Calendar hoje = Calendar.getInstance();
+        int ano = hoje.get(Calendar.YEAR);
+        //Toast.makeText(getApplicationContext(),"Ano: "+ano,Toast.LENGTH_SHORT).show();
+        int mes = hoje.get(Calendar.MONTH);
+        //Toast.makeText(getApplicationContext(),"Mês: "+mes,Toast.LENGTH_SHORT).show();
+        int dia = hoje.get(Calendar.DAY_OF_MONTH);
+        //Toast.makeText(getApplicationContext(),"Dia: "+dia,Toast.LENGTH_SHORT).show();
+        mes = mes+1;
+        Date dia_atual = new Date(ano,mes,dia);
+        Log.d("Data atual",dia_atual.getDate()+"/"+dia_atual.getMonth()+"/"+dia_atual.getYear());
+        //int i=-1;
         try{
-            i = q.getColumnIndex("DataInicio");
-            if(q.moveToFirst()){
-                dtInText=q.getString(i);
-            }else{
-                Log.d("Cursor","carai nenhum");
+            //i = q.getColumnIndex("DataInicio");
+            int j=q.getCount();
+            Log.d("Cursor",j+"");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+            while(q.moveToNext()){
+                dtInText = q.getString(q.getColumnIndex("DataInicio"));
+                Log.d("Data do cursor",dtInText);
+                Date d = sdf.parse(dtInText);
+                String horaini = q.getString(q.getColumnIndex("HoraInicio"));
+                String horafim = q.getString(q.getColumnIndex("HoraFinal"));
+                Double orcamento = q.getDouble(q.getColumnIndex("Orcamento"));
+                Log.d("Data do db",d.getDate()+"/"+d.getMonth()+"/"+d.getYear());
+                if(d.getYear()==dia_atual.getYear()
+                        && (d.getMonth()+1)==dia_atual.getMonth()
+                        && d.getDate()==dia_atual.getDate()){
+
+                    iniciaTravelCards(horaini,horafim,orcamento);
+                    break;
+                } else {
+                    q.close();
+                    Toast.makeText(getApplicationContext(),"Não há nenhuma viagem em andamento",Toast.LENGTH_SHORT).show();
+
+                }
             }
         }catch (Exception e){
             e.printStackTrace();
         }
-        Log.d("Cursor",i+" "+dtInText);
-        q.close();
-        Intent intent = new Intent(this, ViagemAtualActivity.class);
-        startActivity(intent);
+        //Log.d("Cursor",i+" "+dtInText);
     }
 
     public void createTrip(View view) {
@@ -210,7 +223,13 @@ public class MainActivity extends AppCompatActivity
                 ,null);
         Log.d("COLUNAS: ", ""+cursor.getCount());
     }
-
+    public void iniciaTravelCards(String horaini, String horafim, Double orcamento){
+        Intent intent = new Intent(getApplicationContext(),TravelCardsActivity.class);
+        intent.putExtra("TRIP_TIME_START",horaini);
+        intent.putExtra("TRIP_TIME_END", horafim);
+        intent.putExtra("TRIP_ORCAMENTO", orcamento);
+        startActivity(intent);
+    }
     public void gerenciaGostos(View view) {
         if (mAuth.getCurrentUser() != null) {
             Intent intent = new Intent(this, PerfilActivity.class);

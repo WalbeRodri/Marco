@@ -108,6 +108,7 @@ public class TravelCardsActivity extends AppCompatActivity{
         if(todasPermitidas(getRequisitos())){
             executando();
         }else if(!concedePerm){
+            concedePerm=true;
             ActivityCompat.requestPermissions(this,grupoRequisitos(getRequisitos()),ID_PERMISSION_REQUEST);
         }
 

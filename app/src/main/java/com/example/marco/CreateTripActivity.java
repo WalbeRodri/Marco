@@ -95,6 +95,7 @@ public class CreateTripActivity extends AppCompatActivity {
                 values.put("Destino","Recife");
                 values.put("HoraInicio",timeStart);
                 values.put("HoraFinal",timeEnd);
+                values.put("Orcamento",orcam);
                 dbhelper.getWritableDatabase().insert(DBOpenHelper.TRIP,null,values);
                 banco.createTrip(viagem);
                 values.clear();

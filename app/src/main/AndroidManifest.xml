@@ -101,11 +101,6 @@
         <activity
             android:name=".map.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".CurrentTripActivity" />
-        <activity
-            android:name=".map.ViagemAtualActivity"
-            android:label="@string/title_activity_viagem_atual"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
