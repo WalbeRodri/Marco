@@ -166,6 +166,10 @@ public class MainActivity extends AppCompatActivity
         Date dia_atual = new Date(ano,mes,dia);
         Log.d("Data atual",dia_atual.getDate()+"/"+dia_atual.getMonth()+"/"+dia_atual.getYear());
         //int i=-1;
+        boolean viagemAtual = false;
+        String horaini = "";
+        String horafim = "";
+        Double orcamento = 0.0;
         try{
             //i = q.getColumnIndex("DataInicio");
             int j=q.getCount();
@@ -176,9 +180,9 @@ public class MainActivity extends AppCompatActivity
                 dtInText = q.getString(q.getColumnIndex("DataInicio"));
                 Log.d("Data do cursor",dtInText);
                 Date d = sdf.parse(dtInText);
-                String horaini = q.getString(q.getColumnIndex("HoraInicio"));
-                String horafim = q.getString(q.getColumnIndex("HoraFinal"));
-                Double orcamento = q.getDouble(q.getColumnIndex("Orcamento"));
+                horaini = q.getString(q.getColumnIndex("HoraInicio"));
+                horafim = q.getString(q.getColumnIndex("HoraFinal"));
+                orcamento = q.getDouble(q.getColumnIndex("Orcamento"));
                 Log.d("Data do db",d.getDate()+"/"+d.getMonth()+"/"+d.getYear());
                 if(d.getYear()==dia_atual.getYear()
                         && (d.getMonth()+1)==dia_atual.getMonth()
@@ -186,43 +190,23 @@ public class MainActivity extends AppCompatActivity
 
                     iniciaTravelCards(horaini,horafim,orcamento);
                     break;
-                } else {
-                    q.close();
-                    Toast.makeText(getApplicationContext(),"Não há nenhuma viagem em andamento",Toast.LENGTH_SHORT).show();
-
                 }
             }
         }catch (Exception e){
             e.printStackTrace();
         }
-        //Log.d("Cursor",i+" "+dtInText);
+        if(viagemAtual)
+            iniciaTravelCards(horaini,horafim,orcamento);
+        else
+            Toast.makeText(getApplicationContext(),"Não há nenhuma viagem em andamento",Toast.LENGTH_SHORT).show();
+           //Log.d("Cursor",i+" "+dtInText);
     }
 
     public void createTrip(View view) {
         Intent intent = new Intent(this, CreateTripActivity.class);
         startActivity(intent);
     }
-    public void povoaDesgraça(int i){
-        for(int z = 0; z<i; z++){
-            ContentValues values = new ContentValues();
-            values.put("Nome","viage"+z);
-            values.put("DataInicio","dd/MM/yyyy"+z);
-            values.put("Destino","Recife"+z);
-            values.put("HoraInicio",8);
-            values.put("HoraFinal",18);
-             dbHelper.getWritableDatabase().insert(DBOpenHelper.TRIP,null,values);
 
-        }
-        Cursor cursor;
-        cursor = dbHelper.getWritableDatabase().query(DBOpenHelper.TRIP
-                ,new String[]{"DataInicio"}
-                ,null
-                ,new String[]{}
-                ,null
-                ,null
-                ,null);
-        Log.d("COLUNAS: ", ""+cursor.getCount());
-    }
     public void iniciaTravelCards(String horaini, String horafim, Double orcamento){
         Intent intent = new Intent(getApplicationContext(),TravelCardsActivity.class);
         intent.putExtra("TRIP_TIME_START",horaini);

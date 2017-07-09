@@ -2,6 +2,7 @@ package com.example.marco;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import com.example.marco.map.MapsActivity;
 
@@ -46,15 +49,18 @@ public class ListTripsActivity extends AppCompatActivity {
     private ArrayList<String> mAdapterTripKeys; //chaves de locais
     protected Date dia_atual;
     //private LocationManager mgr;
+    private DBOpenHelper dbHelper;
+    private ArrayList<Trip> viagensBD;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_trips);
-        dbMarco = new DataBaseMarco(); //inicializando banco de dados
-        handleInstanceState(savedInstanceState);
-        setUpFirebase();
-        setUpAdapter();
+//        handleInstanceState(savedInstanceState);
+//        setUpFirebase();
+//        setUpAdapter();
+        dbHelper = new DBOpenHelper(this);
       //  mgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
 
@@ -65,17 +71,46 @@ public class ListTripsActivity extends AppCompatActivity {
         recList.setLayoutManager(llm);
         //tripsAdapter = new ListTripsAdapter(createList(3));
 
+        viagensBD = new ArrayList<>();
+        Cursor q = dbHelper.getReadableDatabase().query(
+                DBOpenHelper.TRIP
+                ,new String[]{"Nome","DataInicio","Orcamento","HoraInicio","Horafinal"}
+                ,null
+                ,new String[]{}
+                ,null
+                ,null
+                ,"DataInicio");
+        try{
+            //contagem de itens do cursor, a cargo de debug
+            int j=q.getCount();
+            Log.d("Cursor",j+"");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
+            while(q.moveToNext()) {
+                Trip tripAux = new Trip(
+                        q.getString(q.getColumnIndex("Nome")),
+                        q.getDouble(q.getColumnIndex("Orcamento")),
+                        "Recife",
+                        sdf.parse(q.getString(q.getColumnIndex("DataInicio"))),
+                        null,
+                        q.getString(q.getColumnIndex("HoraFinal")),
+                        q.getString(q.getColumnIndex("HoraInicio")));
+                viagensBD.add(tripAux);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        q.close();
+        ListTripsAdapter ca = new ListTripsAdapter(viagensBD);
+        recList.setAdapter(ca);
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-
+                //tratar a adição de viagens que ja estejam no firebase e pass-las ao bd
 //                decisao = new Decision(mAdapterLocal, perfil1.getPreferences().getPreferences());
-                ListTripsAdapter ca = new ListTripsAdapter(mAdapterTrip);
-                recList.setAdapter(ca);
-
-
+//                ListTripsAdapter ca = new ListTripsAdapter(mAdapterTrip);
+//                ListTripsAdapter ca = new ListTripsAdapter(viagensBD);
+//                recList.setAdapter(ca);
             }
 
             @Override
@@ -149,17 +184,6 @@ public class ListTripsActivity extends AppCompatActivity {
         }
     }
 
-    /*private void currentTrip(){
-        for(int i=0;i<mAdapterTrip.size();i++){
-            Date dt = mAdapterTrip.get(i).getStart_date();
-            if(dt.getDay()==dia_atual.getDay()&&
-                    dt.getYear()==dia_atual.getYear()&&
-                    dt.getMonth()==dia_atual.getMonth()){
-                Intent j = new Intent(getApplicationContext(),TravelCardsActivity.class);
-            }
-        }
-    }*/
-
     // Saving the list of items and keys of the items on rotation
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -168,29 +192,9 @@ public class ListTripsActivity extends AppCompatActivity {
         outState.putStringArrayList(SAVED_ADAPTER_KEYS_TRIP, tripsAdapter.getKeys());
     }
 
-    //    public void deleteTrip(String key) {
-//        int i = tripsAdapter.getItem();
-//                String chave = mAdapterTripKeys.get(i);
-//        dbMarco.deleteTrip(chave);
-//        tripRef.child(key).removeValue();
-//    }
-//
-//    public long getPosition(){
-//        return position;
-//    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-        tripsAdapter.destroy(); //destruindo os adapter's criados
-
+//        tripsAdapter.destroy(); //destruindo os adapter's criados
     }
-
-   //    public void deleteTrip(View v) {
-//        int i = tripsAdapter.getItem();
-//        String chave = mAdapterTripKeys.get(i);
-//        dbMarco.deleteTrip(chave);
-//        Button button = (Button) findViewById(R.id.delete);
-//
-//    }
 }

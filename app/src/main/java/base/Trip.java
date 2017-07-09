@@ -1,10 +1,7 @@
 package base;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.StringTokenizer;
 
 public class Trip {
 
@@ -25,8 +22,13 @@ public class Trip {
     /**
      * Construtor sem Data Chegada e Endereço
      */
-    public Trip(String name, Double budget, String destiny,
-                Date start_date, ArrayList<Day> agenda, String timeStart, String timeEnd) {
+    public Trip(String name,
+                Double budget,
+                String destiny,
+                Date start_date,
+                ArrayList<Day> agenda,
+                String timeStart,
+                String timeEnd) {
         this.budget = budget;
         this.name = name;
         this.destiny = destiny;
@@ -35,21 +37,18 @@ public class Trip {
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
     }
-   /* public Trip(String viagem){
-        StringTokenizer tokeni = new StringTokenizer(viagem,",");
-        //Log.d("Opa",viagem);
-        ArrayList<String> parteTrip = new ArrayList<String>();
-        while(tokeni.hasMoreTokens()){
-            parteTrip.add(tokeni.nextToken());
-        }
-
-    }*/
-
-    /**
+     /**
      * Construtor com todos os campos
      */
-    public Trip(String name, Double budget, String destiny,
-                Date start_date, Date end_date, String address, ArrayList<Day> agenda, String timeStart, String timeEnd) {
+    public Trip(String name,
+                Double budget,
+                String destiny,
+                Date start_date,
+                Date end_date,
+                String address,
+                ArrayList<Day> agenda,
+                String timeStart,
+                String timeEnd) {
         this.budget = budget;
         this.name = name;
         this.destiny = destiny;
