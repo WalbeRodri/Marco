@@ -4,10 +4,12 @@ import android.*;
 import android.Manifest;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.SyncStateContract;
 import android.support.annotation.NonNull;
@@ -27,6 +29,8 @@ import android.widget.Toast;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static com.example.marco.DBOpenHelper.LOCAL;
+import static com.example.marco.DBOpenHelper.TRIP;
 
 import com.example.marco.map.MapsActivity;
 import com.google.android.gms.common.ConnectionResult;
@@ -48,6 +52,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.parceler.Parcels;
 
 import java.io.Console;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import adapters.LocalAdapter;
@@ -96,11 +101,12 @@ public class TravelCardsActivity extends AppCompatActivity{
     private static final String TEM_PERMISSAO = "ComPerm";
     private Bundle estado;
     private Geofence geof;
-
+    private DBOpenHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.estado = savedInstanceState;
+
         if(estado!=null){
             concedePerm = estado.getBoolean(TEM_PERMISSAO,false);
 
@@ -116,11 +122,10 @@ public class TravelCardsActivity extends AppCompatActivity{
     }
     protected void executando(){
         dbMarco = new DataBaseMarco(); //inicializando banco de dados
+        dbHelper = new DBOpenHelper(this);
         handleInstanceState(estado);
         setUpFirebase();
         setUpAdapter();
-
-
         // arrayLocal = decisao.choice();
         setContentView(R.layout.activity_travel_cards);
         final RecyclerView recList = (RecyclerView) findViewById(R.id.cardList);
@@ -132,7 +137,11 @@ public class TravelCardsActivity extends AppCompatActivity{
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
         tvc = new TravelCardsReceiver();
-        ArrayList<Local> arrayLocal = new ArrayList<Local>();
+        final ArrayList<Local> arrayLocal = new ArrayList<Local>();
+
+        //Fazer Query de todos os Locais.
+
+
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -143,24 +152,26 @@ public class TravelCardsActivity extends AppCompatActivity{
                 } else {
                     decisao = new Decision(mAdapterLocal, perfil1.getPreferences().getPreferences(), startTime, endTime, orcamento);
                     locals = decisao.choice();
+                    Cursor q = dbHelper.getReadableDatabase().query(
+                            LOCAL
+                            ,new String[]{"Nome"}
+                            ,null
+                            ,new String[]{}
+                            ,null
+                            ,null
+                            ,null);
+                    for(Local l : locals){
+                        while (q.moveToNext()){
+                            if(q.getString(q.getColumnIndex("Nome")).equals(l.getName()))
+                                l.setName(l.getName()+ " true");
+                            else
+                                l.setName(l.getName()+ "false");
+                        }
+                    }
                     ca = new CreateViagemAdapter(locals, getApplicationContext());
                     recList.setAdapter(ca);
                     LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(new Intent("RODAR_FUSED_LOCATION")); //manda broadcast quando finaliza query
                 }
-                //PRINTS DE TESTE, FAVOR NAO TIRAR
-                /*for(int i = 0; i < perfil1.getPreferences().getPreferences().size(); i++){
-                    Toast.makeText(DecisaoLocal.this, perfil1.getPreferences().getPreferences().get(i), Toast.LENGTH_SHORT).show();
-                }*/
-                /*for (int i = 0; i < mAdapterLocal.size(); i++) {
-                    if (mAdapterLocal.get(i).getType() != null)
-                        Toast.makeText(DecisaoLocal.this, mAdapterLocal.get(i).getType(), Toast.LENGTH_SHORT).show();
-                    else
-                        Toast.makeText(DecisaoLocal.this, "TEVE NULL", Toast.LENGTH_SHORT).show();
-                }*/
-
-
-                //Toast.makeText(DecisaoLocal.this, "Passei", Toast.LENGTH_SHORT).show();
-
             }
 
             @Override
@@ -246,6 +257,19 @@ public class TravelCardsActivity extends AppCompatActivity{
                                     if(results[0]<100){ //a distância menor do que 100 metros é suficiente, no nosso caso, para dizer que a pessoa está de fato no local
                                         //a distância é armazenada no índice 0 segundo a documentação
                                         //tentar mexer no check do xml da view
+                                        Cursor q = dbHelper.getReadableDatabase().query(
+                                                LOCAL
+                                                ,new String[]{"Nome"}
+                                                ,"id = ?"
+                                                ,new String[]{l.getName()}
+                                                ,null
+                                                ,null
+                                                ,null);
+                                        if(!(q.getString(q.getColumnIndex("Nome")).equals(l.getName()))) {
+                                            ContentValues values = new ContentValues();
+                                            values.put("Nome", l.getName());
+                                            dbHelper.getWritableDatabase().insert(LOCAL, null, values);
+                                        }
                                         Toast.makeText(getApplicationContext(),""+results[0],Toast.LENGTH_SHORT).show();
                                     }
                                 }

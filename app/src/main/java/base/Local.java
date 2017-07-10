@@ -21,7 +21,7 @@ public class Local implements Parcelable {
     private String image;
     private String horario;
     private String general_category;
-    //private boolean visitado;
+//    private String visitado;
     public Local(){}
 
     public Local(String name, String description, double price, String schedule, double timeSpend,
@@ -133,7 +133,7 @@ public class Local implements Parcelable {
         longitude = in.readDouble();
         type = in.readString();
         image = in.readString();
-        //visitado = in.readBoolean();
+//        visitado = in.readString();
     }
 
 
@@ -153,7 +153,7 @@ public class Local implements Parcelable {
         dest.writeDouble(longitude);
         dest.writeString(type);
         dest.writeString(image);
-      //  dest.writeString(visitado);
+//        dest.writeString(visitado);
     }
 
     public static final Parcelable.Creator<Local> CREATOR = new Parcelable.Creator<Local>()
@@ -167,6 +167,14 @@ public class Local implements Parcelable {
             return new Local[size];
         }
     };
+
+//    public String isVisitado() {
+//        return visitado;
+//    }
+
+//    public void setVisitado(String visitado) {
+//        this.visitado = visitado;
+//    }
 
    /* public String getVisitado() {
         return visitado;

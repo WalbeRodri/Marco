@@ -81,6 +81,7 @@ public class CreateViagemAdapter extends RecyclerView.Adapter<CreateViagemAdapte
         if (contactViewHolder.check.isChecked()){
 
         }
+
 //        if (!contactViewHolder.check.isChecked()){
 //            contactViewHolder.check.setCheckMarkDrawable(lixo);
 //        }

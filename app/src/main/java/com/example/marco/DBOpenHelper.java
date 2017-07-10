@@ -22,7 +22,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     final static String AGENDA = "Agenda";
     final static String PERFIL = "Perfil";
     final static String PREFERENCES = "Preferencias";
-    final static String LOCAL = "Local";
+    final static String LOCAL = "Local_Visitado";
     final static String DAY = "Dia";
     final static String GOSTOS = "PREF";
     final static String TB_GOSTOS = "TB_PREF";
@@ -42,16 +42,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     final private static String CREATE_PREFERENCES = "CREATE TABLE IF NOT EXISTS "+PREFERENCES+" (" + _ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, "+
             "Preferencia"+" TEXT NOT NULL)";
     final private static String CREATE_LOCAL = "CREATE TABLE IF NOT EXISTS "+LOCAL+" (" + _ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, "+
-            "Nome"+ " TEXT NOT NULL, "+
-            "Descricao"+" TEXT NOT NULL, "+
-            "Itinerario"+" TEXT NOT NULL, "+
-            "TempoGasto"+" TEXT NOT NULL, "+
-            "Latitude"+" REAL NOT NULL, "+
-            "Longitude"+" REAL NOT NULL, "+
-            "Price" + "REAL NOT NULL, "+
-            "Tipo"+" TEXT NOT NULL, "+
-            "Imagem"+" BLOB, "+
-            ""+" TEXT NOT NULL)";
+            "Nome"+ " TEXT)";
     final private static String CREATE_GOSTOS = "CREATE TABLE IF NOT EXISTS "+TB_GOSTOS+" ("+_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "+
             GOSTOS+ " TEXT NOT NULL)";
 

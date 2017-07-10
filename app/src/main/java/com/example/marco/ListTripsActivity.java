@@ -20,6 +20,8 @@ import java.util.Calendar;
 import com.example.marco.map.MapsActivity;
 
 import android.location.LocationManager;
+
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,7 +39,11 @@ import adapters.TripAdapter;
 import base.Trip;
 import database.DataBaseMarco;
 
-public class ListTripsActivity extends AppCompatActivity {
+import static com.example.marco.DBOpenHelper.GOSTOS;
+import static com.example.marco.DBOpenHelper.TB_GOSTOS;
+import static com.example.marco.DBOpenHelper.TRIP;
+
+public class ListTripsActivity extends AppCompatActivity implements OnFragmentInteractionListener {
     private final static String SAVED_ADAPTER_ITEMS_TRIP = "SAVED_ADAPTER_ITEMS_TRIP";
     private final static String SAVED_ADAPTER_KEYS_TRIP = "SAVED_ADAPTER_KEYS_TRIP";
 
@@ -47,12 +53,13 @@ public class ListTripsActivity extends AppCompatActivity {
     private TripAdapter tripsAdapter;
     private ArrayList<Trip> mAdapterTrip; //armazena lista de locais
     private ArrayList<String> mAdapterTripKeys; //chaves de locais
+    private FirebaseAuth mAuth;
     protected Date dia_atual;
     //private LocationManager mgr;
     private DBOpenHelper dbHelper;
     private ArrayList<Trip> viagensBD;
-
-
+    private ListTripsAdapter ca;
+//    private  olfil;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +70,7 @@ public class ListTripsActivity extends AppCompatActivity {
         dbHelper = new DBOpenHelper(this);
       //  mgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
+//        this.olfil = (OnListFragmentInteractionListener) getApplicationContext();
 
         final RecyclerView recList = (RecyclerView) findViewById(R.id.tripsList);
         recList.setHasFixedSize(true);
@@ -73,7 +81,7 @@ public class ListTripsActivity extends AppCompatActivity {
 
         viagensBD = new ArrayList<>();
         Cursor q = dbHelper.getReadableDatabase().query(
-                DBOpenHelper.TRIP
+                TRIP
                 ,new String[]{"Nome","DataInicio","Orcamento","HoraInicio","Horafinal"}
                 ,null
                 ,new String[]{}
@@ -101,41 +109,30 @@ public class ListTripsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         q.close();
-        ListTripsAdapter ca = new ListTripsAdapter(viagensBD);
+        ca = new ListTripsAdapter(viagensBD, this);
         recList.setAdapter(ca);
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //tratar a adição de viagens que ja estejam no firebase e passa-las ao bd
-//                decisao = new Decision(mAdapterLocal, perfil1.getPreferences().getPreferences());
-//                ListTripsAdapter ca = new ListTripsAdapter(mAdapterTrip);
-//                ListTripsAdapter ca = new ListTripsAdapter(viagensBD);
-//                recList.setAdapter(ca);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                //Toast.makeText(DecisaoLocal.this, "Falha conexão!", Toast.LENGTH_SHORT).show();
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
+//        ref.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                //tratar a adição de viagens que ja estejam no firebase e passa-las ao bd
+////                decisao = new Decision(mAdapterLocal, perfil1.getPreferences().getPreferences());
+////                ListTripsAdapter ca = new ListTripsAdapter(mAdapterTrip);
+////                ListTripsAdapter ca = new ListTripsAdapter(viagensBD);
+////                recList.setAdapter(ca);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                //Toast.makeText(DecisaoLocal.this, "Falha conexão!", Toast.LENGTH_SHORT).show();
+//                System.out.println("The read failed: " + databaseError.getCode());
+//            }
+//        });
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         return false;
     }
-
-    public void createTrip(View view) {
-        Intent intent = new Intent(this, CreateTripActivity.class);
-        startActivity(intent);
-    }
-
-    public void openTrip(View view) {
-        Intent intent = new Intent(this, MapsActivity.class);
-        startActivity(intent);
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -156,13 +153,6 @@ public class ListTripsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-    /*
-        private ArrayList<Local> createList() {
-            Decision decisao = new Decision();
-            return decisao.choice();
-        }
-            */
     private void setUpFirebase() {
         mQuery = dbMarco.recoverTrips(); //ACESANDO NÓS DE CONSULTA
     }
@@ -188,13 +178,56 @@ public class ListTripsActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelable(SAVED_ADAPTER_ITEMS_TRIP, Parcels.wrap(tripsAdapter.getItems())); //SETANDO LOCAL QUE IRÁ ARMAZENAR
-        outState.putStringArrayList(SAVED_ADAPTER_KEYS_TRIP, tripsAdapter.getKeys());
+//        outState.putParcelable(SAVED_ADAPTER_ITEMS_TRIP, Parcels.wrap(tripsAdapter.getItems())); //SETANDO LOCAL QUE IRÁ ARMAZENAR
+//        outState.putStringArrayList(SAVED_ADAPTER_KEYS_TRIP, tripsAdapter.getKeys());
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
 //        tripsAdapter.destroy(); //destruindo os adapter's criados
+    }
+
+    public void deleteTrip(View view) { ca.notifyDataSetChanged();
+    }
+
+
+
+    @Override
+    public void onDeleteClick(Trip viagem) {
+        Log.d("ITEM", ">>>>>>>>>>>>>>>>>>>>>>>."+viagem.getName());
+        dbHelper.getReadableDatabase().delete(TRIP,"Nome"+" = '"+viagem.getName()+"' ",null);
+
+    }
+
+    public void iniciaTravelCards(String horaini, String horafim, Double orcamento){
+        Intent intent = new Intent(getApplicationContext(),TravelCardsActivity.class);
+        intent.putExtra("TRIP_TIME_START",horaini);
+        intent.putExtra("TRIP_TIME_END", horafim);
+        intent.putExtra("TRIP_ORCAMENTO", orcamento);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onInfoClick(Trip viagem){
+        mAuth = FirebaseAuth.getInstance();
+
+        if (mAuth.getCurrentUser() != null) {
+            dbMarco = new DataBaseMarco();
+            Log.d("INFO ORCAMENTO", ">>>>>>>>>>>>>>>>>" + viagem.getBudget());
+            Log.d("INFO TIME END", ">>>>>>>>>>>>>>>>>" + viagem.getTimeEnd());
+            Log.d("INFO TIMESTART ", ">>>>>>>>>>>>>>>>>" + viagem.getTimeStart());
+            String horaIni = viagem.getTimeStart();
+            String horafim = viagem.getTimeEnd();
+            Double orca = viagem.getBudget();
+            iniciaTravelCards(horaIni,horafim,orca);
+//            Intent intent = new Intent(this, TravelCardsActivity.class);
+//            intent.putExtra("TRIP_TIME_START", viagem.getTimeStart());
+//            intent.putExtra("TRIP_TIME_END", viagem.getTimeEnd());
+//            intent.putExtra("TRIP_ORCAMENTO", viagem.getBudget());
+//            startActivity(intent);
+        }else {
+            Toast.makeText(ListTripsActivity.this, "Realize Login para prosseguir", Toast.LENGTH_SHORT).show();
+        }
     }
 }
